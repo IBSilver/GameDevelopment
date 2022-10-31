@@ -193,9 +193,11 @@ bool Map::Load()
     
     // L07 DONE 3: Create colliders
     // Later you can create a function here to load and create the colliders from the map
-    app->physics->CreateRectangle(224 + 128, 543 + 32, 832, 64, STATIC);
-    app->physics->CreateRectangle(352 + 64, 384 + 32, 128, 64, STATIC);
-    app->physics->CreateRectangle(256, 704 + 32, 576, 64, STATIC);
+    app->physics->CreateRectangle(352 + 64, 704 + 32, 832, 64, STATIC);
+    app->physics->CreateRectangle(1152, 704 + 32, 448, 64, STATIC);
+    app->physics->CreateRectangle(1248, 704 - 64, 64, 128, STATIC);
+    app->physics->CreateRectangle(1184, 712 - 64, 64, 16, STATIC);
+
 
     if(ret == true)
     {
