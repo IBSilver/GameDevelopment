@@ -48,7 +48,17 @@ bool Player::Update()
 	// L07 DONE 5: Add physics to the player - updated player position using physics
 
 	int speed = 10; 
-	b2Vec2 vel = b2Vec2(0, -GRAVITY_Y); 
+	b2Vec2 vel = b2Vec2(0, -GRAVITY_Y);
+
+	if (position.x >= 250) {
+		app->render->camera.x = -position.x + 250;
+	}
+	else if (position.x<=250){
+		app->render->camera.x = -10;
+	}
+	else {
+		app->render->camera.x = 1600;
+	}
 
 	//L02: DONE 4: modify the position of the player using arrow keys and render the texture
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
@@ -59,7 +69,10 @@ bool Player::Update()
 	}
 		
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-		vel = b2Vec2(-speed, -GRAVITY_Y);
+		if (position.x >= 16) {
+			vel = b2Vec2(-speed, -GRAVITY_Y);
+			app->render->camera.x += speed / 2;
+		}
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
