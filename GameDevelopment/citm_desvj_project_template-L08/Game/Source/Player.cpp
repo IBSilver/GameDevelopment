@@ -88,7 +88,7 @@ bool Player::Update()
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
-	SDL_Rect textSection = { 4,14,19,34 };
+	SDL_Rect textSection = { 0,0,48,48 };
 	app->render->DrawTexture(texture, position.x , position.y, &textSection);
 
 	return true;
