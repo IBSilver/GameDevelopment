@@ -26,6 +26,13 @@ public:
 
 public:
 
+	Animation* currentAnimation = nullptr;
+
+	//Set of animations
+	Animation idleR;
+	Animation right;
+	Animation jump;
+
 private:
 
 	//L02: DONE 1: Declare player parameters

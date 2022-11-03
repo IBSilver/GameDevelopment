@@ -34,8 +34,35 @@ bool Player::Awake() {
 
 bool Player::Start() {
 
+	idleR.totalFrames = 0;
+	right.totalFrames = 0;
+	jump.totalFrames = 0;
+
 	//initilize textures
 	texture = app->tex->Load(texturePath);
+
+	//idleR Anim
+	for (int i = 0; i < 3; i++) {
+		idleR.PushBack({ 0 + (i * 48), 336, 48, 48 });
+	}
+	idleR.loop = true;
+	idleR.speed = 0.5f;
+
+	//right Anim
+	for (int i = 0; i < 5; i++) {
+		right.PushBack({ 0 + (i * 48), 480, 48, 48 });
+	}
+	right.loop = true;
+	right.speed = 0.5f;
+
+	//jump Anim
+	for (int i = 0; i < 3; i++) {
+		jump.PushBack({ 0 + (i * 48), 384, 48, 48 });
+	}
+	jump.loop = true;
+	jump.speed = 0.5f;
+
+	currentAnimation = &idleR;
 
 	// L07 DONE 5: Add physics to the player - initialize physics body
 	pbody = app->physics->CreateCircle(position.x+16, position.y+16, 16, bodyType::DYNAMIC);
@@ -44,6 +71,8 @@ bool Player::Start() {
 
 bool Player::Update()
 {
+	SDL_Rect rect = currentAnimation->GetCurrentFrame();
+	currentAnimation->Update();
 
 	// L07 DONE 5: Add physics to the player - updated player position using physics
 
@@ -66,6 +95,8 @@ bool Player::Update()
 
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 		vel = b2Vec2(speed, -GRAVITY_Y);
+		right.Reset();
+		currentAnimation = &right;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
@@ -77,6 +108,8 @@ bool Player::Update()
 
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 			vel = b2Vec2(speed, GRAVITY_Y);
+			jump.Reset();
+			currentAnimation = &jump;
 		}
 
 	}
