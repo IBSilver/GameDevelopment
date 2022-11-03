@@ -15,6 +15,7 @@ class Input;
 class Render;
 class Textures;
 class Audio;
+class SceneLogo;
 class Scene;
 class EntityManager;
 class Map;
