@@ -41,28 +41,30 @@ bool Player::Start() {
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 
+	
 	//idleR Anim
 	for (int i = 0; i < 3; i++) {
 		idleR.PushBack({ 0 + (i * 48), 336, 48, 48 });
 	}
 	idleR.loop = true;
-	idleR.speed = 0.5f;
+	idleR.speed = 0.1f;
 
 	//right Anim
 	for (int i = 0; i < 5; i++) {
 		right.PushBack({ 0 + (i * 48), 480, 48, 48 });
 	}
 	right.loop = true;
-	right.speed = 0.5f;
+	right.speed = 0.2f;
 
 	//jump Anim
 	for (int i = 0; i < 3; i++) {
 		jump.PushBack({ 0 + (i * 48), 384, 48, 48 });
 	}
-	jump.loop = true;
-	jump.speed = 0.5f;
+	jump.loop = false;
+	jump.speed = 0.075f;
 
 	currentAnimation = &idleR;
+	
 
 	// L07 DONE 5: Add physics to the player - initialize physics body
 	pbody = app->physics->CreateCircle(position.x+16, position.y+16, 16, bodyType::DYNAMIC);
@@ -74,7 +76,7 @@ bool Player::Update()
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	currentAnimation->Update();
 
-	app->render->DrawTexture(texture, position.x, position.y, &rect);
+	app->render->DrawTexture(texture, position.x, position.y-16, &rect);
 
 	// L07 DONE 5: Add physics to the player - updated player position using physics
 
@@ -100,9 +102,13 @@ bool Player::Update()
 		right.Reset();
 		currentAnimation = &right;
 	}
+	
+
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
 		vel = b2Vec2(0, GRAVITY_Y);
+		jump.Reset();
+		currentAnimation = &jump;
 
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 			vel = b2Vec2(-speed, GRAVITY_Y);
@@ -115,6 +121,11 @@ bool Player::Update()
 		}
 
 	}
+
+	if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_IDLE
+		&& app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_IDLE
+		&& app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_IDLE)
+		currentAnimation = &idleR;
 
 	//Set the velocity of the pbody of the player
 	pbody->body->SetLinearVelocity(vel);
