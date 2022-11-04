@@ -74,6 +74,8 @@ bool Player::Update()
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	currentAnimation->Update();
 
+	app->render->DrawTexture(texture, position.x, position.y, &rect);
+
 	// L07 DONE 5: Add physics to the player - updated player position using physics
 
 	int speed = 10; 
@@ -122,7 +124,7 @@ bool Player::Update()
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
 	SDL_Rect textSection = { 0,0,48,48 };
-	app->render->DrawTexture(texture, position.x , position.y, &textSection);
+	//app->render->DrawTexture(texture, position.x , position.y, &textSection);
 
 	return true;
 }
