@@ -30,7 +30,9 @@ public:
 
 	//Set of animations
 	Animation idleR;
+	Animation idleL;
 	Animation right;
+	Animation left;
 	Animation jump;
 
 private:

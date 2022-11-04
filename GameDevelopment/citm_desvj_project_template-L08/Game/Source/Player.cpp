@@ -56,12 +56,19 @@ bool Player::Start() {
 	right.loop = true;
 	right.speed = 0.2f;
 
+	//left Anim
+	for (int i = 5; i >= 0; i--) {
+		left.PushBack({ 480 + (i * 48), 480, 48, 48 });
+	}
+	left.loop = true;
+	left.speed = 0.2f;
+
 	//jump Anim
 	for (int i = 0; i < 3; i++) {
 		jump.PushBack({ 0 + (i * 48), 384, 48, 48 });
 	}
 	jump.loop = false;
-	jump.speed = 0.075f;
+	jump.speed = 0.1f;
 
 	currentAnimation = &idleR;
 	
@@ -94,20 +101,23 @@ bool Player::Update()
 		
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 			vel = b2Vec2(-speed, -GRAVITY_Y);
-		
+			currentAnimation = &left;
+	}
+	else {
+		left.Reset();
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 		vel = b2Vec2(speed, -GRAVITY_Y);
-		right.Reset();
 		currentAnimation = &right;
 	}
-	
-
+	else {
+		right.Reset();
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
 		vel = b2Vec2(0, GRAVITY_Y);
-		jump.Reset();
+	
 		currentAnimation = &jump;
 
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
@@ -116,10 +126,12 @@ bool Player::Update()
 
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 			vel = b2Vec2(speed, GRAVITY_Y);
-			jump.Reset();
-			currentAnimation = &jump;
+			/*jump.Reset();
+			currentAnimation = &jump;*/
 		}
-
+	}
+	else {
+		jump.Reset();
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_IDLE
