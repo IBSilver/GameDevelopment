@@ -23,7 +23,8 @@ public:
 	bool Update();
 
 	bool CleanUp();
-
+	// L07 DONE 5: Add physics to the player - declare a Physics body
+	PhysBody* pbody;
 public:
 
 	Animation* currentAnimation = nullptr;
@@ -41,8 +42,7 @@ private:
 	SDL_Texture* texture;
 	const char* texturePath;
 
-	// L07 DONE 5: Add physics to the player - declare a Physics body
-	PhysBody* pbody;
+
 
 };
 

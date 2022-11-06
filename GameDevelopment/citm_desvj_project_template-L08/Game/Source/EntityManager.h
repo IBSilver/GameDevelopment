@@ -26,6 +26,9 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	bool LoadState(pugi::xml_node&);
+	bool SaveState(pugi::xml_node&);
+
 	// Additional methods
 	Entity* CreateEntity(EntityType type);
 

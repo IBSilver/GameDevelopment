@@ -4,6 +4,7 @@
 #include "App.h"
 #include "Textures.h"
 #include "Scene.h"
+#include "Physics.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -132,4 +133,28 @@ bool EntityManager::Update(float dt)
 	}
 
 	return ret;
+}
+
+// L03: DONE 6: Implement a method to load the state
+// for now load camera's x and y
+bool EntityManager::LoadState(pugi::xml_node& data)
+{
+	int x = data.child("camera").attribute("x").as_int();
+	int y = data.child("camera").attribute("y").as_int();
+
+	app->scene->player->pbody->body->SetTransform({ PIXEL_TO_METERS(x), PIXEL_TO_METERS(y) }, 0);
+
+	return true;
+}
+
+// L03: DONE 8: Create a method to save the state of the renderer
+// using append_child and append_attribute
+bool EntityManager::SaveState(pugi::xml_node& data)
+{
+	pugi::xml_node pl = data.append_child("camera");
+
+	pl.append_attribute("x") = app->scene->player->position.x;
+	pl.append_attribute("y") = app->scene->player->position.y;
+
+	return true;
 }
