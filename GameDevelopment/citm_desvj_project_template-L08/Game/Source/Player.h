@@ -36,6 +36,7 @@ public:
 	Animation left;
 	Animation jumpR;
 	Animation jumpL;
+	Animation death;
 
 	bool dir;
 

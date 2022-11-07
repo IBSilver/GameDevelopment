@@ -41,11 +41,12 @@ bool Player::Start() {
 	left.totalFrames = 0;
 	right.totalFrames = 0;
 	jumpR.totalFrames = 0;
+	jumpL.totalFrames = 0;
+	death.totalFrames = 0;
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 
-	
 	//idleR Anim
 	for (int i = 0; i < 3; i++) {
 		idleR.PushBack({ 0 + (i * 48), 336, 48, 48 });
@@ -87,6 +88,13 @@ bool Player::Start() {
 	}
 	jumpL.loop = false;
 	jumpL.speed = 0.1f;
+
+	//death Anim
+	for (int i = 0; i < 5; i++) {
+		death.PushBack({ 0 + (i * 48), 192, 48, 48 });
+	}
+	death.loop = false;
+	death.speed = 0.2f;
 
 	currentAnimation = &idleR;
 	
@@ -155,8 +163,6 @@ bool Player::Update()
 			vel = b2Vec2(speed, GRAVITY_Y);
 			dir = true;
 			currentAnimation = &jumpR;
-			/*jump.Reset();
-			currentAnimation = &jump;*/
 		}
 	}
 	else {
