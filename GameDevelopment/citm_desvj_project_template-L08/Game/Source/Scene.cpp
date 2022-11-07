@@ -95,8 +95,8 @@ bool Scene::Update(float dt)
 		if (player->position.x >= 250) {
 			app->render->camera.x = -player->position.x + 250;
 
-			if (player->position.x >= 2426) {
-				app->render->camera.x = -2176;
+			if (player->position.x >= 2810) {
+				app->render->camera.x = -2560;
 			}
 		}
 		else {

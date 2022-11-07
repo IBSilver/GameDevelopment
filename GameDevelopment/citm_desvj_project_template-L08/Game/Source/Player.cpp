@@ -34,9 +34,13 @@ bool Player::Awake() {
 
 bool Player::Start() {
 
+	dir = true;
+	
 	idleR.totalFrames = 0;
+	idleL.totalFrames = 0;
+	left.totalFrames = 0;
 	right.totalFrames = 0;
-	jump.totalFrames = 0;
+	jumpR.totalFrames = 0;
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
@@ -48,6 +52,13 @@ bool Player::Start() {
 	}
 	idleR.loop = true;
 	idleR.speed = 0.1f;
+
+	//idleL Anim
+	for (int i = 3; i >= 0; i--) {
+		idleL.PushBack({ 576 + (i * 48), 336, 48, 48 });
+	}
+	idleL.loop = true;
+	idleL.speed = 0.1f;
 
 	//right Anim
 	for (int i = 0; i < 5; i++) {
@@ -63,12 +74,19 @@ bool Player::Start() {
 	left.loop = true;
 	left.speed = 0.2f;
 
-	//jump Anim
+	//jumpR Anim
 	for (int i = 0; i < 3; i++) {
-		jump.PushBack({ 0 + (i * 48), 384, 48, 48 });
+		jumpR.PushBack({ 0 + (i * 48), 384, 48, 48 });
 	}
-	jump.loop = false;
-	jump.speed = 0.1f;
+	jumpR.loop = false;
+	jumpR.speed = 0.1f;
+
+	//jumpL Anim
+	for (int i = 3; i >= 0; i--) {
+		jumpL.PushBack({ 576 + (i * 48), 384, 48, 48 });
+	}
+	jumpL.loop = false;
+	jumpL.speed = 0.1f;
 
 	currentAnimation = &idleR;
 	
@@ -102,6 +120,7 @@ bool Player::Update()
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 			vel = b2Vec2(-speed, -GRAVITY_Y);
 			currentAnimation = &left;
+			dir = false;
 	}
 	else {
 		left.Reset();
@@ -110,6 +129,7 @@ bool Player::Update()
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 		vel = b2Vec2(speed, -GRAVITY_Y);
 		currentAnimation = &right;
+		dir = true;
 	}
 	else {
 		right.Reset();
@@ -118,26 +138,36 @@ bool Player::Update()
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
 		vel = b2Vec2(0, GRAVITY_Y);
 	
-		currentAnimation = &jump;
+		
 
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 			vel = b2Vec2(-speed, GRAVITY_Y);
+			dir = false;
+			currentAnimation = &jumpL;
 		}
 
 		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 			vel = b2Vec2(speed, GRAVITY_Y);
+			dir = true;
+			currentAnimation = &jumpR;
 			/*jump.Reset();
 			currentAnimation = &jump;*/
 		}
 	}
 	else {
-		jump.Reset();
+		jumpL.Reset();
+		jumpR.Reset();
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_IDLE
 		&& app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_IDLE
-		&& app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_IDLE)
+		&& app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_IDLE && dir)
 		currentAnimation = &idleR;
+
+	if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_IDLE
+		&& app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_IDLE
+		&& app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_IDLE && !dir)
+		currentAnimation = &idleL;
 
 	//Set the velocity of the pbody of the player
 	pbody->body->SetLinearVelocity(vel);

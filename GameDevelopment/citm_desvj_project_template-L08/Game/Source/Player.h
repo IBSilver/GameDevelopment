@@ -34,15 +34,16 @@ public:
 	Animation idleL;
 	Animation right;
 	Animation left;
-	Animation jump;
+	Animation jumpR;
+	Animation jumpL;
+
+	bool dir;
 
 private:
 
 	//L02: DONE 1: Declare player parameters
 	SDL_Texture* texture;
 	const char* texturePath;
-
-
 
 };
 
