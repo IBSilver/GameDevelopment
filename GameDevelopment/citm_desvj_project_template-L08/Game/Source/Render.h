@@ -43,8 +43,8 @@ public:
 	void SetBackgroundColor(SDL_Color color);
 
 	// L03: DONE 6: Declare Load / Save methods
-	//bool LoadState(pugi::xml_node&);
-	//bool SaveState(pugi::xml_node&);
+	bool LoadState(pugi::xml_node&);
+	bool SaveState(pugi::xml_node&);
 
 public:
 

@@ -28,7 +28,8 @@ public:
 public:
 
 	Animation* currentAnimation = nullptr;
-
+	// L07 DONE 6: Define OnCollision function for the player. Check the virtual function on Entity class
+	
 	//Set of animations
 	Animation idleR;
 	Animation idleL;
@@ -38,13 +39,22 @@ public:
 	Animation jumpL;
 	Animation death;
 
+	//Guarda direccion personaje
 	bool dir;
+
+	void OnCollision(PhysBody* physA, PhysBody* physB);
+
+public:
 
 private:
 
 	//L02: DONE 1: Declare player parameters
 	SDL_Texture* texture;
 	const char* texturePath;
+
+
+
+	int pickCoinFxId;
 
 };
 

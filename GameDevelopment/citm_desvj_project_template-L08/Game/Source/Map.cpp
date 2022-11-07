@@ -193,6 +193,18 @@ bool Map::Load()
     
     // L07 DONE 3: Create colliders
     // Later you can create a function here to load and create the colliders from the map
+    PhysBody* c1 = app->physics->CreateRectangle(224 + 128, 543 + 32, 256, 64, STATIC);
+    // L07 DONE 7: Assign collider type
+    c1->ctype = ColliderType::PLATFORM;
+
+    PhysBody* c2 = app->physics->CreateRectangle(352 + 64, 384 + 32, 128, 64, STATIC);
+    // L07 DONE 7: Assign collider type
+    c2->ctype = ColliderType::PLATFORM;
+
+    PhysBody* c3 = app->physics->CreateRectangle(256, 704 + 32, 576, 64, STATIC);
+    // L07 DONE 7: Assign collider type
+    c3->ctype = ColliderType::PLATFORM;
+
 
     //pared invisible
     app->physics->CreateRectangle(0, 288, 1, 1000, STATIC);
@@ -209,10 +221,10 @@ bool Map::Load()
     app->physics->CreateRectangle(48 * 32 + 13 * 32 / 2, 288 + 12 * 32 + 1 * 32 / 2, 13 * 32, 32, STATIC);
     app->physics->CreateRectangle(50 * 32 + 9 * 32 / 2, 288 + 11 * 32 + 1 * 32 / 2, 9 * 32, 32, STATIC);
     app->physics->CreateRectangle(52 * 32 + 5 * 32 / 2, 288 + 10 * 32 + 1 * 32 / 2, 5 * 32, 32, STATIC);
-    app->physics->CreateRectangle(54 * 32 + 1 * 32 / 2, 288+8 + 8 * 32 + 2 * 32 / 2, 1 * 32, 64, STATIC);
+    app->physics->CreateRectangle(54 * 32 + 1 * 32 / 2, 288 + 8 + 8 * 32 + 2 * 32 / 2, 1 * 32, 64, STATIC);
     app->physics->CreateRectangle(69 * 32 + 3 * 32 / 2, 288 + 12 * 32 + 1 * 32 / 2, 3 * 32, 32, STATIC);
 
-    app->physics->CreateRectangle(69 * 32 + 3 * 32 / 2, 288 + 4 * 32 + 5 * 32 / 2, 3 * 32, 5*32, STATIC);
+    app->physics->CreateRectangle(69 * 32 + 3 * 32 / 2, 288 + 4 * 32 + 5 * 32 / 2, 3 * 32, 5 * 32, STATIC);
     app->physics->CreateRectangle(72 * 32 + 1 * 32 / 2, 288 + 7 * 32 + 0.5 * 32 / 2, 32, 16, STATIC);
     app->physics->CreateRectangle(74 * 32 + 1 * 32 / 2, 288 + 10 * 32 + 0.5 * 32 / 2, 32, 16, STATIC);
     app->physics->CreateRectangle(74 * 32 + 1 * 32 / 2, 288 + 5 * 32 + 0.5 * 32 / 2, 32, 16, STATIC);
@@ -226,7 +238,6 @@ bool Map::Load()
     app->physics->CreateRectangle(88 * 32 + 3 * 32 / 2, 288 + 9 * 32 + 1 * 32 / 2, 3 * 32, 32, STATIC);
     app->physics->CreateRectangle(89 * 32 + 2 * 32 / 2, 288 + 8 * 32 + 1 * 32 / 2, 2 * 32, 32, STATIC);
     app->physics->CreateRectangle(90 * 32 + 1 * 32 / 2, 288 + 7 * 32 + 1 * 32 / 2, 1 * 32, 32, STATIC);
-
 
 
 

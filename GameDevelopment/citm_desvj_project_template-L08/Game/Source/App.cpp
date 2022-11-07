@@ -4,7 +4,6 @@
 #include "Render.h"
 #include "Textures.h"
 #include "Audio.h"
-#include "SceneLogo.h"
 #include "Scene.h"
 #include "EntityManager.h"
 #include "Map.h"

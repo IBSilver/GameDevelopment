@@ -37,7 +37,7 @@ bool Player::Awake() {
 bool Player::Start() {
 
 	dir = true;
-	
+
 	idleR.totalFrames = 0;
 	idleL.totalFrames = 0;
 	left.totalFrames = 0;
@@ -46,9 +46,9 @@ bool Player::Start() {
 	jumpL.totalFrames = 0;
 	death.totalFrames = 0;
 
+
 	//initilize textures
 	texture = app->tex->Load(texturePath);
-
 	//idleR Anim
 	for (int i = 0; i < 3; i++) {
 		idleR.PushBack({ 0 + (i * 48), 336, 48, 48 });
@@ -83,14 +83,14 @@ bool Player::Start() {
 	}
 	jumpR.loop = false;
 	jumpR.speed = 0.1f;
-
+	
 	//jumpL Anim
 	for (int i = 3; i >= 0; i--) {
 		jumpL.PushBack({ 576 + (i * 48), 384, 48, 48 });
 	}
 	jumpL.loop = false;
-	jumpL.speed = 0.1f;
-
+	jumpL.speed = 0.1f; 
+	
 	//death Anim
 	for (int i = 0; i < 5; i++) {
 		death.PushBack({ 0 + (i * 48), 192, 48, 48 });
@@ -99,10 +99,19 @@ bool Player::Start() {
 	death.speed = 0.2f;
 
 	currentAnimation = &idleR;
-	
 
 	// L07 DONE 5: Add physics to the player - initialize physics body
 	pbody = app->physics->CreateCircle(position.x+16, position.y+16, 16, bodyType::DYNAMIC);
+
+	// L07 DONE 6: Assign player class (using "this") to the listener of the pbody. This makes the Physics module to call the OnCollision method
+	pbody->listener = this; 
+
+	// L07 DONE 7: Assign collider type
+	pbody->ctype = ColliderType::PLAYER;
+
+	//initialize audio effect - !! Path is hardcoded, should be loaded from config.xml
+	pickCoinFxId = app->audio->LoadFx("Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg");
+
 	return true;
 }
 
@@ -115,9 +124,8 @@ bool Player::Update()
 
 	// L07 DONE 5: Add physics to the player - updated player position using physics
 
-	int speed = 10;
-	b2Vec2 vel = b2Vec2(0, -GRAVITY_Y);
-
+	int speed = 10; 
+	b2Vec2 vel = b2Vec2(0, -GRAVITY_Y); 
 
 	//L02: DONE 4: modify the position of the player using arrow keys and render the texture
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
@@ -126,7 +134,7 @@ bool Player::Update()
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
 		//
 	}
-
+		
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 		vel = b2Vec2(-speed, -GRAVITY_Y);
 		currentAnimation = &left;
@@ -188,6 +196,7 @@ bool Player::Update()
 		&& app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_IDLE && !dir)
 		currentAnimation = &idleL;
 
+
 	//Set the velocity of the pbody of the player
 	pbody->body->SetLinearVelocity(vel);
 
@@ -196,13 +205,37 @@ bool Player::Update()
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
 	SDL_Rect textSection = { 0,0,48,48 };
+
 	//app->render->DrawTexture(texture, position.x , position.y, &textSection);
+	//app->render->DrawTexture(texture, position.x , position.y);
 
 	return true;
 }
 
 bool Player::CleanUp()
 {
-
 	return true;
+}
+
+// L07 DONE 6: Define OnCollision function for the player. Check the virtual function on Entity class
+void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
+
+	// L07 DONE 7: Detect the type of collision
+
+	switch (physB->ctype)
+	{
+		case ColliderType::ITEM:
+			LOG("Collision ITEM");
+			app->audio->PlayFx(pickCoinFxId);
+			break;
+		case ColliderType::PLATFORM:
+			LOG("Collision PLATFORM");
+			break;
+		case ColliderType::UNKNOWN:
+			LOG("Collision UNKNOWN");
+			break;
+	}
+	
+
+
 }
