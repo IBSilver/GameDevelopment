@@ -138,7 +138,12 @@ bool Player::Update()
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
 		vel = b2Vec2(0, GRAVITY_Y);
 	
-		
+		if (dir) {
+			currentAnimation = &jumpR;
+		}
+		else {
+			currentAnimation = &jumpL;
+		}
 
 		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 			vel = b2Vec2(-speed, GRAVITY_Y);
