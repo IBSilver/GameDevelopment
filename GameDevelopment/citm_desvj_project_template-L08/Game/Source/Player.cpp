@@ -9,6 +9,8 @@
 #include "Point.h"
 #include "Physics.h"
 
+int jumpTimer = 30;
+
 Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("Player");
@@ -109,11 +111,11 @@ bool Player::Update()
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	currentAnimation->Update();
 
-	app->render->DrawTexture(texture, position.x, position.y-16, &rect);
+	app->render->DrawTexture(texture, position.x, position.y - 16, &rect);
 
 	// L07 DONE 5: Add physics to the player - updated player position using physics
 
-	int speed = 10; 
+	int speed = 10;
 	b2Vec2 vel = b2Vec2(0, -GRAVITY_Y);
 
 
@@ -124,11 +126,11 @@ bool Player::Update()
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
 		//
 	}
-		
+
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-			vel = b2Vec2(-speed, -GRAVITY_Y);
-			currentAnimation = &left;
-			dir = false;
+		vel = b2Vec2(-speed, -GRAVITY_Y);
+		currentAnimation = &left;
+		dir = false;
 	}
 	else {
 		left.Reset();
@@ -144,25 +146,31 @@ bool Player::Update()
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
-		vel = b2Vec2(0, GRAVITY_Y);
-	
-		if (dir) {
-			currentAnimation = &jumpR;
-		}
-		else {
-			currentAnimation = &jumpL;
-		}
+		if (jumpTimer > 0)
+		{
+			vel = b2Vec2(0, GRAVITY_Y);
 
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-			vel = b2Vec2(-speed, GRAVITY_Y);
-			dir = false;
-			currentAnimation = &jumpL;
-		}
 
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-			vel = b2Vec2(speed, GRAVITY_Y);
-			dir = true;
-			currentAnimation = &jumpR;
+
+			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+				vel = b2Vec2(speed, GRAVITY_Y);
+				dir = true;
+				currentAnimation = &jumpR;
+				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+					vel = b2Vec2(-speed, GRAVITY_Y);
+					dir = false;
+					currentAnimation = &jumpL;
+				}
+
+				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+					vel = b2Vec2(speed, GRAVITY_Y);
+					dir = true;
+					currentAnimation = &jumpR;
+					/*jump.Reset();
+					currentAnimation = &jump;*/
+				}
+			}
+			jumpTimer--;
 		}
 	}
 	else {
