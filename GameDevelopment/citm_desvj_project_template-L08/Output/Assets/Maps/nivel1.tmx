@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="100" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="14" nextobjectid="1">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="100" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="15" nextobjectid="32">
  <properties>
   <property name="Draw" type="bool" value="true"/>
  </properties>
@@ -1552,7 +1552,7 @@
    <tile gid="378"/>
   </data>
  </layer>
- <layer id="1" name="Plataforma" width="100" height="15" visible="0" locked="1">
+ <layer id="1" name="Plataforma" width="100" height="15" locked="1">
   <properties>
    <property name="Draw" type="bool" value="true"/>
   </properties>
@@ -4563,4 +4563,29 @@
    <tile gid="124"/>
   </data>
  </layer>
+ <objectgroup id="14" name="Colisiones">
+  <object id="2" x="0" y="416" width="832" height="64"/>
+  <object id="4" x="928" y="416" width="448" height="64"/>
+  <object id="5" x="1216" y="288" width="64" height="128"/>
+  <object id="7" x="1440" y="416" width="864" height="64"/>
+  <object id="8" x="1536" y="384" width="416" height="32"/>
+  <object id="9" x="1600" y="352" width="288" height="32"/>
+  <object id="10" x="1664" y="320" width="160" height="32"/>
+  <object id="12" x="2208" y="384" width="96" height="32"/>
+  <object id="13" x="2208" y="128" width="96" height="160"/>
+  <object id="15" x="1728" y="264" width="32" height="56"/>
+  <object id="16" x="2400" y="128" width="96" height="352"/>
+  <object id="17" x="2496" y="416" width="704" height="64"/>
+  <object id="18" x="2720" y="384" width="192" height="32"/>
+  <object id="19" x="2752" y="352" width="160" height="32"/>
+  <object id="20" x="2784" y="320" width="128" height="32"/>
+  <object id="21" x="2816" y="288" width="96" height="32"/>
+  <object id="22" x="2848" y="256" width="64" height="32"/>
+  <object id="23" x="2880" y="224" width="32" height="32"/>
+  <object id="24" x="1152" y="352" width="64" height="16"/>
+  <object id="25" x="1376" y="256" width="63" height="15"/>
+  <object id="26" x="2368" y="160" width="33" height="13"/>
+  <object id="28" x="2305" y="224" width="31" height="15"/>
+  <object id="30" x="2368" y="320" width="32" height="14"/>
+ </objectgroup>
 </map>

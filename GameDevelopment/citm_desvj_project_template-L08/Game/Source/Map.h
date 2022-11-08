@@ -91,6 +91,18 @@ struct MapLayer
 	{
 		return data[(y * width) + x];
 	}
+
+
+};
+
+struct ColLayer
+{
+	int x;
+	int y;
+	int width;
+	int height;
+	//uint* data;
+
 };
 
 // L04: DONE 1: Create a struct needed to hold the information to Map node
@@ -141,6 +153,7 @@ private:
 	// L05
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
 	bool LoadAllLayers(pugi::xml_node mapNode);
+	bool LoadObject(pugi::xml_node node);
 
 	// L06: DONE 2
 	TileSet* GetTilesetFromTileId(int gid) const;

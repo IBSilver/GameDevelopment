@@ -190,7 +190,12 @@ bool Map::Load()
     {
         ret = LoadAllLayers(mapFileXML.child("map"));
     }
-    
+
+    if (ret == true)
+    {
+        ret = LoadObject(mapFileXML.child("map"));
+    }
+
     // L07 DONE 3: Create colliders
     // Later you can create a function here to load and create the colliders from the map
     PhysBody* c1 = app->physics->CreateRectangle(224 + 128, 543 + 32, 256, 64, STATIC);
@@ -211,33 +216,32 @@ bool Map::Load()
     app->physics->CreateRectangle(3200, 288, 1, 1000, STATIC);
 
     //plataformas
-    app->physics->CreateRectangle(352 + 64, 704 + 32, 832, 64, STATIC);
-    app->physics->CreateRectangle(1152, 704 + 32, 448, 64, STATIC);
-    app->physics->CreateRectangle(1248, 704 - 64, 64, 128, STATIC);
-    app->physics->CreateRectangle(1184, 712 - 64, 64, 16, STATIC);
+    //app->physics->CreateRectangle(1152, 704 + 32, 448, 64, STATIC);
+    //app->physics->CreateRectangle(1248, 704 - 64, 64, 128, STATIC);
+    //app->physics->CreateRectangle(1184, 712 - 64, 64, 16, STATIC);
 
-    app->physics->CreateRectangle(42 * 32 + 64, 288 + 8 * 32 + 8, 64, 16, STATIC);
-    app->physics->CreateRectangle(45 * 32 + 27 * 32 / 2, 288 + 13 * 32 + 2 * 32 / 2, 27 * 32, 64, STATIC);
-    app->physics->CreateRectangle(48 * 32 + 13 * 32 / 2, 288 + 12 * 32 + 1 * 32 / 2, 13 * 32, 32, STATIC);
-    app->physics->CreateRectangle(50 * 32 + 9 * 32 / 2, 288 + 11 * 32 + 1 * 32 / 2, 9 * 32, 32, STATIC);
-    app->physics->CreateRectangle(52 * 32 + 5 * 32 / 2, 288 + 10 * 32 + 1 * 32 / 2, 5 * 32, 32, STATIC);
-    app->physics->CreateRectangle(54 * 32 + 1 * 32 / 2, 288 + 8 + 8 * 32 + 2 * 32 / 2, 1 * 32, 64, STATIC);
-    app->physics->CreateRectangle(69 * 32 + 3 * 32 / 2, 288 + 12 * 32 + 1 * 32 / 2, 3 * 32, 32, STATIC);
+    //app->physics->CreateRectangle(42 * 32 + 64, 288 + 8 * 32 + 8, 64, 16, STATIC);
+    //app->physics->CreateRectangle(45 * 32 + 27 * 32 / 2, 288 + 13 * 32 + 2 * 32 / 2, 27 * 32, 64, STATIC);
+    //app->physics->CreateRectangle(48 * 32 + 13 * 32 / 2, 288 + 12 * 32 + 1 * 32 / 2, 13 * 32, 32, STATIC);
+    //app->physics->CreateRectangle(50 * 32 + 9 * 32 / 2, 288 + 11 * 32 + 1 * 32 / 2, 9 * 32, 32, STATIC);
+    //app->physics->CreateRectangle(52 * 32 + 5 * 32 / 2, 288 + 10 * 32 + 1 * 32 / 2, 5 * 32, 32, STATIC);
+    //app->physics->CreateRectangle(54 * 32 + 1 * 32 / 2, 288 + 8 + 8 * 32 + 2 * 32 / 2, 1 * 32, 64, STATIC);
+    //app->physics->CreateRectangle(69 * 32 + 3 * 32 / 2, 288 + 12 * 32 + 1 * 32 / 2, 3 * 32, 32, STATIC);
 
-    app->physics->CreateRectangle(69 * 32 + 3 * 32 / 2, 288 + 4 * 32 + 5 * 32 / 2, 3 * 32, 5 * 32, STATIC);
-    app->physics->CreateRectangle(72 * 32 + 1 * 32 / 2, 288 + 7 * 32 + 0.5 * 32 / 2, 32, 16, STATIC);
-    app->physics->CreateRectangle(74 * 32 + 1 * 32 / 2, 288 + 10 * 32 + 0.5 * 32 / 2, 32, 16, STATIC);
-    app->physics->CreateRectangle(74 * 32 + 1 * 32 / 2, 288 + 5 * 32 + 0.5 * 32 / 2, 32, 16, STATIC);
+    //app->physics->CreateRectangle(69 * 32 + 3 * 32 / 2, 288 + 4 * 32 + 5 * 32 / 2, 3 * 32, 5 * 32, STATIC);
+    //app->physics->CreateRectangle(72 * 32 + 1 * 32 / 2, 288 + 7 * 32 + 0.5 * 32 / 2, 32, 16, STATIC);
+    //app->physics->CreateRectangle(74 * 32 + 1 * 32 / 2, 288 + 10 * 32 + 0.5 * 32 / 2, 32, 16, STATIC);
+    //app->physics->CreateRectangle(74 * 32 + 1 * 32 / 2, 288 + 5 * 32 + 0.5 * 32 / 2, 32, 16, STATIC);
 
-    app->physics->CreateRectangle(75 * 32 + 3 * 32 / 2, 288 + 4 * 32 + 11 * 32 / 2, 3 * 32, 11 * 32, STATIC);
-    app->physics->CreateRectangle(78 * 32 + 22 * 32 / 2, 288 + 13 * 32 + 2 * 32 / 2, 22 * 32, 64, STATIC);
+    //app->physics->CreateRectangle(75 * 32 + 3 * 32 / 2, 288 + 4 * 32 + 11 * 32 / 2, 3 * 32, 11 * 32, STATIC);
+    //app->physics->CreateRectangle(78 * 32 + 22 * 32 / 2, 288 + 13 * 32 + 2 * 32 / 2, 22 * 32, 64, STATIC);
 
-    app->physics->CreateRectangle(85 * 32 + 6 * 32 / 2, 288 + 12 * 32 + 1 * 32 / 2, 6 * 32, 32, STATIC);
-    app->physics->CreateRectangle(86 * 32 + 5 * 32 / 2, 288 + 11 * 32 + 1 * 32 / 2, 5 * 32, 32, STATIC);
-    app->physics->CreateRectangle(87 * 32 + 4 * 32 / 2, 288 + 10 * 32 + 1 * 32 / 2, 4 * 32, 32, STATIC);
-    app->physics->CreateRectangle(88 * 32 + 3 * 32 / 2, 288 + 9 * 32 + 1 * 32 / 2, 3 * 32, 32, STATIC);
-    app->physics->CreateRectangle(89 * 32 + 2 * 32 / 2, 288 + 8 * 32 + 1 * 32 / 2, 2 * 32, 32, STATIC);
-    app->physics->CreateRectangle(90 * 32 + 1 * 32 / 2, 288 + 7 * 32 + 1 * 32 / 2, 1 * 32, 32, STATIC);
+    //app->physics->CreateRectangle(85 * 32 + 6 * 32 / 2, 288 + 12 * 32 + 1 * 32 / 2, 6 * 32, 32, STATIC);
+    //app->physics->CreateRectangle(86 * 32 + 5 * 32 / 2, 288 + 11 * 32 + 1 * 32 / 2, 5 * 32, 32, STATIC);
+    //app->physics->CreateRectangle(87 * 32 + 4 * 32 / 2, 288 + 10 * 32 + 1 * 32 / 2, 4 * 32, 32, STATIC);
+    //app->physics->CreateRectangle(88 * 32 + 3 * 32 / 2, 288 + 9 * 32 + 1 * 32 / 2, 3 * 32, 32, STATIC);
+    //app->physics->CreateRectangle(89 * 32 + 2 * 32 / 2, 288 + 8 * 32 + 1 * 32 / 2, 2 * 32, 32, STATIC);
+    //app->physics->CreateRectangle(90 * 32 + 1 * 32 / 2, 288 + 7 * 32 + 1 * 32 / 2, 1 * 32, 32, STATIC);
 
 
 
@@ -378,6 +382,32 @@ bool Map::LoadAllLayers(pugi::xml_node mapNode) {
 
     return ret;
 }
+
+bool Map::LoadObject(pugi::xml_node node)
+{
+    bool ret = true;
+    LOG("adfHdhdgfgsrhg");
+
+    ColLayer object;
+    for (pugi::xml_node colNode = node.child("objectgroup").child("object"); colNode && ret; colNode = colNode.next_sibling("object"))
+    {
+        //Load the attributes
+        object.x = node.child("objectgroup").child("object").attribute("x").as_int();
+        object.y = node.child("objectgroup").child("object").attribute("y").as_int();
+        object.width = node.child("objectgroup").child("object").attribute("width").as_int();
+        object.height = node.child("objectgroup").child("object").attribute("height").as_int();
+        LOG("%i", object.x);
+        LOG("%i", object.y);
+        LOG("%i", object.width);
+        LOG("%i", object.height);
+
+        app->physics->CreateRectangle(object.x+ object.width/2, 288+object.y+object.height/2, object.width, object.height, STATIC);
+        colNode.next_sibling("object");
+    }
+
+    return ret;
+}
+
 
 // L06: DONE 6: Load a group of properties from a node and fill a list with it
 bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
