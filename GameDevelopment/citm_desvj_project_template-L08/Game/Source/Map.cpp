@@ -392,10 +392,10 @@ bool Map::LoadObject(pugi::xml_node node)
     for (pugi::xml_node colNode = node.child("objectgroup").child("object"); colNode && ret; colNode = colNode.next_sibling("object"))
     {
         //Load the attributes
-        object.x = node.child("objectgroup").child("object").attribute("x").as_int();
-        object.y = node.child("objectgroup").child("object").attribute("y").as_int();
-        object.width = node.child("objectgroup").child("object").attribute("width").as_int();
-        object.height = node.child("objectgroup").child("object").attribute("height").as_int();
+        object.x = colNode.next_sibling("object").attribute("x").as_int();
+        object.y = colNode.next_sibling("object").attribute("y").as_int();
+        object.width = colNode.next_sibling("object").attribute("width").as_int();
+        object.height = colNode.next_sibling("object").attribute("height").as_int();
         LOG("%i", object.x);
         LOG("%i", object.y);
         LOG("%i", object.width);
