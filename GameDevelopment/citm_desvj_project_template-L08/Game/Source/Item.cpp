@@ -42,7 +42,7 @@ bool Item::Start() {
 	currentAnimation = &money;
 	
 	// L07 DONE 4: Add a physics to an item - initialize the physics body
-	pbody = app->physics->CreateCircle(position.x, position.y, 16, bodyType::DYNAMIC);
+	pbody = app->physics->CreateCircle(position.x, position.y, 12, bodyType::DYNAMIC);
 
 	// L07 DONE 7: Assign collider type
 	pbody->ctype = ColliderType::ITEM;
@@ -55,7 +55,7 @@ bool Item::Update()
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	currentAnimation->Update();
 
-	app->render->DrawTexture(texture, position.x, position.y - 16, &rect);
+	app->render->DrawTexture(texture, position.x+6, position.y+6, &rect);
 
 	// L07 DONE 4: Add a physics to an item - update the position of the object from the physics.  
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;

@@ -197,20 +197,9 @@ bool Map::Load()
     }
 
     // L07 DONE 3: Create colliders
-    // Later you can create a function here to load and create the colliders from the map
-    PhysBody* c1 = app->physics->CreateRectangle(224 + 128, 543 + 32, 256, 64, STATIC);
-    // L07 DONE 7: Assign collider type
+    //plataforma inicial
+    PhysBody* c1 = app->physics->CreateRectangle(416, 416+288+32, 832, 64, STATIC);
     c1->ctype = ColliderType::PLATFORM;
-
-    PhysBody* c2 = app->physics->CreateRectangle(352 + 64, 384 + 32, 128, 64, STATIC);
-    // L07 DONE 7: Assign collider type
-    c2->ctype = ColliderType::PLATFORM;
-
-    PhysBody* c3 = app->physics->CreateRectangle(256, 704 + 32, 576, 64, STATIC);
-    // L07 DONE 7: Assign collider type
-    c3->ctype = ColliderType::PLATFORM;
-
-
     //pared invisible
     app->physics->CreateRectangle(0, 288, 1, 1000, STATIC);
     app->physics->CreateRectangle(3200, 288, 1, 1000, STATIC);
@@ -386,9 +375,10 @@ bool Map::LoadAllLayers(pugi::xml_node mapNode) {
 bool Map::LoadObject(pugi::xml_node node)
 {
     bool ret = true;
-    LOG("adfHdhdgfgsrhg");
+    LOG("Loading Objects");
 
     ColLayer object;
+    
     for (pugi::xml_node colNode = node.child("objectgroup").child("object"); colNode && ret; colNode = colNode.next_sibling("object"))
     {
         //Load the attributes
@@ -396,13 +386,10 @@ bool Map::LoadObject(pugi::xml_node node)
         object.y = colNode.next_sibling("object").attribute("y").as_int();
         object.width = colNode.next_sibling("object").attribute("width").as_int();
         object.height = colNode.next_sibling("object").attribute("height").as_int();
-        LOG("%i", object.x);
-        LOG("%i", object.y);
-        LOG("%i", object.width);
-        LOG("%i", object.height);
 
-        app->physics->CreateRectangle(object.x+ object.width/2, 288+object.y+object.height/2, object.width, object.height, STATIC);
-        colNode.next_sibling("object");
+
+        PhysBody* c1 = app->physics->CreateRectangle(object.x+ object.width/2, 288+object.y+object.height/2, object.width, object.height, STATIC);
+        c1->ctype = ColliderType::PLATFORM;
     }
 
     return ret;
