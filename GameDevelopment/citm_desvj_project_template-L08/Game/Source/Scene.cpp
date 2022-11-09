@@ -86,10 +86,10 @@ bool Scene::Update(float dt)
 		app->render->camera.y -= 50;
 
 	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
-		app->render->camera.x += 50;
+		app->render->camera.x += 5;
 
 	else if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		app->render->camera.x -= 50;
+		app->render->camera.x -= 5;
 
 	else {
 		if (player->position.x >= 250) {

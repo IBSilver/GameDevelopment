@@ -2,6 +2,7 @@
 #define __ITEM_H__
 
 #include "Entity.h"
+#include "Animation.h"
 #include "Point.h"
 #include "SDL/include/SDL.h"
 
@@ -25,6 +26,9 @@ public:
 public:
 
 	bool isPicked = false;
+
+	Animation* currentAnimation = nullptr;
+	Animation money;
 
 private:
 
