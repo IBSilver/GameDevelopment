@@ -41,6 +41,11 @@ public:
 
 	//Guarda direccion personaje
 	bool dir;
+	//Timer salto
+	int jumpTimer = 30;
+	//Variables del personaje
+	bool dead = false;
+	bool onair = false;
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
@@ -53,7 +58,7 @@ private:
 	const char* texturePath;
 
 
-
+	int jumpFx;
 	int pickCoinFxId;
 
 };

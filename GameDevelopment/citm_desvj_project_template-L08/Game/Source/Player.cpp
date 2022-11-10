@@ -9,8 +9,6 @@
 #include "Point.h"
 #include "Physics.h"
 
-int jumpTimer = 30;
-
 Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("Player");
@@ -111,6 +109,7 @@ bool Player::Start() {
 
 	//initialize audio effect - !! Path is hardcoded, should be loaded from config.xml
 	pickCoinFxId = app->audio->LoadFx("Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg");
+	jumpFx = app->audio->LoadFx("Assets/Audio/Fx/jump.wav");
 
 	return true;
 }
@@ -153,30 +152,24 @@ bool Player::Update()
 		right.Reset();
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+		app->audio->PlayFx(jumpFx);
+	}
+
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
 		if (jumpTimer > 0)
 		{
+			onair = true;
 			vel = b2Vec2(0, GRAVITY_Y);
-
-
-
 			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-				vel = b2Vec2(speed, GRAVITY_Y);
+				vel = b2Vec2(speed*0.9, GRAVITY_Y);
 				dir = true;
 				currentAnimation = &jumpR;
-				if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-					vel = b2Vec2(-speed, GRAVITY_Y);
-					dir = false;
-					currentAnimation = &jumpL;
-				}
-
-				if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-					vel = b2Vec2(speed, GRAVITY_Y);
-					dir = true;
-					currentAnimation = &jumpR;
-					/*jump.Reset();
-					currentAnimation = &jump;*/
-				}
+			}
+			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+				vel = b2Vec2(-speed*0.9, GRAVITY_Y);
+				dir = false;
+				currentAnimation = &jumpL;
 			}
 			jumpTimer--;
 		}
