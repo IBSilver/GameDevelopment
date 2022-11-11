@@ -179,6 +179,14 @@ bool Player::Update()
 		jumpR.Reset();
 	}
 
+	if (dead) {
+		currentAnimation = &death;
+		dir = true;
+	}
+	else {
+		death.Reset();
+	}
+
 	if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_IDLE
 		&& app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_IDLE
 		&& app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_IDLE && dir)
@@ -189,6 +197,7 @@ bool Player::Update()
 		&& app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_IDLE && !dir)
 		currentAnimation = &idleL;
 
+	
 
 	//Set the velocity of the pbody of the player
 	pbody->body->SetLinearVelocity(vel);
@@ -224,6 +233,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		case ColliderType::PLATFORM:
 			LOG("Collision PLATFORM");
 			jumpTimer = 30;
+			break;
+		case ColliderType::DEATH:
+			LOG("Collision DEATH");
+			dead = true;
 			break;
 		case ColliderType::UNKNOWN:
 			LOG("Collision UNKNOWN");
