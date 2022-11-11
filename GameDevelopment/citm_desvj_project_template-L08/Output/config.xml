@@ -29,6 +29,9 @@
     <item x="384" y="352" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
     <item x="200" y="672" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
     <item x="500" y="672" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+    <logo x="0"   y="288" texturepath="Assets/Scenes/logo.png"/>
+    <menu x="0"   y="288" texturepath="Assets/Scenes/title.png"/>
+
   </scene>
 
   <map>
