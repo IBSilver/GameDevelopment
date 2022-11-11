@@ -42,8 +42,10 @@ bool Player::Start() {
 	right.totalFrames = 0;
 	jumpR.totalFrames = 0;
 	jumpL.totalFrames = 0;
+	jumpR2.totalFrames = 0;
+	jumpL2.totalFrames = 0;
 	death.totalFrames = 0;
-
+	win.totalFrames = 0;
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
@@ -76,18 +78,32 @@ bool Player::Start() {
 	left.speed = 0.2f;
 
 	//jumpR Anim
-	for (int i = 0; i < 3; i++) {
-		jumpR.PushBack({ 0 + (i * 48), 384, 48, 48 });
+	for (int i = 0; i < 5; i++) {
+		jumpR.PushBack({ 0 + (i * 48), 240, 48, 48 });
 	}
 	jumpR.loop = false;
-	jumpR.speed = 0.1f;
-	
+	jumpR.speed = 0.15f;
+
 	//jumpL Anim
-	for (int i = 3; i >= 0; i--) {
-		jumpL.PushBack({ 576 + (i * 48), 384, 48, 48 });
+	for (int i = 5; i >= 0; i--) {
+		jumpL.PushBack({ 480 + (i * 48), 240, 48, 48 });
 	}
 	jumpL.loop = false;
-	jumpL.speed = 0.1f; 
+	jumpL.speed = 0.15f;
+
+	//jumpR2 Anim
+	for (int i = 0; i < 3; i++) {
+		jumpR2.PushBack({ 0 + (i * 48), 384, 48, 48 });
+	}
+	jumpR2.loop = false;
+	jumpR2.speed = 0.15f;
+	
+	//jumpL2 Anim
+	for (int i = 3; i >= 0; i--) {
+		jumpL2.PushBack({ 576 + (i * 48), 384, 48, 48 });
+	}
+	jumpL2.loop = false;
+	jumpL2.speed = 0.15f; 
 	
 	//death Anim
 	for (int i = 0; i < 5; i++) {
@@ -96,13 +112,20 @@ bool Player::Start() {
 	death.loop = false;
 	death.speed = 0.2f;
 
+	//win Anim
+	for (int i = 0; i < 5; i++) {
+		win.PushBack({ 0 + (i * 48), 576, 48, 48 });
+	}
+	win.loop = true;
+	win.speed = 0.15f;
+
 	currentAnimation = &idleR;
 
 	// L07 DONE 5: Add physics to the player - initialize physics body
 	pbody = app->physics->CreateCircle(position.x+16, position.y+16, 16, bodyType::DYNAMIC);
 
 	// L07 DONE 6: Assign player class (using "this") to the listener of the pbody. This makes the Physics module to call the OnCollision method
-	pbody->listener = this; 
+	pbody->listener = this;
 
 	// L07 DONE 7: Assign collider type
 	pbody->ctype = ColliderType::PLAYER;
@@ -159,6 +182,12 @@ bool Player::Update()
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
 		if (jumpTimer > 0)
 		{
+			if (dir) {
+				currentAnimation = &jumpR;
+			}
+			else {
+				currentAnimation = &jumpL;
+			}
 			onair = true;
 			vel = b2Vec2(0, GRAVITY_Y);
 			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
@@ -197,8 +226,6 @@ bool Player::Update()
 		&& app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_IDLE && !dir)
 		currentAnimation = &idleL;
 
-	
-
 	//Set the velocity of the pbody of the player
 	pbody->body->SetLinearVelocity(vel);
 
@@ -223,7 +250,6 @@ bool Player::CleanUp()
 void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	// L07 DONE 7: Detect the type of collision
-
 	switch (physB->ctype)
 	{
 		case ColliderType::ITEM:
@@ -242,7 +268,4 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			LOG("Collision UNKNOWN");
 			break;
 	}
-	
-
-
 }

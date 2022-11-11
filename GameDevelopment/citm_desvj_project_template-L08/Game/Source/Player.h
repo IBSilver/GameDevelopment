@@ -37,7 +37,10 @@ public:
 	Animation left;
 	Animation jumpR;
 	Animation jumpL;
+	Animation jumpR2;
+	Animation jumpL2;
 	Animation death;
+	Animation win;
 
 	//Guarda direccion personaje
 	bool dir;
@@ -46,6 +49,7 @@ public:
 	//Variables del personaje
 	bool dead = false;
 	bool onair = false;
+	bool winner = false;
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
