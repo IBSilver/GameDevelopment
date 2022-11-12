@@ -197,12 +197,12 @@ bool Map::Load()
     }
 
     // L07 DONE 3: Create colliders
-    //plataforma inicial
-    PhysBody* c1 = app->physics->CreateRectangle(416, 416+288+32, 832, 64, STATIC);
-    c1->ctype = ColliderType::PLATFORM;
     //pared invisible
     app->physics->CreateRectangle(0, 288, 1, 1000, STATIC);
     app->physics->CreateRectangle(3200, 288, 1, 1000, STATIC);
+
+    //muerte
+    app->physics->CreateRectangle(0, 288+481, 3200, 1, STATIC);
 
     //plataformas
     //app->physics->CreateRectangle(1152, 704 + 32, 448, 64, STATIC);
