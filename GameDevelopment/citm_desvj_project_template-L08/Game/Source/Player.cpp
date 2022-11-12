@@ -203,10 +203,6 @@ bool Player::Update()
 			jumpTimer--;
 		}
 	}
-	else {
-		jumpL.Reset();
-		jumpR.Reset();
-	}
 
 	if (dead) {
 		currentAnimation = &death;
