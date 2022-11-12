@@ -211,7 +211,6 @@ bool Player::Update()
 	if (dead) {
 		currentAnimation = &death;
 		dir = true;
-		app->~App();
 	}
 	else {
 		death.Reset();
