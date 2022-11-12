@@ -50,6 +50,7 @@ public:
 	bool dead = false;
 	bool onair = false;
 	bool winner = false;
+	bool GodMode = false;
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 

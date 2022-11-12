@@ -74,19 +74,32 @@ bool Scene::Update(float dt)
 {
 	// L03: DONE 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
+	{
 		app->LoadLevel1Request();
+		app->scene->player->dead = false;
+		app->scene->player->winner = false;
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
+	{
 		app->LoadCurrentLevelRequest();
-
-	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
-		app->SaveGameRequest();
+		app->scene->player->dead = false;
+		app->scene->player->winner = false;
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		app->SaveGameRequest();
 
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 		app->LoadGameRequest();
+
+	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+		if (app->scene->player->GodMode == false) {
+			app->scene->player->GodMode = true;
+			app->scene->player->jumpTimer = 999;
+		}
+		else
+			app->scene->player->GodMode = false;
 
 	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		app->render->camera.y += 50;

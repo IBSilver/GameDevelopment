@@ -57,11 +57,12 @@ public:
 	void SaveGameRequest() ;
 	bool LoadFromFile();
 	bool SaveToFile() ;
-
 	void LoadLevel1Request();
 	void LoadCurrentLevelRequest();
 	bool LoadLevel1();
 	bool LoadCurrentLevel();
+	bool GodMode();
+
 
 private:
 

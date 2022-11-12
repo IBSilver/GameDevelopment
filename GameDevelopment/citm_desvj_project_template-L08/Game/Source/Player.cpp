@@ -262,14 +262,22 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			break;
 		case ColliderType::PLATFORM:
 			LOG("Collision PLATFORM");
-			jumpTimer = 30;
 			jumpL.Reset();
 			jumpR.Reset();
 			onair = false;
+			if (!GodMode)
+			{
+				jumpTimer = 30;
+			}
+			else
+			{
+				jumpTimer = 999;
+			}
 			break;
 		case ColliderType::DEATH:
 			LOG("Collision DEATH");
-			dead = true;
+			if(!GodMode)
+				dead = true;
 			break;
 		case ColliderType::WIN:
 			LOG("Collision WIN");
