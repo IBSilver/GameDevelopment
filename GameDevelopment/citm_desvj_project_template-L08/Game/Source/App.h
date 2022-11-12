@@ -58,6 +58,11 @@ public:
 	bool LoadFromFile();
 	bool SaveToFile() ;
 
+	void LoadLevel1Request();
+	void LoadCurrentLevelRequest();
+	bool LoadLevel1();
+	bool LoadCurrentLevel();
+
 private:
 
 	// Load config file
@@ -113,6 +118,9 @@ private:
 	// L03: DONE 1: Create control variables to control that the real Load and Save happens at the end of the frame
     bool saveGameRequested;
 	bool loadGameRequested;
+	bool loadLevel1Requested;
+	bool loadCurrentLevelRequested;
+
 };
 
 extern App* app;

@@ -167,6 +167,8 @@ void App::FinishUpdate()
 	// L03: DONE 1: This is a good place to call Load / Save methods
 	if (loadGameRequested == true) LoadFromFile();
 	if (saveGameRequested == true) SaveToFile();
+	if (loadLevel1Requested == true) LoadLevel1();
+	if (loadCurrentLevelRequested == true) LoadCurrentLevel();
 }
 
 // Call modules before each loop iteration
@@ -292,6 +294,18 @@ void App::SaveGameRequest()
 	saveGameRequested = true;
 }
 
+void App::LoadLevel1Request()
+{
+	// NOTE: We should check if SAVE_STATE_FILENAME actually exist
+	loadLevel1Requested = true;
+}
+
+void App::LoadCurrentLevelRequest()
+{
+	// NOTE: We should check if SAVE_STATE_FILENAME actually exist
+	loadCurrentLevelRequested = true;
+}
+
 
 // L02: DONE 5: Implement the method LoadFromFile() to actually load a xml file
 // then call all the modules to load themselves
@@ -347,4 +361,22 @@ bool App::SaveToFile()
 	saveGameRequested = false;
 
 	return ret;
+}
+
+bool App::LoadLevel1()
+{
+	app->scene->player->pbody->body->SetTransform({ PIXEL_TO_METERS(250), PIXEL_TO_METERS(672) }, 0);
+
+	loadLevel1Requested = false;
+
+	return true;
+}
+
+bool App::LoadCurrentLevel()
+{
+	app->scene->player->pbody->body->SetTransform({ PIXEL_TO_METERS(250), PIXEL_TO_METERS(672) }, 0);
+
+	loadCurrentLevelRequested = false;
+
+	return true;
 }
