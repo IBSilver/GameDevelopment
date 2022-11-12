@@ -26,9 +26,12 @@ public:
 public:
 
 	bool isPicked = false;
+	int pickCoinFxId;
 
 	Animation* currentAnimation = nullptr;
 	Animation money;
+
+	void Item::OnCollision(PhysBody* physA, PhysBody* physB);
 
 private:
 

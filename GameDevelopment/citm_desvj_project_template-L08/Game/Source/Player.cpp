@@ -131,7 +131,6 @@ bool Player::Start() {
 	pbody->ctype = ColliderType::PLAYER;
 
 	//initialize audio effect - !! Path is hardcoded, should be loaded from config.xml
-	pickCoinFxId = app->audio->LoadFx("Assets/Audio/Fx/retro-video-game-coin-pickup-38299.wav");
 	jumpFx = app->audio->LoadFx("Assets/Audio/Fx/jump.wav");
 
 	return true;
@@ -258,7 +257,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 		case ColliderType::ITEM:
 			LOG("Collision ITEM");
-			app->audio->PlayFx(pickCoinFxId);
 			break;
 		case ColliderType::PLATFORM:
 			LOG("Collision PLATFORM");
