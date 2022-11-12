@@ -202,7 +202,12 @@ bool Map::Load()
     app->physics->CreateRectangle(3200, 288, 1, 1000, STATIC);
 
     //muerte
-    app->physics->CreateRectangle(0, 288+481, 3200, 1, STATIC);
+    PhysBody* c2 = app->physics->CreateRectangle(1600, 288+481, 3200, 1, STATIC);
+    c2->ctype = ColliderType::DEATH;
+
+    //victoria
+    PhysBody* c3 = app->physics->CreateRectangle(3078 + 9, 288 + 382 + 17, 18, 34, STATIC);
+    c3->ctype = ColliderType::WIN;
 
     //plataformas
     //app->physics->CreateRectangle(1152, 704 + 32, 448, 64, STATIC);
