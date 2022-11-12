@@ -98,8 +98,10 @@ bool Scene::Update(float dt)
 			app->scene->player->GodMode = true;
 			app->scene->player->jumpTimer = 999;
 		}
-		else
+		else {
 			app->scene->player->GodMode = false;
+			app->scene->player->jumpTimer = 30;
+		}
 
 	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		app->render->camera.y += 50;
