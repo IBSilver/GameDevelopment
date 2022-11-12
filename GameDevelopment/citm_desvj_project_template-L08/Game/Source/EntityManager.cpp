@@ -139,8 +139,8 @@ bool EntityManager::Update(float dt)
 // for now load camera's x and y
 bool EntityManager::LoadState(pugi::xml_node& data)
 {
-	int x = data.child("camera").attribute("x").as_int();
-	int y = data.child("camera").attribute("y").as_int();
+	int x = 16+data.child("camera").attribute("x").as_int();
+	int y = 16+data.child("camera").attribute("y").as_int();
 
 	app->scene->player->pbody->body->SetTransform({ PIXEL_TO_METERS(x), PIXEL_TO_METERS(y) }, 0);
 
