@@ -7,10 +7,8 @@
 	<:anonymous />
 	<scene />
 	<entitymanager>
-		<camera x="1228" y="543" />
+		<camera x="250" y="671" />
 	</entitymanager>
 	<map />
-	<renderer>
-		<camera x="-978" y="0" />
-	</renderer>
+	<renderer />
 </save_state>
