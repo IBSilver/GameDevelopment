@@ -131,7 +131,7 @@ bool Player::Start() {
 	pbody->ctype = ColliderType::PLAYER;
 
 	//initialize audio effect - !! Path is hardcoded, should be loaded from config.xml
-	pickCoinFxId = app->audio->LoadFx("Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg");
+	pickCoinFxId = app->audio->LoadFx("Assets/Audio/Fx/retro-video-game-coin-pickup-38299.wav");
 	jumpFx = app->audio->LoadFx("Assets/Audio/Fx/jump.wav");
 
 	return true;
@@ -211,6 +211,7 @@ bool Player::Update()
 	if (dead) {
 		currentAnimation = &death;
 		dir = true;
+		app->~App();
 	}
 	else {
 		death.Reset();
