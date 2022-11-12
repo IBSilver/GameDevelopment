@@ -82,14 +82,14 @@ bool Player::Start() {
 		jumpR.PushBack({ 0 + (i * 48), 240, 48, 48 });
 	}
 	jumpR.loop = false;
-	jumpR.speed = 0.15f;
+	jumpR.speed = 0.2f;
 
 	//jumpL Anim
 	for (int i = 5; i >= 0; i--) {
 		jumpL.PushBack({ 480 + (i * 48), 240, 48, 48 });
 	}
 	jumpL.loop = false;
-	jumpL.speed = 0.15f;
+	jumpL.speed = 0.2f;
 
 	//jumpR2 Anim
 	for (int i = 0; i < 3; i++) {
@@ -189,14 +189,14 @@ bool Player::Update()
 				currentAnimation = &jumpL;
 			}
 			onair = true;
-			vel = b2Vec2(0, GRAVITY_Y);
+			vel = b2Vec2(0, GRAVITY_Y/2);
 			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && !dead && !winner) {
-				vel = b2Vec2(speed*0.9, GRAVITY_Y);
+				vel = b2Vec2(speed*0.9, GRAVITY_Y/1.5);
 				dir = true;
 				currentAnimation = &jumpR;
 			}
 			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && !dead && !winner) {
-				vel = b2Vec2(-speed*0.9, GRAVITY_Y);
+				vel = b2Vec2(-speed*0.9, GRAVITY_Y/1.5);
 				dir = false;
 				currentAnimation = &jumpL;
 			}
@@ -265,6 +265,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			jumpTimer = 30;
 			jumpL.Reset();
 			jumpR.Reset();
+			onair = false;
 			break;
 		case ColliderType::DEATH:
 			LOG("Collision DEATH");
