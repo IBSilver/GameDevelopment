@@ -216,14 +216,22 @@ bool Player::Update()
 		death.Reset();
 	}
 
+	if (winner) {
+		currentAnimation = &win;
+		dir = true;
+	}
+	else {
+		win.Reset();
+	}
+
 	if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_IDLE
 		&& app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_IDLE
-		&& app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_IDLE && dir)
+		&& app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_IDLE && dir && !dead && !winner)
 		currentAnimation = &idleR;
 
 	if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_IDLE
 		&& app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_IDLE
-		&& app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_IDLE && !dir)
+		&& app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_IDLE && !dir && !dead && !winner)
 		currentAnimation = &idleL;
 
 	//Set the velocity of the pbody of the player
@@ -263,6 +271,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		case ColliderType::DEATH:
 			LOG("Collision DEATH");
 			dead = true;
+			break;
+		case ColliderType::WIN:
+			LOG("Collision WIN");
+			winner = true;
 			break;
 		case ColliderType::UNKNOWN:
 			LOG("Collision UNKNOWN");
