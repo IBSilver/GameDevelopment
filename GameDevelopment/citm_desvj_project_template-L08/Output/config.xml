@@ -24,11 +24,11 @@
   <!-- L02: DONE: Add an element for the entity manager and add the player parameters -->
   <scene>
     <player x="250" y="672" texturepath="Assets/Textures/personajes/Biker/Biker.png"/>
-    <item x="256" y="515" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
-    <item x="416" y="512" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
-    <item x="384" y="352" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
-    <item x="200" y="672" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
-    <item x="500" y="672" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+    <item x="840" y="628" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+    <item x="880" y="608" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+    <item x="920" y="628" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+    <item x="1408" y="520" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+    <item x="2224" y="392" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
     <logo x="0"   y="288" texturepath="Assets/Scenes/logo.png"/>
     <menu x="0"   y="288" texturepath="Assets/Scenes/title.png"/>
 
