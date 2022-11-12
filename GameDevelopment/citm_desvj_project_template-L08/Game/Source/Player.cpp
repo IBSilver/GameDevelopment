@@ -157,7 +157,7 @@ bool Player::Update()
 		//
 	}
 		
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && !dead && !winner) {
 		vel = b2Vec2(-speed, -GRAVITY_Y);
 		currentAnimation = &left;
 		dir = false;
@@ -166,7 +166,7 @@ bool Player::Update()
 		left.Reset();
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && !dead && !winner) {
 		vel = b2Vec2(speed, -GRAVITY_Y);
 		currentAnimation = &right;
 		dir = true;
@@ -175,11 +175,11 @@ bool Player::Update()
 		right.Reset();
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !dead && !winner) {
 		app->audio->PlayFx(jumpFx);
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT) {
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && !dead && !winner) {
 		if (jumpTimer > 0)
 		{
 			if (dir) {
@@ -190,12 +190,12 @@ bool Player::Update()
 			}
 			onair = true;
 			vel = b2Vec2(0, GRAVITY_Y);
-			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
+			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && !dead && !winner) {
 				vel = b2Vec2(speed*0.9, GRAVITY_Y);
 				dir = true;
 				currentAnimation = &jumpR;
 			}
-			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
+			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && !dead && !winner) {
 				vel = b2Vec2(-speed*0.9, GRAVITY_Y);
 				dir = false;
 				currentAnimation = &jumpL;
