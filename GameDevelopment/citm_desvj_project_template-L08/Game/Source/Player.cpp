@@ -267,6 +267,8 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		case ColliderType::PLATFORM:
 			LOG("Collision PLATFORM");
 			jumpTimer = 30;
+			jumpL.Reset();
+			jumpR.Reset();
 			break;
 		case ColliderType::DEATH:
 			LOG("Collision DEATH");
