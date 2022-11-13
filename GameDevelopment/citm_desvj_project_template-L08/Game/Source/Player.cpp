@@ -220,7 +220,7 @@ bool Player::Update()
 		}
 	}
 
-	if (dead) {
+	if (dead && !GodMode) {
 		currentAnimation = &death;
 		dir = true;
 	}
@@ -228,7 +228,7 @@ bool Player::Update()
 		death.Reset();
 	}
 
-	if (winner) {
+	if (winner && !GodMode) {
 		currentAnimation = &win;
 		dir = true;
 	}
@@ -286,13 +286,15 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::DEATH:
 		LOG("Collision DEATH");
-		app->audio->PlayFx(deathFx);
-		if (!GodMode)
+		if (!GodMode) {
 			dead = true;
+			app->audio->PlayFx(deathFx);
+		}
 		break;
 	case ColliderType::WIN:
 		LOG("Collision WIN");
-		winner = true;
+		if (!GodMode)
+			winner = true;
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
