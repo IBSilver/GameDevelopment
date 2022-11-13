@@ -180,22 +180,11 @@ bool Player::Update()
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !dead && !winner) {
-		app->audio->PlayFx(jumpFx);
+		if (onair == false)
+			app->audio->PlayFx(jumpFx);
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && !dead && !winner) {
-		if (onair == false) {
-			jumpL.Reset();
-			jumpR.Reset();
-			if (!GodMode)
-			{
-				jumpTimer = 30;
-			}
-			else
-			{
-				jumpTimer = 999;
-			}
-		}
 		if (jumpTimer > 0)
 		{
 			if (dir) {
@@ -219,6 +208,27 @@ bool Player::Update()
 
 		}
 	}
+
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE)
+	{
+		if (onair == false) {
+			jumpL.Reset();
+			jumpR.Reset();
+			if (!GodMode)
+			{
+				jumpTimer = 30;
+			}
+			else
+			{
+				jumpTimer = 999;
+			}
+		}
+		else
+			jumpTimer = 0;
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
+		jumpTimer = 0;
 
 	if (dead && !GodMode) {
 		currentAnimation = &death;
