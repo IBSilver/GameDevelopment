@@ -6,17 +6,24 @@ Platform game for the videogame development subject.
 
 ## Key Features
 
+ - Logo Scene & Title Scene.
+ - Music for scenes and level & Fx for jump, death and win.
  - The player can move left or right and can jump.
  - The player can die.
  - The player can win.
  - The player can obtain coins.
+ 
+ ## Navigation
+
+ - Logo Scene: 5 seconds screen. Also can press Enter to go to the Title Screen.
+ - Title Scene: Press Enter to start the level.
+ - Dead Scene: Appears when you die. Wait a few seconds and try again!
  
 ## Controls
 
  - D: Move right
  - A: Move left
  - Space: Jump
- - If you die, you can go to the start of the level with F1 or F3.
  
  ## Debug
 
