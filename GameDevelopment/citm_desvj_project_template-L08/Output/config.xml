@@ -24,12 +24,21 @@
   <!-- L02: DONE: Add an element for the entity manager and add the player parameters -->
   <scene>
     <player x="250" y="672" texturepath="Assets/Textures/personajes/Biker/Biker.png"/>
-    <item x="840" y="628" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
-    <item x="880" y="608" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
-    <item x="920" y="628" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
-    <item x="1408" y="520" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
-    <item x="2224" y="392" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
-    <logo x="0"   y="288" texturepath="Assets/Scenes/logo.png"/>
+    <item x="744" y="628" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+    <item x="776" y="608" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+    <item x="808" y="628" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+    <item x="1326" y="512" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+    <item x="1356" y="512" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+	<item x="1544" y="392" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+	<item x="2064" y="648" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+	<item x="2224" y="648" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+	<item x="2160" y="552" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+	<item x="2096" y="392" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+	<item x="2208" y="392" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+	<item x="2336" y="392" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+	<item x="2672" y="552" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+
+	<logo x="0"   y="288" texturepath="Assets/Scenes/logo.png"/>
     <menu x="0"   y="288" texturepath="Assets/Scenes/title.png"/>
 
   </scene>

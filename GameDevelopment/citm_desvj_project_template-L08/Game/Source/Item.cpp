@@ -42,7 +42,7 @@ bool Item::Start() {
 	currentAnimation = &money;
 	
 	// L07 DONE 4: Add a physics to an item - initialize the physics body
-	pbody = app->physics->CreateRectangleSensor(position.x, position.y, 12, 12, bodyType::STATIC);
+	pbody = app->physics->CreateRectangleSensor(position.x, position.y, 16, 16, bodyType::STATIC);
 
 	// L07 DONE 6: Assign player class (using "this") to the listener of the pbody. This makes the Physics module to call the OnCollision method
 	pbody->listener = this;
