@@ -134,6 +134,7 @@ bool Player::Start() {
 	//initialize audio effect - !! Path is hardcoded, should be loaded from config.xml
 	jumpFx = app->audio->LoadFx("Assets/Audio/Fx/jump.wav");
 	deathFx = app->audio->LoadFx("Assets/Audio/Fx/biker_hurt.wav");
+	winFx = app->audio->LoadFx("Assets/Audio/Fx/win.wav");
 
 	return true;
 }
@@ -303,8 +304,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::WIN:
 		LOG("Collision WIN");
-		if (!GodMode)
+		if (!GodMode) {
 			winner = true;
+			app->audio->PlayFx(winFx);
+		}
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");

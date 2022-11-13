@@ -68,6 +68,7 @@ private:
 	//Sounds
 	int jumpFx;
 	int deathFx;
+	int winFx;
 
 };
 
