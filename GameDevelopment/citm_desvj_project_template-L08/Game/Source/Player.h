@@ -25,6 +25,7 @@ public:
 	bool CleanUp();
 	// L07 DONE 5: Add physics to the player - declare a Physics body
 	PhysBody* pbody;
+
 public:
 
 	Animation* currentAnimation = nullptr;
@@ -45,12 +46,14 @@ public:
 	//Guarda direccion personaje
 	bool dir;
 	//Timer salto
-	int jumpTimer = 30;
+	int jumpTimer;
 	//Variables del personaje
 	bool dead = false;
 	bool onair = false;
 	bool winner = false;
 	bool GodMode = false;
+	//para calcular si el player se mueve en y
+	int posInicialY;
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 

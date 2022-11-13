@@ -35,6 +35,7 @@ bool Player::Awake() {
 bool Player::Start() {
 
 	dir = true;
+	jumpTimer = 30;
 
 	idleR.totalFrames = 0;
 	idleL.totalFrames = 0;
@@ -138,6 +139,9 @@ bool Player::Start() {
 
 bool Player::Update()
 {
+	posInicialY = position.y;
+	//LOG("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA %d", app->scene->player->posInicialY);
+	
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	currentAnimation->Update();
 
@@ -179,6 +183,18 @@ bool Player::Update()
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && !dead && !winner) {
+		if (onair == false) {
+			jumpL.Reset();
+			jumpR.Reset();
+			if (!GodMode)
+			{
+				jumpTimer = 30;
+			}
+			else
+			{
+				jumpTimer = 999;
+			}
+		}
 		if (jumpTimer > 0)
 		{
 			if (dir) {
@@ -187,7 +203,6 @@ bool Player::Update()
 			else {
 				currentAnimation = &jumpL;
 			}
-			onair = true;
 			vel = b2Vec2(0, GRAVITY_Y/2);
 			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && !dead && !winner) {
 				vel = b2Vec2(speed*0.9, GRAVITY_Y/1.5);
@@ -200,6 +215,7 @@ bool Player::Update()
 				currentAnimation = &jumpL;
 			}
 			jumpTimer--;
+
 		}
 	}
 
@@ -237,6 +253,11 @@ bool Player::Update()
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
 	SDL_Rect textSection = { 0,0,48,48 };
+	LOG("AAAAAAAAAAAAAAAAAAAAAAA %d", onair);
+	if (position.y - posInicialY == 0)
+		onair = false;
+	else
+		onair = true;
 
 	//app->render->DrawTexture(texture, position.x , position.y, &textSection);
 	//app->render->DrawTexture(texture, position.x , position.y);
@@ -249,40 +270,30 @@ bool Player::CleanUp()
 	return true;
 }
 
+
 // L07 DONE 6: Define OnCollision function for the player. Check the virtual function on Entity class
 void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	// L07 DONE 7: Detect the type of collision
 	switch (physB->ctype)
 	{
-		case ColliderType::ITEM:
-			LOG("Collision ITEM");
-			break;
-		case ColliderType::PLATFORM:
-			LOG("Collision PLATFORM");
-			jumpL.Reset();
-			jumpR.Reset();
-			onair = false;
-			if (!GodMode)
-			{
-				jumpTimer = 30;
-			}
-			else
-			{
-				jumpTimer = 999;
-			}
-			break;
-		case ColliderType::DEATH:
-			LOG("Collision DEATH");
-			if(!GodMode)
-				dead = true;
-			break;
-		case ColliderType::WIN:
-			LOG("Collision WIN");
-			winner = true;
-			break;
-		case ColliderType::UNKNOWN:
-			LOG("Collision UNKNOWN");
-			break;
+	case ColliderType::ITEM:
+		LOG("Collision ITEM");
+		break;
+	case ColliderType::PLATFORM:
+		LOG("Collision PLATFORM");
+		break;
+	case ColliderType::DEATH:
+		LOG("Collision DEATH");
+		if (!GodMode)
+			dead = true;
+		break;
+	case ColliderType::WIN:
+		LOG("Collision WIN");
+		winner = true;
+		break;
+	case ColliderType::UNKNOWN:
+		LOG("Collision UNKNOWN");
+		break;
 	}
 }
