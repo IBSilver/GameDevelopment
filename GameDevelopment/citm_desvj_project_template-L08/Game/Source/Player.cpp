@@ -133,6 +133,7 @@ bool Player::Start() {
 
 	//initialize audio effect - !! Path is hardcoded, should be loaded from config.xml
 	jumpFx = app->audio->LoadFx("Assets/Audio/Fx/jump.wav");
+	deathFx = app->audio->LoadFx("Assets/Audio/Fx/biker_hurt.wav");
 
 	return true;
 }
@@ -285,6 +286,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::DEATH:
 		LOG("Collision DEATH");
+		app->audio->PlayFx(deathFx);
 		if (!GodMode)
 			dead = true;
 		break;

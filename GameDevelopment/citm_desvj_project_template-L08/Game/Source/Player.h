@@ -65,9 +65,9 @@ private:
 	SDL_Texture* texture;
 	const char* texturePath;
 
-
+	//Sounds
 	int jumpFx;
-	int pickCoinFxId;
+	int deathFx;
 
 };
 
