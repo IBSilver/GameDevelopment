@@ -52,8 +52,13 @@ public:
 	bool onair = false;
 	bool winner = false;
 	bool GodMode = false;
-	//para calcular si el player se mueve en y
+	//Para calcular si el player se mueve en y
 	int posInicialY;
+
+	//Sounds
+	int jumpFx;
+	int deathFx;
+	int winFx;
 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
@@ -64,11 +69,6 @@ private:
 	//L02: DONE 1: Declare player parameters
 	SDL_Texture* texture;
 	const char* texturePath;
-
-	//Sounds
-	int jumpFx;
-	int deathFx;
-	int winFx;
 
 };
 

@@ -96,6 +96,18 @@ bool Scene::Update(float dt)
 		app->scene->player->winner = false;
 	}
 
+	if (app->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN) {
+		app->scene->player->dead = true;
+		app->scene->player->winner = false;
+		app->audio->PlayFx(app->scene->player->deathFx);
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN) {
+		app->scene->player->winner = true;
+		app->scene->player->dead = false;
+		app->audio->PlayFx(app->scene->player->winFx);
+	}
+
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 		if (app->scene->player->GodMode == false) {
 			app->scene->player->GodMode = true;
