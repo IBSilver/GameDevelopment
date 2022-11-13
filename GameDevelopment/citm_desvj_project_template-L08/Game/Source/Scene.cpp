@@ -133,8 +133,8 @@ bool Scene::Update(float dt)
 	else if (Logo == true) {
 		app->render->camera.y = 1288;
 		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
-			timer = 200;
-		if (timer < 200)
+			timer = 250;
+		if (timer < 250)
 		{
 			timer++;
 		}
