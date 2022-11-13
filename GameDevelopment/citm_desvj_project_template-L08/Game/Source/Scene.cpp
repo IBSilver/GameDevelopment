@@ -90,8 +90,11 @@ bool Scene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 		app->SaveGameRequest();
 
-	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) {
 		app->LoadGameRequest();
+		app->scene->player->dead = false;
+		app->scene->player->winner = false;
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
 		if (app->scene->player->GodMode == false) {

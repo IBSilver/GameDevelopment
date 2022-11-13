@@ -206,7 +206,7 @@ bool Map::Load()
     c2->ctype = ColliderType::DEATH;
 
     //victoria
-    PhysBody* c3 = app->physics->CreateRectangle(3078 + 9, 288 + 382 + 17, 18, 34, STATIC);
+    PhysBody* c3 = app->physics->CreateRectangle(3142 + 9, 288 + 382 + 17, 18, 34, STATIC);
     c3->ctype = ColliderType::WIN;
 
     //plataformas
