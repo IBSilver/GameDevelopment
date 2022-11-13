@@ -118,11 +118,11 @@ bool Scene::Update(float dt)
 			app->scene->player->jumpTimer = 30;
 		}
 
-	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+	/*if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		app->render->camera.y += 50;
 
 	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		app->render->camera.y -= 50;
+		app->render->camera.y -= 50;*/
 
 	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 		app->render->camera.x += 5;
@@ -132,7 +132,7 @@ bool Scene::Update(float dt)
 
 	else if (Logo == true) {
 		app->render->camera.y = 1288;
-		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
 			timer = 200;
 		if (timer < 200)
 		{
@@ -147,16 +147,18 @@ bool Scene::Update(float dt)
 
 	else if (Title == true) {
 		app->render->camera.y = 2288;
-		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-			timer = 200;
-		if (timer < 100)
+		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) {
+			//timer = 200;
+			Title = false;
+		}
+		/*if (timer < 100)
 		{
 			timer++;
 		}
 		else {
 			timer = 0;
 			Title = false;
-		}
+		}*/
 	}
 
 	else if (app->scene->player->dead == true)
@@ -196,8 +198,6 @@ bool Scene::Update(float dt)
 	}
 	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		app->render->camera.x -= 1;
-
-
 
 	//app->render->DrawTexture(img, 380, 100); // Placeholder not needed any more
 

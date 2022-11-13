@@ -170,7 +170,7 @@ bool Player::Update()
 		//
 	}
 		
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && !dead && !winner) {
+	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && !dead && !winner && !app->scene->Logo && !app->scene->Title) {
 		vel = b2Vec2(-speed, -GRAVITY_Y);
 		currentAnimation = &left;
 		dir = false;
@@ -179,7 +179,7 @@ bool Player::Update()
 		left.Reset();
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && !dead && !winner) {
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && !dead && !winner && !app->scene->Logo && !app->scene->Title) {
 		vel = b2Vec2(speed, -GRAVITY_Y);
 		currentAnimation = &right;
 		dir = true;
@@ -188,12 +188,12 @@ bool Player::Update()
 		right.Reset();
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !dead && !winner) {
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && !dead && !winner && !app->scene->Logo && !app->scene->Title) {
 		if (onair == false)
 			app->audio->PlayFx(jumpFx);
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && !dead && !winner) {
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && !dead && !winner && !app->scene->Logo && !app->scene->Title) {
 		if (jumpTimer > 0)
 		{
 			if (dir) {
