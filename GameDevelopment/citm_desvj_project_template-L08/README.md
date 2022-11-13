@@ -9,12 +9,14 @@ Platform game for the videogame development subject.
  - The player can move left or right and can jump.
  - The player can die.
  - The player can win.
+ - The player can obtain coins.
  
 ## Controls
 
  - D: Move right
  - A: Move left
  - Space: Jump
+ - If you die, you can go to the start of the level with F1 or F3.
  
  ## Debug
 
@@ -22,8 +24,10 @@ Platform game for the videogame development subject.
  - F3: Start from the beginning of the current level
  - F5: Save the current game state
  - F6: Load the previous state
+ - F7: Instant death
+ - F8: Instant win
  - F9: View colliders / logic
- - F10: God Mode (fly around, cannot be killed)
+ - F10: God Mode (fly around, cannot be killed, cannot win)
 
 ## Developers
 
