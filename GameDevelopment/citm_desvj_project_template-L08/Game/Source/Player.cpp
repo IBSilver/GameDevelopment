@@ -29,10 +29,15 @@ bool Player::Awake() {
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
 
+
 	return true;
 }
 
 bool Player::Start() {
+
+	logo = app->tex->Load("Assets/Scenes/logo.png");
+	title = app->tex->Load("Assets/Scenes/title.png");
+	gameover = app->tex->Load("Assets/Scenes/gameover.png");
 
 	dir = true;
 	jumpTimer = 30;
@@ -142,10 +147,13 @@ bool Player::Start() {
 bool Player::Update()
 {
 	posInicialY = position.y;
-	//LOG("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA %d", app->scene->player->posInicialY);
-	
+
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	currentAnimation->Update();
+
+	app->render->DrawTexture(logo, 0, -1288, NULL);
+	app->render->DrawTexture(title, 0, -2288, NULL);
+	app->render->DrawTexture(gameover, 0, -3288, NULL);
 
 	app->render->DrawTexture(texture, position.x, position.y - 16, &rect);
 

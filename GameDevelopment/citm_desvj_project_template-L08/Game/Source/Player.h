@@ -70,6 +70,10 @@ private:
 	SDL_Texture* texture;
 	const char* texturePath;
 
+	SDL_Texture* logo;
+	SDL_Texture* title;
+	SDL_Texture* gameover;
+
 };
 
 #endif // __PLAYER_H__

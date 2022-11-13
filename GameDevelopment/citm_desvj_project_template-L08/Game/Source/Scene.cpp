@@ -118,11 +118,11 @@ bool Scene::Update(float dt)
 			app->scene->player->jumpTimer = 30;
 		}
 
-	/*if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		app->render->camera.y += 50;
 
 	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		app->render->camera.y -= 50;*/
+		app->render->camera.y -= 50;
 
 	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 		app->render->camera.x += 5;
@@ -130,9 +130,55 @@ bool Scene::Update(float dt)
 	else if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		app->render->camera.x -= 5;
 
+	else if (Logo == true) {
+		app->render->camera.y = 1288;
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+			timer = 200;
+		if (timer < 200)
+		{
+			timer++;
+		}
+		else {
+			timer = 0;
+			Title = true;
+			Logo = false;
+		}
+	}
+
+	else if (Title == true) {
+		app->render->camera.y = 2288;
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+			timer = 200;
+		if (timer < 100)
+		{
+			timer++;
+		}
+		else {
+			timer = 0;
+			Title = false;
+		}
+	}
+
+	else if (app->scene->player->dead == true)
+	{
+		app->render->camera.x = 0;
+		app->render->camera.y = 3288;
+		if (timer < 200)
+		{
+			timer++;
+		}
+		else {
+			timer = 0;
+			app->LoadCurrentLevelRequest();
+			app->scene->player->dead = false;
+		}
+	}
+
 	else {
 		if (player->position.x >= 250) {
 			app->render->camera.x = -player->position.x + 250;
+			app->render->camera.y = -288;
+
 
 			if (player->position.x >= 2810) {
 				app->render->camera.x = -2560;

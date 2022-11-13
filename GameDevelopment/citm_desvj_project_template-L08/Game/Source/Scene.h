@@ -34,6 +34,9 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	bool Logo = true;
+	bool Title = false;
+	int timer = 0;
 public:
 
 	//L02: DONE 3: Declare a Player attribute 
