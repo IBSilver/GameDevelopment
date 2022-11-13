@@ -161,16 +161,22 @@ bool Scene::Update(float dt)
 
 	else if (app->scene->player->dead == true)
 	{
-		app->render->camera.x = 0;
-		app->render->camera.y = 3288;
-		if (timer < 200)
+		if (timer < 50)
 		{
 			timer++;
 		}
 		else {
-			timer = 0;
-			app->LoadCurrentLevelRequest();
-			app->scene->player->dead = false;
+			app->render->camera.x = 0;
+			app->render->camera.y = 3288;
+			if (timer < 250)
+			{
+				timer++;
+			}
+			else {
+				timer = 0;
+				app->LoadCurrentLevelRequest();
+				app->scene->player->dead = false;
+			}
 		}
 	}
 
