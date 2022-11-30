@@ -171,7 +171,7 @@ bool Player::Update()
 	}
 		
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && !dead && !winner && !app->scene->Logo && !app->scene->Title) {
-		vel = b2Vec2(-speed, -GRAVITY_Y);
+		vel = b2Vec2(-speed * 0.8, -GRAVITY_Y);
 		currentAnimation = &left;
 		dir = false;
 	}
@@ -180,7 +180,7 @@ bool Player::Update()
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && !dead && !winner && !app->scene->Logo && !app->scene->Title) {
-		vel = b2Vec2(speed, -GRAVITY_Y);
+		vel = b2Vec2(speed * 0.8, -GRAVITY_Y);
 		currentAnimation = &right;
 		dir = true;
 	}
@@ -204,12 +204,12 @@ bool Player::Update()
 			}
 			vel = b2Vec2(0, GRAVITY_Y/2);
 			if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && !dead && !winner) {
-				vel = b2Vec2(speed*0.9, GRAVITY_Y/1.5);
+				vel = b2Vec2(speed * 0.8, GRAVITY_Y/1.5);
 				dir = true;
 				currentAnimation = &jumpR;
 			}
 			if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && !dead && !winner) {
-				vel = b2Vec2(-speed*0.9, GRAVITY_Y/1.5);
+				vel = b2Vec2(-speed * 0.8, GRAVITY_Y/1.5);
 				dir = false;
 				currentAnimation = &jumpL;
 			}
