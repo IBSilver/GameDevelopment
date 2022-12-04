@@ -39,7 +39,7 @@ public:
 	int timer = 0;
 public:
 
-	//L02: DONE 3: Declare a Player attribute 
+	// Declare a Player attribute 
 	Player* player;
 
 private:

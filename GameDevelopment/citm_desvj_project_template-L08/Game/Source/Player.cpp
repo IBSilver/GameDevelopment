@@ -20,11 +20,8 @@ Player::~Player() {
 
 bool Player::Awake() {
 
-	//L02: DONE 1: Initialize Player parameters
-	//pos = position;
-	//texturePath = "Assets/Textures/player/idle1.png";
-
-	//L02: DONE 5: Get Player parameters from XML
+	// Initialize Player parameters
+	// Get Player parameters from XML
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
@@ -35,6 +32,7 @@ bool Player::Awake() {
 
 bool Player::Start() {
 
+	// Initialize scenes
 	logo = app->tex->Load("Assets/Scenes/logo.png");
 	title = app->tex->Load("Assets/Scenes/title.png");
 	gameover = app->tex->Load("Assets/Scenes/gameover.png");
@@ -42,6 +40,7 @@ bool Player::Start() {
 	dir = true;
 	jumpTimer = 30;
 
+	// Initialize animations
 	idleR.totalFrames = 0;
 	idleL.totalFrames = 0;
 	left.totalFrames = 0;
@@ -53,72 +52,73 @@ bool Player::Start() {
 	death.totalFrames = 0;
 	win.totalFrames = 0;
 
-	//initilize textures
+	// Initilize textures
 	texture = app->tex->Load(texturePath);
-	//idleR Anim
+
+	// idleR Anim
 	for (int i = 0; i < 3; i++) {
 		idleR.PushBack({ 0 + (i * 48), 336, 48, 48 });
 	}
 	idleR.loop = true;
 	idleR.speed = 0.1f;
 
-	//idleL Anim
+	// idleL Anim
 	for (int i = 3; i >= 0; i--) {
 		idleL.PushBack({ 576 + (i * 48), 336, 48, 48 });
 	}
 	idleL.loop = true;
 	idleL.speed = 0.1f;
 
-	//right Anim
+	// right Anim
 	for (int i = 0; i < 5; i++) {
 		right.PushBack({ 0 + (i * 48), 480, 48, 48 });
 	}
 	right.loop = true;
 	right.speed = 0.2f;
 
-	//left Anim
+	// left Anim
 	for (int i = 5; i >= 0; i--) {
 		left.PushBack({ 480 + (i * 48), 480, 48, 48 });
 	}
 	left.loop = true;
 	left.speed = 0.2f;
 
-	//jumpR Anim
+	// jumpR Anim
 	for (int i = 0; i < 5; i++) {
 		jumpR.PushBack({ 0 + (i * 48), 240, 48, 48 });
 	}
 	jumpR.loop = false;
 	jumpR.speed = 0.2f;
 
-	//jumpL Anim
+	// jumpL Anim
 	for (int i = 5; i >= 0; i--) {
 		jumpL.PushBack({ 480 + (i * 48), 240, 48, 48 });
 	}
 	jumpL.loop = false;
 	jumpL.speed = 0.2f;
 
-	//jumpR2 Anim
+	// jumpR2 Anim
 	for (int i = 0; i < 3; i++) {
 		jumpR2.PushBack({ 0 + (i * 48), 384, 48, 48 });
 	}
 	jumpR2.loop = false;
 	jumpR2.speed = 0.15f;
 	
-	//jumpL2 Anim
+	// jumpL2 Anim
 	for (int i = 3; i >= 0; i--) {
 		jumpL2.PushBack({ 576 + (i * 48), 384, 48, 48 });
 	}
 	jumpL2.loop = false;
 	jumpL2.speed = 0.15f; 
 	
-	//death Anim
+	// death Anim
 	for (int i = 0; i < 5; i++) {
 		death.PushBack({ 0 + (i * 48), 192, 48, 48 });
 	}
 	death.loop = false;
 	death.speed = 0.2f;
 
-	//win Anim
+	// win Anim
 	for (int i = 0; i < 5; i++) {
 		win.PushBack({ 0 + (i * 48), 576, 48, 48 });
 	}
@@ -127,16 +127,16 @@ bool Player::Start() {
 
 	currentAnimation = &idleR;
 
-	// L07 DONE 5: Add physics to the player - initialize physics body
+	// Add physics to the player - initialize physics body
 	pbody = app->physics->CreateCircle(position.x+16, position.y+16, 16, bodyType::DYNAMIC);
 
-	// L07 DONE 6: Assign player class (using "this") to the listener of the pbody. This makes the Physics module to call the OnCollision method
+	// Assign player class (using "this") to the listener of the pbody. This makes the Physics module to call the OnCollision method
 	pbody->listener = this;
 
-	// L07 DONE 7: Assign collider type
+	// Assign collider type
 	pbody->ctype = ColliderType::PLAYER;
 
-	//initialize audio effect - !! Path is hardcoded, should be loaded from config.xml
+	// initialize audio effect - !! Path is hardcoded, should be loaded from config.xml
 	jumpFx = app->audio->LoadFx("Assets/Audio/Fx/jump.wav");
 	deathFx = app->audio->LoadFx("Assets/Audio/Fx/biker_hurt.wav");
 	winFx = app->audio->LoadFx("Assets/Audio/Fx/win.wav");
@@ -151,23 +151,22 @@ bool Player::Update()
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	currentAnimation->Update();
 
+	// Render the texture
 	app->render->DrawTexture(logo, 0, -1288, NULL);
 	app->render->DrawTexture(title, 0, -2288, NULL);
 	app->render->DrawTexture(gameover, 0, -3288, NULL);
-
 	app->render->DrawTexture(texture, position.x, position.y - 16, &rect);
 
-	// L07 DONE 5: Add physics to the player - updated player position using physics
-
+	// Add physics to the player - updated player position using physics
 	int speed = 10; 
 	b2Vec2 vel = b2Vec2(0, -GRAVITY_Y); 
 
-	//L02: DONE 4: modify the position of the player using arrow keys and render the texture
+	// Modify the position of the player using arrow keys
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-		//
+		
 	}
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-		//
+		
 	}
 		
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && !dead && !winner && !app->scene->Logo && !app->scene->Title) {
@@ -239,6 +238,7 @@ bool Player::Update()
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP)
 		jumpTimer = 0;
 
+	// Gameplay conditions
 	if (dead && !GodMode) {
 		currentAnimation = &death;
 		dir = true;
@@ -255,6 +255,7 @@ bool Player::Update()
 		win.Reset();
 	}
 
+	// idleAnim condition
 	if (app->input->GetKey(SDL_SCANCODE_A) == KeyState::KEY_IDLE
 		&& app->input->GetKey(SDL_SCANCODE_D) == KeyState::KEY_IDLE
 		&& app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_IDLE && dir && !dead && !winner)
@@ -265,22 +266,19 @@ bool Player::Update()
 		&& app->input->GetKey(SDL_SCANCODE_SPACE) == KeyState::KEY_IDLE && !dir && !dead && !winner)
 		currentAnimation = &idleL;
 
-	//Set the velocity of the pbody of the player
+	// Set the velocity of the pbody of the player
 	pbody->body->SetLinearVelocity(vel);
 
-	//Update player position in pixels
+	// Update player position in pixels
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
 	SDL_Rect textSection = { 0,0,48,48 };
-	LOG("AAAAAAAAAAAAAAAAAAAAAAA %d", onair);
+	//LOG("AAAAAAAAAAAAAAAAAAAAAAA %d", onair);
 	if (position.y - posInicialY == 0)
 		onair = false;
 	else
 		onair = true;
-
-	//app->render->DrawTexture(texture, position.x , position.y, &textSection);
-	//app->render->DrawTexture(texture, position.x , position.y);
 
 	return true;
 }
@@ -291,10 +289,10 @@ bool Player::CleanUp()
 }
 
 
-// L07 DONE 6: Define OnCollision function for the player. Check the virtual function on Entity class
+// Define OnCollision function for the player. Check the virtual function on Entity class
 void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
-	// L07 DONE 7: Detect the type of collision
+	// Detect the type of collision
 	switch (physB->ctype)
 	{
 	case ColliderType::ITEM:

@@ -103,7 +103,7 @@ bool Audio::PlayMusic(const char* path, float fadeTime)
 			Mix_HaltMusic();
 		}
 
-		// this call blocks until fade out is done
+		// This call blocks until fade out is done
 		Mix_FreeMusic(music);
 	}
 

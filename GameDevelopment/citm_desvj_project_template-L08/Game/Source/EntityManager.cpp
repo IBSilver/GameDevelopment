@@ -81,7 +81,7 @@ Entity* EntityManager::CreateEntity(EntityType type)
 {
 	Entity* entity = nullptr; 
 
-	//L02: DONE 2: Instantiate entity according to the type and add the new entoty it to the list of Entities
+	// Instantiate entity according to the type and add the new entoty it to the list of Entities
 
 	switch (type)
 	{
@@ -135,7 +135,7 @@ bool EntityManager::Update(float dt)
 	return ret;
 }
 
-// L03: DONE 6: Implement a method to load the state
+// Implement a method to load the state
 // for now load camera's x and y
 bool EntityManager::LoadState(pugi::xml_node& data)
 {
@@ -147,7 +147,7 @@ bool EntityManager::LoadState(pugi::xml_node& data)
 	return true;
 }
 
-// L03: DONE 8: Create a method to save the state of the renderer
+// Create a method to save the state of the renderer
 // using append_child and append_attribute
 bool EntityManager::SaveState(pugi::xml_node& data)
 {

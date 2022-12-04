@@ -34,7 +34,7 @@ bool Scene::Awake(pugi::xml_node& config)
 		item->parameters = itemNode;
 	}
 
-	//L02: DONE 3: Instantiate the player using the entity manager
+	// Instantiate the player using the entity manager
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	player->parameters = config.child("player");
 
@@ -47,10 +47,10 @@ bool Scene::Start()
 	//img = app->tex->Load("Assets/Textures/test.png");
 	app->audio->PlayMusic("Assets/Audio/Music/Level1.ogg");
 
-	// L03: DONE: Load map
+	// Load map
 	app->map->Load();
 
-	// L04: DONE 7: Set the window title with map/tileset info
+	// Set the window title with map/tileset info
 	SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
 		app->map->mapData.width,
 		app->map->mapData.height,
@@ -72,7 +72,7 @@ bool Scene::PreUpdate()
 // Called each loop iteration
 bool Scene::Update(float dt)
 {
-	// L03: DONE 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
+	// Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
 	{
 		app->LoadLevel1Request();
@@ -118,6 +118,7 @@ bool Scene::Update(float dt)
 			app->scene->player->jumpTimer = 30;
 		}
 
+	// Move camera
 	/*if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		app->render->camera.y += 50;
 
@@ -130,6 +131,7 @@ bool Scene::Update(float dt)
 	else if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		app->render->camera.x -= 5;*/
 
+	// Logo scene
 	if (Logo == true) {
 		app->render->camera.y = 1288;
 		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
@@ -145,22 +147,15 @@ bool Scene::Update(float dt)
 		}
 	}
 
+	// Title scene
 	else if (Title == true) {
 		app->render->camera.y = 2288;
 		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) {
-			//timer = 200;
 			Title = false;
 		}
-		/*if (timer < 100)
-		{
-			timer++;
-		}
-		else {
-			timer = 0;
-			Title = false;
-		}*/
 	}
 
+	// Dead scene
 	else if (app->scene->player->dead == true)
 	{
 		if (timer < 50)
@@ -196,10 +191,6 @@ bool Scene::Update(float dt)
 			app->render->camera.x = -10;
 		}
 	}
-	/*if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
-		app->render->camera.x -= 1;*/
-
-	//app->render->DrawTexture(img, 380, 100); // Placeholder not needed any more
 
 	// Draw map
 	app->map->Draw();

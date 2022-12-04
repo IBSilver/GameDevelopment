@@ -50,14 +50,14 @@ void Map::Draw()
     }
     */
 
-    // L05: DONE 5: Prepare the loop to draw all tiles in a layer + DrawTexture()
+    // Prepare the loop to draw all tiles in a layer + DrawTexture()
 
     ListItem<MapLayer*>* mapLayerItem;
     mapLayerItem = mapData.maplayers.start;
 
     while (mapLayerItem != NULL) {
 
-        //L06: DONE 7: use GetProperty method to ask each layer if your “Draw” property is true.
+        // Use GetProperty method to ask each layer if your “Draw” property is true.
         if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value) {
 
             for (int x = 0; x < mapLayerItem->data->width; x++)
@@ -85,7 +85,7 @@ void Map::Draw()
     }
 }
 
-// L05: DONE 8: Create a method that translates x,y coordinates from map positions to world positions
+// Create a method that translates x,y coordinates from map positions to world positions
 iPoint Map::MapToWorld(int x, int y) const
 {
     iPoint ret;
@@ -102,7 +102,7 @@ SDL_Rect TileSet::GetTileRect(int gid) const
     SDL_Rect rect = { 0 };
     int relativeIndex = gid - firstgid;
 
-    // L05: DONE 7: Get relative Tile rectangle
+    // Get relative Tile rectangle
     rect.w = tileWidth;
     rect.h = tileHeight;
     rect.x = margin + (tileWidth + spacing) * (relativeIndex % columns);
@@ -112,7 +112,7 @@ SDL_Rect TileSet::GetTileRect(int gid) const
 }
 
 
-// L06: DONE 2: Pick the right Tileset based on a tile id
+// Pick the right Tileset based on a tile id
 TileSet* Map::GetTilesetFromTileId(int gid) const
 {
     ListItem<TileSet*>* item = mapData.tilesets.start;
@@ -136,7 +136,7 @@ bool Map::CleanUp()
 {
     LOG("Unloading map");
 
-    // L04: DONE 2: Make sure you clean up any memory allocated from tilesets/map
+    // Make sure you clean up any memory allocated from tilesets/map
 	ListItem<TileSet*>* item;
 	item = mapData.tilesets.start;
 
@@ -147,7 +147,7 @@ bool Map::CleanUp()
 	}
 	mapData.tilesets.Clear();
 
-    // L05: DONE 2: clean up all layer data
+    // Clean up all layer data
     // Remove all layers
     ListItem<MapLayer*>* layerItem;
     layerItem = mapData.maplayers.start;
@@ -185,7 +185,7 @@ bool Map::Load()
         ret = LoadTileSet(mapFileXML);
     }
 
-    // L05: DONE 4: Iterate all layers and load each of them
+    // Iterate all layers and load each of them
     if (ret == true)
     {
         ret = LoadAllLayers(mapFileXML.child("map"));
@@ -196,52 +196,23 @@ bool Map::Load()
         ret = LoadObject(mapFileXML.child("map"));
     }
 
-    // L07 DONE 3: Create colliders
-    //pared invisible
+    // Create all the colliders
+ 
+    // Walls limit collision
     app->physics->CreateRectangle(0, 288, 1, 1000, STATIC);
     app->physics->CreateRectangle(3200, 288, 1, 1000, STATIC);
 
-    //muerte
+    // Dead collision
     PhysBody* c2 = app->physics->CreateRectangle(1600, 288+481, 3200, 1, STATIC);
     c2->ctype = ColliderType::DEATH;
 
-    //victoria
+    // Win collision
     PhysBody* c3 = app->physics->CreateRectangle(3142 + 9, 288 + 382 + 17, 18, 34, STATIC);
     c3->ctype = ColliderType::WIN;
 
-    //plataformas
-    //app->physics->CreateRectangle(1152, 704 + 32, 448, 64, STATIC);
-    //app->physics->CreateRectangle(1248, 704 - 64, 64, 128, STATIC);
-    //app->physics->CreateRectangle(1184, 712 - 64, 64, 16, STATIC);
-
-    //app->physics->CreateRectangle(42 * 32 + 64, 288 + 8 * 32 + 8, 64, 16, STATIC);
-    //app->physics->CreateRectangle(45 * 32 + 27 * 32 / 2, 288 + 13 * 32 + 2 * 32 / 2, 27 * 32, 64, STATIC);
-    //app->physics->CreateRectangle(48 * 32 + 13 * 32 / 2, 288 + 12 * 32 + 1 * 32 / 2, 13 * 32, 32, STATIC);
-    //app->physics->CreateRectangle(50 * 32 + 9 * 32 / 2, 288 + 11 * 32 + 1 * 32 / 2, 9 * 32, 32, STATIC);
-    //app->physics->CreateRectangle(52 * 32 + 5 * 32 / 2, 288 + 10 * 32 + 1 * 32 / 2, 5 * 32, 32, STATIC);
-    //app->physics->CreateRectangle(54 * 32 + 1 * 32 / 2, 288 + 8 + 8 * 32 + 2 * 32 / 2, 1 * 32, 64, STATIC);
-    //app->physics->CreateRectangle(69 * 32 + 3 * 32 / 2, 288 + 12 * 32 + 1 * 32 / 2, 3 * 32, 32, STATIC);
-
-    //app->physics->CreateRectangle(69 * 32 + 3 * 32 / 2, 288 + 4 * 32 + 5 * 32 / 2, 3 * 32, 5 * 32, STATIC);
-    //app->physics->CreateRectangle(72 * 32 + 1 * 32 / 2, 288 + 7 * 32 + 0.5 * 32 / 2, 32, 16, STATIC);
-    //app->physics->CreateRectangle(74 * 32 + 1 * 32 / 2, 288 + 10 * 32 + 0.5 * 32 / 2, 32, 16, STATIC);
-    //app->physics->CreateRectangle(74 * 32 + 1 * 32 / 2, 288 + 5 * 32 + 0.5 * 32 / 2, 32, 16, STATIC);
-
-    //app->physics->CreateRectangle(75 * 32 + 3 * 32 / 2, 288 + 4 * 32 + 11 * 32 / 2, 3 * 32, 11 * 32, STATIC);
-    //app->physics->CreateRectangle(78 * 32 + 22 * 32 / 2, 288 + 13 * 32 + 2 * 32 / 2, 22 * 32, 64, STATIC);
-
-    //app->physics->CreateRectangle(85 * 32 + 6 * 32 / 2, 288 + 12 * 32 + 1 * 32 / 2, 6 * 32, 32, STATIC);
-    //app->physics->CreateRectangle(86 * 32 + 5 * 32 / 2, 288 + 11 * 32 + 1 * 32 / 2, 5 * 32, 32, STATIC);
-    //app->physics->CreateRectangle(87 * 32 + 4 * 32 / 2, 288 + 10 * 32 + 1 * 32 / 2, 4 * 32, 32, STATIC);
-    //app->physics->CreateRectangle(88 * 32 + 3 * 32 / 2, 288 + 9 * 32 + 1 * 32 / 2, 3 * 32, 32, STATIC);
-    //app->physics->CreateRectangle(89 * 32 + 2 * 32 / 2, 288 + 8 * 32 + 1 * 32 / 2, 2 * 32, 32, STATIC);
-    //app->physics->CreateRectangle(90 * 32 + 1 * 32 / 2, 288 + 7 * 32 + 1 * 32 / 2, 1 * 32, 32, STATIC);
-
-
-
     if(ret == true)
     {
-        // L04: DONE 5: LOG all the data loaded iterate all tilesets and LOG everything
+        // LOG all the data loaded iterate all tilesets and LOG everything
        
         LOG("Successfully parsed map XML file :%s", mapFileName.GetString());
         LOG("width : %d height : %d",mapData.width,mapData.height);
@@ -259,7 +230,7 @@ bool Map::Load()
             tileset = tileset->next;
         }
 
-        // L05: DONE 4: LOG the info for each loaded layer
+        // LOG the info for each loaded layer
         ListItem<MapLayer*>* mapLayer;
         mapLayer = mapData.maplayers.start;
 
@@ -277,7 +248,7 @@ bool Map::Load()
     return ret;
 }
 
-// L04: DONE 3: Implement LoadMap to load the map properties
+// Implement LoadMap to load the map properties
 bool Map::LoadMap(pugi::xml_node mapFile)
 {
     bool ret = true;
@@ -290,7 +261,7 @@ bool Map::LoadMap(pugi::xml_node mapFile)
     }
     else
     {
-        //Load map general properties
+        // Load map general properties
         mapData.height = map.attribute("height").as_int();
         mapData.width = map.attribute("width").as_int();
         mapData.tileHeight = map.attribute("tileheight").as_int();
@@ -300,7 +271,7 @@ bool Map::LoadMap(pugi::xml_node mapFile)
     return ret;
 }
 
-// L04: DONE 4: Implement the LoadTileSet function to load the tileset properties
+// Implement the LoadTileSet function to load the tileset properties
 bool Map::LoadTileSet(pugi::xml_node mapFile){
 
     bool ret = true; 
@@ -310,7 +281,7 @@ bool Map::LoadTileSet(pugi::xml_node mapFile){
     {
         TileSet* set = new TileSet();
 
-        // L04: DONE 4: Load Tileset attributes
+        // Load Tileset attributes
         set->name = tileset.attribute("name").as_string();
         set->firstgid = tileset.attribute("firstgid").as_int();
         set->margin = tileset.attribute("margin").as_int();
@@ -320,7 +291,7 @@ bool Map::LoadTileSet(pugi::xml_node mapFile){
         set->columns = tileset.attribute("columns").as_int();
         set->tilecount = tileset.attribute("tilecount").as_int();
 
-        // L04: DONE 4: Load Tileset image
+        // Load Tileset image
         SString tmp("%s%s", mapFolder.GetString(), tileset.child("image").attribute("source").as_string());
         set->texture = app->tex->Load(tmp.GetString());
 
@@ -330,7 +301,7 @@ bool Map::LoadTileSet(pugi::xml_node mapFile){
     return ret;
 }
 
-// L05: DONE 3: Implement a function that loads a single layer layer
+// Implement a function that loads a single layer layer
 bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
 {
     bool ret = true;
@@ -341,14 +312,14 @@ bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
     layer->width = node.attribute("width").as_int();
     layer->height = node.attribute("height").as_int();
 
-    //L06: DONE 6 Call Load Propoerties
+    // Call Load Propoerties
     LoadProperties(node, layer->properties);
 
-    //Reserve the memory for the data 
+    // Reserve the memory for the data 
     layer->data = new uint[layer->width * layer->height];
     memset(layer->data, 0, layer->width * layer->height);
 
-    //Iterate over all the tiles and assign the values
+    // Iterate over all the tiles and assign the values
     pugi::xml_node tile;
     int i = 0;
     for (tile = node.child("data").child("tile"); tile && ret; tile = tile.next_sibling("tile"))
@@ -360,23 +331,24 @@ bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
     return ret;
 }
 
-// L05: DONE 4: Iterate all layers and load each of them
+// Iterate all layers and load each of them
 bool Map::LoadAllLayers(pugi::xml_node mapNode) {
     bool ret = true;
 
     for (pugi::xml_node layerNode = mapNode.child("layer"); layerNode && ret; layerNode = layerNode.next_sibling("layer"))
     {
-        //Load the layer
+        // Load the layer
         MapLayer* mapLayer = new MapLayer();
         ret = LoadLayer(layerNode, mapLayer);
 
-        //add the layer to the map
+        // Add the layer to the map
         mapData.maplayers.Add(mapLayer);
     }
 
     return ret;
 }
 
+// Load the map collisions with objects
 bool Map::LoadObject(pugi::xml_node node)
 {
     bool ret = true;
@@ -386,7 +358,7 @@ bool Map::LoadObject(pugi::xml_node node)
     
     for (pugi::xml_node colNode = node.child("objectgroup").child("object"); colNode && ret; colNode = colNode.next_sibling("object"))
     {
-        //Load the attributes
+        // Load the attributes
         object.x = colNode.next_sibling("object").attribute("x").as_int();
         object.y = colNode.next_sibling("object").attribute("y").as_int();
         object.width = colNode.next_sibling("object").attribute("width").as_int();
@@ -401,7 +373,7 @@ bool Map::LoadObject(pugi::xml_node node)
 }
 
 
-// L06: DONE 6: Load a group of properties from a node and fill a list with it
+// Load a group of properties from a node and fill a list with it
 bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 {
     bool ret = false;
@@ -419,7 +391,7 @@ bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 }
 
 
-// L06: DONE 7: Ask for the value of a custom property
+// Ask for the value of a custom property
 Properties::Property* Properties::GetProperty(const char* name)
 {
     ListItem<Property*>* item = list.start;

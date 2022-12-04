@@ -23,15 +23,15 @@ public:
 	bool Update();
 
 	bool CleanUp();
-	// L07 DONE 5: Add physics to the player - declare a Physics body
+	
+	// Add physics to the player - declare a Physics body
 	PhysBody* pbody;
 
 public:
 
 	Animation* currentAnimation = nullptr;
-	// L07 DONE 6: Define OnCollision function for the player. Check the virtual function on Entity class
 	
-	//Set of animations
+	// Set of animations
 	Animation idleR;
 	Animation idleL;
 	Animation right;
@@ -43,33 +43,38 @@ public:
 	Animation death;
 	Animation win;
 
-	//Guarda direccion personaje
+	// Save last player direction (left or right)
 	bool dir;
-	//Timer salto
+
+	// Jump timer
 	int jumpTimer;
-	//Variables del personaje
+
+	// Character variables
 	bool dead = false;
 	bool onair = false;
 	bool winner = false;
 	bool GodMode = false;
-	//Para calcular si el player se mueve en y
+
+	// Calculate if player moves in y
 	int posInicialY;
 
-	//Sounds
+	// Desclare sounds parameters
 	int jumpFx;
 	int deathFx;
 	int winFx;
 
+	// Define OnCollision function for the player. Check the virtual function on Entity class
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
 public:
 
 private:
 
-	//L02: DONE 1: Declare player parameters
+	// Declare player parameters
 	SDL_Texture* texture;
 	const char* texturePath;
 
+	// Declare scenes parameters
 	SDL_Texture* logo;
 	SDL_Texture* title;
 	SDL_Texture* gameover;
