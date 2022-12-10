@@ -34,9 +34,15 @@ bool Scene::Awake(pugi::xml_node& config)
 		item->parameters = itemNode;
 	}
 
+	for (pugi::xml_node enemyNode = config.child("enemy"); enemyNode; enemyNode = enemyNode.next_sibling("enemy"))
+	{
+		Enemy* enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
+		enemy->parameters = enemyNode;
+	}
 	// Instantiate the player using the entity manager
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	player->parameters = config.child("player");
+
 
 	return ret;
 }
@@ -178,11 +184,9 @@ bool Scene::Update(float dt)
 	}
 
 	else {
+		app->render->camera.y = -288;
 		if (player->position.x >= 250) {
 			app->render->camera.x = -player->position.x + 250;
-			app->render->camera.y = -288;
-
-
 			if (player->position.x >= 2810) {
 				app->render->camera.x = -2560;
 			}

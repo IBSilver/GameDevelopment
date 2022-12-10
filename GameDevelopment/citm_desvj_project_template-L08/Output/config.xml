@@ -21,7 +21,7 @@
     <fx volume="128"/>
   </audio>
 
-  <!-- L02: DONE: Add an element for the entity manager and add the player parameters -->
+  <!-- Add an element for the entity manager and add the player parameters -->
   <scene>
     <player x="250" y="672" texturepath="Assets/Textures/personajes/Biker/Biker.png"/>
     <item x="744" y="628" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
@@ -37,8 +37,10 @@
 	<item x="2208" y="392" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
 	<item x="2336" y="392" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
 	<item x="2672" y="552" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+	<enemy x="265" y="672" texturepath="Assets/Textures/enemigos/Robot_walking.png"/>
 
-	<logo x="0"   y="288" texturepath="Assets/Scenes/logo.png"/>
+
+	  <logo x="0"   y="288" texturepath="Assets/Scenes/logo.png"/>
     <menu x="0"   y="288" texturepath="Assets/Scenes/title.png"/>
 
   </scene>
