@@ -32,11 +32,11 @@ public:
 	Animation* currentAnimation = nullptr;
 
 	// Set of animations
-	//Animation idleR;
-	//Animation idleL;
-	//Animation right;
-	//Animation left;
-	//Animation death;
+	Animation idleR;
+	Animation idleL;
+	Animation right;
+	Animation left;
+	Animation death;
 
 
 	// Save last player direction (left or right)

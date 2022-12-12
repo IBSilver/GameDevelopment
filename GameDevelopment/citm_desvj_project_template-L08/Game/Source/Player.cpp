@@ -56,7 +56,7 @@ bool Player::Start() {
 	texture = app->tex->Load(texturePath);
 
 	// idleR Anim
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 4; i++) {
 		idleR.PushBack({ 0 + (i * 48), 336, 48, 48 });
 	}
 	idleR.loop = true;
@@ -70,7 +70,7 @@ bool Player::Start() {
 	idleL.speed = 0.1f;
 
 	// right Anim
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 6; i++) {
 		right.PushBack({ 0 + (i * 48), 480, 48, 48 });
 	}
 	right.loop = true;

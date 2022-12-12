@@ -34,7 +34,7 @@ bool Enemy::Start() {
 	//dir = true;
 
 	// Initialize animations
-	//idleR.totalFrames = 0;
+	idleR.totalFrames = 0;
 	//idleL.totalFrames = 0;
 	//left.totalFrames = 0;
 	//right.totalFrames = 0;
@@ -44,18 +44,18 @@ bool Enemy::Start() {
 	texture = app->tex->Load(texturePath);
 
 	// idleR Anim
-	//for (int i = 0; i < 3; i++) {
-	//	idleR.PushBack({ 0 + (i * 48), 336, 48, 48 });
-	//}
-	//idleR.loop = true;
-	//idleR.speed = 0.1f;
+	for (int i = 0; i < 4; i++) {
+		idleR.PushBack({ 0 + (i * 48), 0, 48, 48 });
+	}
+	idleR.loop = true;
+	idleR.speed = 0.1f;
 
 	// idleL Anim
-	//for (int i = 3; i >= 0; i--) {
-	//	idleL.PushBack({ 576 + (i * 48), 336, 48, 48 });
-	//}
-	//idleL.loop = true;
-	//idleL.speed = 0.1f;
+	for (int i = 3; i >= 0; i--) {
+		idleL.PushBack({ 193 + (i * 48), 0, 48, 48 });
+	}
+	idleL.loop = true;
+	idleL.speed = 0.1f;
 
 	// right Anim
 	//for (int i = 0; i < 5; i++) {
@@ -79,7 +79,7 @@ bool Enemy::Start() {
 	//death.loop = false;
 	//death.speed = 0.2f;
 
-	//currentAnimation = &idleR;
+	currentAnimation = &idleR;
 
 
 
@@ -104,11 +104,11 @@ bool Enemy::Update()
 {
 	//posInicialY = position.y;
 
-	//SDL_Rect rect = currentAnimation->GetCurrentFrame();
-	//currentAnimation->Update();
+	SDL_Rect rect = currentAnimation->GetCurrentFrame();
+	currentAnimation->Update();
 
 	// Render the texture
-	app->render->DrawTexture(texture, position.x, position.y - 16, NULL/*&rect*/);
+	app->render->DrawTexture(texture, position.x, position.y - 16, &rect);
 
 	// Add physics to the enemy - updated enemy position using physics
 	//int speed = 10;
@@ -153,7 +153,7 @@ bool Enemy::Update()
 	//}
 
 	// idleAnim condition
-	//currentAnimation = &idleR;
+	currentAnimation = &idleR;
 
 
 	// Set the velocity of the pbody of the player
