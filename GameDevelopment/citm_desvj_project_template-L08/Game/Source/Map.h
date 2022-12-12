@@ -143,6 +143,9 @@ public:
 	// Create a method that translates x,y coordinates from map positions to world positions
 	iPoint MapToWorld(int x, int y) const;
 
+	iPoint Map::WorldToMap(int x, int y);
+
+
 private:
 
 	bool LoadMap(pugi::xml_node mapFile);

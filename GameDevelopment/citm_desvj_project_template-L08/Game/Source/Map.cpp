@@ -96,6 +96,17 @@ iPoint Map::MapToWorld(int x, int y) const
     return ret;
 }
 
+// L08: DONE 3: Add method WorldToMap to obtain  map coordinates from screen coordinates
+iPoint Map::WorldToMap(int x, int y)
+{
+    iPoint ret(0, 0);
+
+    ret.x = x / mapData.tileWidth;
+    ret.y = y / mapData.tileHeight;
+
+    return ret;
+}
+
 // Get relative Tile rectangle
 SDL_Rect TileSet::GetTileRect(int gid) const
 {
