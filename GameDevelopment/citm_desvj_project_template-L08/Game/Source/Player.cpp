@@ -38,7 +38,7 @@ bool Player::Start() {
 	gameover = app->tex->Load("Assets/Scenes/gameover.png");
 
 	dir = true;
-	jumpTimer = 30;
+	jumpTimer = 32;
 
 	// Initialize animations
 	idleR.totalFrames = 0;
@@ -224,7 +224,7 @@ bool Player::Update()
 			jumpR.Reset();
 			if (!GodMode)
 			{
-				jumpTimer = 30;
+				jumpTimer = 32;
 			}
 			else
 			{

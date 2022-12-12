@@ -145,6 +145,7 @@ public:
 
 	iPoint Map::WorldToMap(int x, int y);
 
+	bool CreateWalkabilityMap(int& width, int& height, uchar** buffer) const;
 
 private:
 

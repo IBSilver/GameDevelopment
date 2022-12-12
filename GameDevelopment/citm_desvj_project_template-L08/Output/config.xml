@@ -47,7 +47,7 @@
 
   <map>
     <mapfolder path="Assets/Maps/"/>
-    <mapfile path="Assets/Maps/nivel1.tmx"/>
+    <mapfile path="Assets/Maps/nivel2.tmx"/>
   </map>
   
 </config>
