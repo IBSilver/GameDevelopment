@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="100" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="21" nextobjectid="68">
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="100" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="21" nextobjectid="69">
  <properties>
   <property name="Draw" type="bool" value="true"/>
  </properties>
@@ -1579,7 +1579,10 @@
    <tile gid="378"/>
   </data>
  </layer>
- <layer id="18" name="Plataforma fondo" width="100" height="15">
+ <layer id="18" name="Plataforma fondo" width="100" height="15" tintcolor="#9c8e8e">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
@@ -3084,6 +3087,9 @@
   </data>
  </layer>
  <layer id="19" name="objetos" width="100" height="15">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
@@ -4290,7 +4296,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="84"/>
+   <tile/>
    <tile gid="109"/>
    <tile gid="114"/>
    <tile gid="116"/>
@@ -5192,7 +5198,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="4"/>
+   <tile gid="5"/>
    <tile gid="6"/>
    <tile/>
    <tile/>
@@ -5292,7 +5298,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="22"/>
+   <tile gid="23"/>
    <tile gid="24"/>
    <tile/>
    <tile/>
@@ -5592,7 +5598,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="4"/>
+   <tile gid="5"/>
    <tile gid="5"/>
    <tile gid="36"/>
    <tile gid="36"/>
@@ -5692,7 +5698,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="13"/>
+   <tile gid="3"/>
    <tile gid="14"/>
    <tile gid="14"/>
    <tile gid="14"/>
@@ -5792,12 +5798,12 @@
    <tile/>
    <tile gid="436"/>
    <tile/>
-   <tile gid="13"/>
+   <tile gid="3"/>
    <tile gid="14"/>
    <tile gid="14"/>
    <tile gid="14"/>
    <tile gid="15"/>
-   <tile/>
+   <tile gid="71"/>
    <tile/>
    <tile/>
    <tile/>
@@ -5892,7 +5898,7 @@
    <tile/>
    <tile gid="448"/>
    <tile/>
-   <tile gid="13"/>
+   <tile gid="3"/>
    <tile gid="14"/>
    <tile gid="14"/>
    <tile gid="14"/>
@@ -5992,7 +5998,7 @@
    <tile gid="5"/>
    <tile gid="5"/>
    <tile gid="5"/>
-   <tile gid="13"/>
+   <tile gid="3"/>
    <tile gid="14"/>
    <tile gid="14"/>
    <tile gid="14"/>
@@ -6094,7 +6100,11 @@
    <tile gid="14"/>
   </data>
  </layer>
- <layer id="20" name="Navigation" width="100" height="15">
+ <layer id="20" name="Navigation" width="100" height="15" visible="0">
+  <properties>
+   <property name="Draw" type="bool" value="false"/>
+   <property name="Navigation" type="bool" value="true"/>
+  </properties>
   <data>
    <tile gid="125"/>
    <tile gid="125"/>
@@ -7301,7 +7311,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile gid="125"/>
+   <tile/>
    <tile gid="125"/>
    <tile gid="125"/>
    <tile gid="125"/>
@@ -7598,7 +7608,7 @@
    <tile/>
   </data>
  </layer>
- <objectgroup id="14" name="Colisiones">
+ <objectgroup id="14" name="Colisiones" visible="0">
   <object id="2" x="0" y="320" width="160" height="160"/>
   <object id="4" x="160" y="416" width="320" height="64"/>
   <object id="5" x="0" y="192" width="64" height="64"/>
@@ -7628,5 +7638,6 @@
   <object id="64" x="1408" y="352" width="224" height="16"/>
   <object id="65" x="1664" y="384" width="192" height="16"/>
   <object id="67" x="960" y="384" width="32" height="32"/>
+  <object id="68" x="160" y="384" width="32" height="32"/>
  </objectgroup>
 </map>
