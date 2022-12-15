@@ -365,7 +365,7 @@ bool App::SaveToFile()
 
 bool App::LoadLevel1()
 {
-	app->scene->player->pbody->body->SetTransform({ PIXEL_TO_METERS(250), PIXEL_TO_METERS(672) }, 0);
+	app->scene->player->pbody->body->SetTransform({ PIXEL_TO_METERS(30), PIXEL_TO_METERS(576) }, 0);
 
 	loadLevel1Requested = false;
 
@@ -374,7 +374,7 @@ bool App::LoadLevel1()
 
 bool App::LoadCurrentLevel()
 {
-	app->scene->player->pbody->body->SetTransform({ PIXEL_TO_METERS(250), PIXEL_TO_METERS(672) }, 0);
+	app->scene->player->pbody->body->SetTransform({ PIXEL_TO_METERS(30), PIXEL_TO_METERS(576) }, 0);
 
 	loadCurrentLevelRequested = false;
 

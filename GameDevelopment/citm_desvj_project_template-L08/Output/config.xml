@@ -23,7 +23,7 @@
 
   <!-- Add an element for the entity manager and add the player parameters -->
   <scene>
-    <player x="250" y="672" texturepath="Assets/Textures/personajes/Biker/Biker.png"/>
+    <player x="30" y="576" texturepath="Assets/Textures/personajes/Biker/Biker.png"/>
     <item x="744" y="628" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
     <item x="776" y="608" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
     <item x="808" y="628" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>

@@ -140,7 +140,7 @@ bool Scene::Update(float dt)
 		}
 		else {
 			app->scene->player->GodMode = false;
-			app->scene->player->jumpTimer = 32;
+			app->scene->player->jumpTimer = 30;
 		}
 
 	// Move camera

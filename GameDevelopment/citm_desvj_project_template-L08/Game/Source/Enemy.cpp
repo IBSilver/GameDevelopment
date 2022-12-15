@@ -79,7 +79,7 @@ bool Enemy::Start() {
 	//death.loop = false;
 	//death.speed = 0.2f;
 
-	currentAnimation = &idleR;
+	currentAnimation = &idleL;
 
 
 
@@ -153,7 +153,7 @@ bool Enemy::Update()
 	//}
 
 	// idleAnim condition
-	currentAnimation = &idleR;
+	currentAnimation = &idleL;
 
 
 	// Set the velocity of the pbody of the player
