@@ -29,15 +29,16 @@ public:
 
 public:
 
-	Animation* currentAnimation = nullptr;
+	//Enemy destroyed variable
+	bool destroyed = false;
 
-	// Set of animations
+	//Enemy animations
+	Animation* currentAnimation = nullptr;
 	Animation idleR;
 	Animation idleL;
 	Animation right;
 	Animation left;
 	Animation death;
-
 
 	// Save last player direction (left or right)
 	//bool dir;
@@ -45,10 +46,8 @@ public:
 	// Character variables
 	//bool dead = false;
 
-
 	// Desclare sounds parameters
 	//int deathFx;
-
 
 	// Define OnCollision function for the player. Check the virtual function on Entity class
 	void OnCollision(PhysBody* physA, PhysBody* physB);

@@ -25,7 +25,6 @@ bool Enemy::Awake() {
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
 
-
 	return true;
 }
 
@@ -35,7 +34,7 @@ bool Enemy::Start() {
 
 	// Initialize animations
 	idleR.totalFrames = 0;
-	//idleL.totalFrames = 0;
+	idleL.totalFrames = 0;
 	//left.totalFrames = 0;
 	//right.totalFrames = 0;
 	//death.totalFrames = 0;
@@ -57,33 +56,7 @@ bool Enemy::Start() {
 	idleL.loop = true;
 	idleL.speed = 0.1f;
 
-	// right Anim
-	//for (int i = 0; i < 5; i++) {
-	//	right.PushBack({ 0 + (i * 48), 480, 48, 48 });
-	//}
-	//right.loop = true;
-	//right.speed = 0.2f;
-
-	// left Anim
-	//for (int i = 5; i >= 0; i--) {
-	//	left.PushBack({ 480 + (i * 48), 480, 48, 48 });
-	//}
-	//left.loop = true;
-	//left.speed = 0.2f;
-
-
-	// death Anim
-	//for (int i = 0; i < 5; i++) {
-	//	death.PushBack({ 0 + (i * 48), 192, 48, 48 });
-	//}
-	//death.loop = false;
-	//death.speed = 0.2f;
-
 	currentAnimation = &idleL;
-
-
-
-
 
 	// Add physics to the enemy - initialize physics body
 	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 16, bodyType::DYNAMIC);
@@ -94,7 +67,7 @@ bool Enemy::Start() {
 	// Assign collider type
 	pbody->ctype = ColliderType::ENEMY;
 
-	// initialize audio effect - !! Path is hardcoded, should be loaded from config.xml
+	// Initialize audio effect - !! Path is hardcoded, should be loaded from config.xml
 	//deathFx = app->audio->LoadFx("Assets/Audio/Fx/biker_hurt.wav");
 
 	return true;
@@ -108,53 +81,16 @@ bool Enemy::Update()
 	currentAnimation->Update();
 
 	// Render the texture
-	app->render->DrawTexture(texture, position.x, position.y - 16, &rect);
-
+	if (!destroyed) {
+		app->render->DrawTexture(texture, position.x, position.y - 16, &rect);
+	}
+	
 	// Add physics to the enemy - updated enemy position using physics
 	//int speed = 10;
 	b2Vec2 vel = b2Vec2(0, -GRAVITY_Y);
 
-	// Modify the position of the player using arrow keys
-
-	//if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && !dead && !winner && !app->scene->Logo && !app->scene->Title) {
-	//	vel = b2Vec2(-speed * 0.8, -GRAVITY_Y);
-	//	currentAnimation = &left;
-	//	dir = false;
-	//}
-	//else {
-	//	left.Reset();
-	//}
-
-	//if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && !dead && !winner && !app->scene->Logo && !app->scene->Title) {
-	//	vel = b2Vec2(speed * 0.8, -GRAVITY_Y);
-	//	currentAnimation = &right;
-	//	dir = true;
-	//}
-	//else {
-	//	right.Reset();
-	//}
-
-	
-	// Gameplay conditions
-	//if (dead && !GodMode) {
-	//	currentAnimation = &death;
-	//	dir = true;
-	//}
-	//else {
-	//	death.Reset();
-	//}
-
-	//if (winner && !GodMode) {
-	//	currentAnimation = &win;
-	//	dir = true;
-	//}
-	//else {
-	//	win.Reset();
-	//}
-
 	// idleAnim condition
 	currentAnimation = &idleL;
-
 
 	// Set the velocity of the pbody of the player
 	//pbody->body->SetLinearVelocity(vel);
@@ -163,8 +99,7 @@ bool Enemy::Update()
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
-	SDL_Rect textSection = { 0,0,48,48 };
-
+	//SDL_Rect textSection = { 0,0,48,48 };
 
 	return true;
 }
@@ -175,20 +110,24 @@ bool Enemy::CleanUp()
 }
 
 
-// Define OnCollision function for the player. Check the virtual function on Entity class
+// Define OnCollision function for the enemy. Check the virtual function on Entity class
 void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	// Detect the type of collision
 	switch (physB->ctype)
 	{
-	case ColliderType::ITEM:
-		LOG("Collision ITEM");
-		break;
-	case ColliderType::PLATFORM:
-		LOG("Collision PLATFORM");
-		break;
-	case ColliderType::UNKNOWN:
-		LOG("Collision UNKNOWN");
+	case ColliderType::PLAYER:
+		LOG("ENEMY Collision PLAYER");
+		LOG("ENEMY Y: %d", position.y);
+		LOG("PLAYER Y: %d", app->scene->player->position.y);
+		if (!app->scene->player->GodMode && app->scene->player->position.y >= position.y) {
+			app->scene->player->dead = true;
+			//app->audio->PlayFx(deathFx);
+		}
+		else {
+			physA->body->DestroyFixture(physA->body->GetFixtureList());
+			destroyed = true;
+		}
 		break;
 	}
 }

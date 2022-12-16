@@ -13,6 +13,7 @@ class Item : public Entity
 public:
 
 	Item();
+
 	virtual ~Item();
 
 	bool Awake();
@@ -25,16 +26,22 @@ public:
 
 public:
 
+	//Money picked variable
 	bool isPicked = false;
+
+	//Money sound variable
 	int pickCoinFxId;
 
+	//Money animation
 	Animation* currentAnimation = nullptr;
 	Animation money;
 
+	//Money Collision function
 	void Item::OnCollision(PhysBody* physA, PhysBody* physB);
 
 private:
 
+	//Define money parameters
 	SDL_Texture* texture;
 	const char* texturePath;
 

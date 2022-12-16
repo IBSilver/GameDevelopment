@@ -11,13 +11,15 @@
 
 Item::Item() : Entity(EntityType::ITEM)
 {
-	name.Create("item");
+	name.Create("Item");
 }
 
 Item::~Item() {}
 
 bool Item::Awake() {
 
+	// Initialize item parameters
+	// Get item parameters from XML
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
@@ -83,7 +85,7 @@ void Item::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 	case ColliderType::PLAYER:
-		LOG("Collision ITEM");
+		LOG("ITEM Collision PLAYER");
 		app->audio->PlayFx(pickCoinFxId);
 		physA->body->DestroyFixture(physA->body->GetFixtureList());
 		isPicked = true;

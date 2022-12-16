@@ -136,7 +136,7 @@ bool Player::Start() {
 	// Assign collider type
 	pbody->ctype = ColliderType::PLAYER;
 
-	// initialize audio effect - !! Path is hardcoded, should be loaded from config.xml
+	// Initialize audio effect - !! Path is hardcoded, should be loaded from config.xml
 	jumpFx = app->audio->LoadFx("Assets/Audio/Fx/jump.wav");
 	deathFx = app->audio->LoadFx("Assets/Audio/Fx/biker_hurt.wav");
 	winFx = app->audio->LoadFx("Assets/Audio/Fx/win.wav");
@@ -273,8 +273,8 @@ bool Player::Update()
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
 
-	SDL_Rect textSection = { 0,0,48,48 };
-	//LOG("AAAAAAAAAAAAAAAAAAAAAAA %d", onair);
+	//SDL_Rect textSection = { 0,0,48,48 };
+
 	if (position.y - posInicialY == 0)
 		onair = false;
 	else
@@ -296,27 +296,30 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 	case ColliderType::ITEM:
-		LOG("Collision ITEM");
+		LOG("PLAYER Collision ITEM");
 		break;
 	case ColliderType::PLATFORM:
-		LOG("Collision PLATFORM");
+		LOG("PLAYER Collision PLATFORM");
+		break;
+	case ColliderType::ENEMY:
+		LOG("PLAYER Collision ENEMY");
 		break;
 	case ColliderType::DEATH:
-		LOG("Collision DEATH");
+		LOG("PLAYER Collision DEATH");
 		if (!GodMode) {
 			dead = true;
 			app->audio->PlayFx(deathFx);
 		}
 		break;
 	case ColliderType::WIN:
-		LOG("Collision WIN");
+		LOG("PLAYER Collision WIN");
 		if (!GodMode) {
 			winner = true;
 			app->audio->PlayFx(winFx);
 		}
 		break;
 	case ColliderType::UNKNOWN:
-		LOG("Collision UNKNOWN");
+		LOG("PLAYER Collision UNKNOWN");
 		break;
 	}
 }
