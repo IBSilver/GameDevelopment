@@ -7,7 +7,7 @@
 #include "DynArray.h"
 #include "List.h"
 
-#define DEFAULT_PATH_LENGTH 32
+#define DEFAULT_PATH_LENGTH 50
 #define INVALID_WALK_CODE 255
 
 class PathFinding : public Module

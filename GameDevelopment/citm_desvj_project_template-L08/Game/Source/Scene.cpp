@@ -11,6 +11,7 @@
 
 #include "Defs.h"
 #include "Log.h"
+#include "DynArray.h"
 
 Scene::Scene() : Module()
 {
@@ -158,7 +159,7 @@ bool Scene::Update(float dt)
 
 	// Logo scene
 	if (Logo == true) {
-		app->render->camera.y = 1288;
+		app->render->camera.y = 1000;
 		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
 			timer = 250;
 		if (timer < 250)
@@ -174,7 +175,7 @@ bool Scene::Update(float dt)
 
 	// Title scene
 	else if (Title == true) {
-		app->render->camera.y = 2288;
+		app->render->camera.y = 2000;
 		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) {
 			Title = false;
 		}
@@ -189,7 +190,7 @@ bool Scene::Update(float dt)
 		}
 		else {
 			app->render->camera.x = 0;
-			app->render->camera.y = 3288;
+			app->render->camera.y = 3000;
 			if (timer < 250)
 			{
 				timer++;
@@ -203,7 +204,7 @@ bool Scene::Update(float dt)
 	}
 
 	else {
-		app->render->camera.y = -288;
+		app->render->camera.y = -000;
 		if (player->position.x >= 250) {
 			app->render->camera.x = -player->position.x + 250;
 			if (player->position.x >= 2810) {
@@ -253,6 +254,7 @@ bool Scene::Update(float dt)
 	{
 		iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
 		app->render->DrawTexture(mouseTileTex, pos.x, pos.y);
+		LOG("pos.x = %d, pos.y = %d", pos.x, pos.y);
 	}
 
 	// L12: Debug pathfinding

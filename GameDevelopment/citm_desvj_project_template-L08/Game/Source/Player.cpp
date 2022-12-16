@@ -152,9 +152,9 @@ bool Player::Update()
 	currentAnimation->Update();
 
 	// Render the texture
-	app->render->DrawTexture(logo, 0, -1288, NULL);
-	app->render->DrawTexture(title, 0, -2288, NULL);
-	app->render->DrawTexture(gameover, 0, -3288, NULL);
+	app->render->DrawTexture(logo, 0, -1000, NULL);
+	app->render->DrawTexture(title, 0, -2000, NULL);
+	app->render->DrawTexture(gameover, 0, -3000, NULL);
 	app->render->DrawTexture(texture, position.x, position.y - 16, &rect);
 
 	// Add physics to the player - updated player position using physics

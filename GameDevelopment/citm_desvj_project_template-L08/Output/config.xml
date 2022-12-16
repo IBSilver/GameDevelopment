@@ -23,24 +23,24 @@
 
   <!-- Add an element for the entity manager and add the player parameters -->
   <scene>
-    <player x="30" y="576" texturepath="Assets/Textures/personajes/Biker/Biker.png"/>
-    <item x="368" y="464" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
-    <item x="432" y="464" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
-    <item x="528" y="464" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
-	<item x="592" y="464" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
-    <item x="304" y="688" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
-    <item x="400" y="688" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
-	<item x="1040" y="688" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
-	<item x="1328" y="400" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
-	<item x="1424" y="400" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
-	<item x="1680" y="592" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
-	<item x="1936" y="592" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
-	<item x="2272" y="496" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
-	<item x="1808" y="464" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
-	<item x="1936" y="464" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
-	<item x="2064" y="464" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
-	<enemy x="265" y="672" texturepath="Assets/Textures/enemigos/Robot_walking.png"/>
-	<enemy x="355" y="672" texturepath="Assets/Textures/enemigos/Robot_walking.png"/>
+    <player x="30" y="288" texturepath="Assets/Textures/personajes/Biker/Biker.png"/>
+    <item x="368" y="176" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+    <item x="432" y="176" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+    <item x="528" y="176" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+	<item x="592" y="176" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+    <item x="304" y="400" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+    <item x="400" y="400" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+	<item x="1040" y="400" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+	<item x="1328" y="112" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+	<item x="1424" y="112" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+	<item x="1680" y="304" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+	<item x="1936" y="304" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+	<item x="2272" y="208" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+	<item x="1808" y="176" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+	<item x="1936" y="176" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+	<item x="2064" y="176" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
+	<enemy x="265" y="384" texturepath="Assets/Textures/enemigos/Robot_walking.png"/>
+	<enemy x="355" y="384" texturepath="Assets/Textures/enemigos/Robot_walking.png"/>
 
 
 	  <logo x="0"   y="288" texturepath="Assets/Scenes/logo.png"/>

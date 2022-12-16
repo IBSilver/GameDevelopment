@@ -5,9 +5,10 @@
 	<textures />
 	<audio />
 	<:anonymous />
+	<pathfinding />
 	<scene />
 	<entitymanager>
-		<camera x="250" y="671" />
+		<camera x="250" y="2563" />
 	</entitymanager>
 	<map />
 	<renderer />

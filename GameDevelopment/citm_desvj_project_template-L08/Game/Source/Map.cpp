@@ -60,9 +60,8 @@ bool Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
                 if (tileset != NULL)
                 {
                     //According to the mapType use the ID of the tile to set the walkability value
-                    if (mapData.type == MapTypes::MAPTYPE_ISOMETRIC && tileId == 25) map[i] = 1;
-                    else if (mapData.type == MapTypes::MAPTYPE_ORTHOGONAL && tileId == 50) map[i] = 1;
-                    else map[i] = 0;
+                    
+                    if (tileId == 125) map[i] = 1;
                 }
                 else {
                     LOG("CreateWalkabilityMap: Invalid tileset found");
@@ -125,7 +124,7 @@ void Map::Draw()
 
                     app->render->DrawTexture(tileset->texture,
                         pos.x,
-                        pos.y+288,
+                        pos.y,
                         &r);
                 }
             }
@@ -260,15 +259,15 @@ bool Map::Load()
     // Create all the colliders
  
     // Walls limit collision
-    app->physics->CreateRectangle(0, 288, 1, 1000, STATIC);
-    app->physics->CreateRectangle(3200, 288, 1, 1000, STATIC);
+    app->physics->CreateRectangle(0, 0, 1, 1000, STATIC);
+    app->physics->CreateRectangle(3200, 0, 1, 1000, STATIC);
 
     // Dead collision
-    PhysBody* c2 = app->physics->CreateRectangle(1600, 288+481, 3200, 1, STATIC);
+    PhysBody* c2 = app->physics->CreateRectangle(1600, 481, 3200, 1, STATIC);
     c2->ctype = ColliderType::DEATH;
 
     // Win collision
-    PhysBody* c3 = app->physics->CreateRectangle(3142 + 9, 288 + 382 + 17, 18, 34, STATIC);
+    PhysBody* c3 = app->physics->CreateRectangle(3142 + 9, 382 + 17, 18, 34, STATIC);
     c3->ctype = ColliderType::WIN;
 
     if(ret == true)
@@ -426,7 +425,7 @@ bool Map::LoadObject(pugi::xml_node node)
         object.height = colNode.next_sibling("object").attribute("height").as_int();
 
 
-        PhysBody* c1 = app->physics->CreateRectangle(object.x+ object.width/2, 288+object.y+object.height/2, object.width, object.height, STATIC);
+        PhysBody* c1 = app->physics->CreateRectangle(object.x+ object.width/2, object.y+object.height/2, object.width, object.height, STATIC);
         c1->ctype = ColliderType::PLATFORM;
     }
 
