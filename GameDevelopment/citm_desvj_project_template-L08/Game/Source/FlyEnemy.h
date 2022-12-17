@@ -1,5 +1,5 @@
-#ifndef __ENEMY_H__
-#define __ENEMY_H__
+#ifndef __FLY_ENEMY_H__
+#define __FLY_ENEMY_H__
 
 #include "Entity.h"
 #include "Animation.h"
@@ -8,13 +8,13 @@
 
 struct SDL_Texture;
 
-class Enemy : public Entity
+class FlyEnemy : public Entity
 {
 public:
 
-	Enemy();
+	FlyEnemy();
 
-	virtual ~Enemy();
+	virtual ~FlyEnemy();
 
 	bool Awake();
 
@@ -24,7 +24,7 @@ public:
 
 	bool CleanUp();
 
-	// Add physics to the enemy - declare a Physics body
+	// Add physics to the fly enemy - declare a Physics body
 	PhysBody* pbody;
 
 public:
@@ -34,32 +34,30 @@ public:
 
 	//Enemy animations
 	Animation* currentAnimation = nullptr;
-	Animation idleR;
-	Animation idleL;
-	Animation right;
-	Animation left;
+	Animation idle;
+	Animation move;
 	Animation death;
 
-	// Save last enemy direction (left or right)
+	// Save last fly enemy direction (left or right)
 	//bool dir;
 
-	// Enemy variables
+	// Fly enemy variables
 	//bool dead = false;
 
 	// Declare sounds parameters
 	//int deathFx;
 
-	// Define OnCollision function for the enemy. Check the virtual function on Entity class
+	// Define OnCollision function for thefly enemy. Check the virtual function on Entity class
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
 public:
 
 private:
 
-	// Declare enemy parameters
+	// Declare fly enemy parameters
 	SDL_Texture* texture;
 	const char* texturePath;
 
 };
 
-#endif // __ENEMY_H__
+#endif // __PLAYER_H__

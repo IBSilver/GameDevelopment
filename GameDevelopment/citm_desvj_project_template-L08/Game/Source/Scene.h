@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Item.h"
 #include "Enemy.h"
+#include "FlyEnemy.h"
 
 struct SDL_Texture;
 
@@ -40,9 +41,11 @@ public:
 	int timer = 0;
 public:
 
-	// Declare a Player attribute 
+	// Declare entities attributes
 	Player* player;
 	Enemy* enemy;
+	FlyEnemy* flyenemy;
+	Item* item;
 
 private:
 	SDL_Texture* img;
