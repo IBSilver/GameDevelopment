@@ -246,7 +246,6 @@ bool Scene::Update(float dt)
 
 	//Convert again the tile coordinates to world coordinates to render the texture of the tile	******************
 	iPoint highlightedTileWorld = app->map->MapToWorld(destinyTile.x, destinyTile.y);
-	//LOG("highlightedTileWorld: %d, %d", highlightedTileWorld.x/32, highlightedTileWorld.y/32);
 	app->render->DrawTexture(mouseTileTex, highlightedTileWorld.x, highlightedTileWorld.y);
 
 	//Test compute path function
@@ -285,14 +284,12 @@ bool Scene::Update(float dt)
 		app->pathfinding->CreatePath(originF, destinyTile);
 	//}
 
-	// L12: Get the latest calculated path and draw
+	// Get the latest calculated path and draw
 	const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
 	for (uint i = 0; i < path->Count(); ++i)
 	{
 		pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
 		app->render->DrawTexture(mouseTileTex, pos.x, pos.y);
-		//LOG("primer path: %d, %d", app->map->MapToWorld(path->At(0)->x, path->At(0)->y).x, app->map->MapToWorld(path->At(0)->x, path->At(0)->y).y);
-		//LOG("pos.x = %d, pos.y = %d", pos.x, pos.y);
 	}
 
 	if (enemy->destroyed == false && app->pathfinding->CreatePath(origin, destinyTile)>1) {
@@ -315,17 +312,12 @@ bool Scene::Update(float dt)
 			enemyFlying->moveDown();
 	}
 
-	// L12: Debug pathfinding
+	// Debug pathfinding
 	iPoint originScreen = app->map->MapToWorld(origin.x, origin.y);
 	app->render->DrawTexture(originTex, originScreen.x, originScreen.y);
 
 	iPoint originScreenF = app->map->MapToWorld(originF.x, originF.y);
 	app->render->DrawTexture(originTex, originScreenF.x, originScreenF.y);
-
-	//Enemy moves following pathfind
-
-
-
 
 	return true;
 }

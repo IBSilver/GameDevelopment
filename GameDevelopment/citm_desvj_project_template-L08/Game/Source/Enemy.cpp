@@ -32,8 +32,6 @@ bool Enemy::Awake() {
 
 bool Enemy::Start() {
 
-	//dir = true;
-
 	// Initialize animations
 	idleR.totalFrames = 0;
 	idleL.totalFrames = 0;
@@ -113,12 +111,6 @@ bool Enemy::Update()
 	//int speed = 10;
 	b2Vec2 vel = b2Vec2(0, -GRAVITY_Y);
 
-	// idleAnim condition
-	//currentAnimation = &idleL;
-
-	// Set the velocity of the pbody of the player
-	//pbody->body->SetLinearVelocity(vel);
-
 	// Update enemy position in pixels
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
@@ -145,6 +137,7 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 		if (!app->scene->player->GodMode && enemyhead >= position.y) {
 			if (!destroyed) {
 				app->scene->player->dead = true;
+				app->audio->PlayFx(app->scene->player->deathFx);
 			}
 		}
 		else {

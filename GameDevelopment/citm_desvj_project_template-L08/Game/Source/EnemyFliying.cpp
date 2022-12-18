@@ -40,21 +40,21 @@ bool EnemyFlying::Start() {
 	// Initilize textures
 	texture = app->tex->Load(texturePath);
 	
-	//idle Anim
+	// idle Anim
 	for (int i = 0; i < 4; i++) {
 		idle.PushBack({ 0 + (i * 48), 144, 48, 48 });
 	}
 	idle.loop = true;
 	idle.speed = 0.1f;
 
-	//move Anim
+	// move Anim
 	for (int i = 0; i < 4; i++) {
 		move.PushBack({ 0 + (i * 48), 192, 48, 48 });
 	}
 	move.loop = true;
 	move.speed = 0.1f;
 
-	//death Anim
+	// death Anim
 	for (int i = 0; i < 2; i++) {
 		death.PushBack({ 0 + (i * 48), 96, 48, 48 });
 	}
@@ -88,10 +88,6 @@ bool EnemyFlying::Update()
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	currentAnimation->Update();
 
-	// Render the texture
-	/*if (!destroyed) {
-		app->render->DrawTexture(texture, position.x, position.y - 16, &rect);
-	}*/
 	app->render->DrawTexture(texture, position.x, position.y - 16, &rect);
 
 	// Add physics to the enemy - updated enemy position using physics
@@ -129,6 +125,9 @@ void EnemyFlying::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("ENEMYFLYING Collision PLAYER");
 		if (!app->scene->player->GodMode && enemyhead >= position.y) {
 			if (!destroyed) {
+				if (!app->scene->player->dead) {
+					app->audio->PlayFx(app->scene->player->deathFx);
+				}
 				app->scene->player->dead = true;
 			}
 		}

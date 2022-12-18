@@ -58,7 +58,7 @@ public:
 	// Calculate if player moves in y
 	int posInicialY;
 
-	// Desclare sounds parameters
+	// Declare sounds parameters
 	int jumpFx;
 	int deathFx;
 	int winFx;

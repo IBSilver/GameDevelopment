@@ -26,22 +26,22 @@ public:
 
 public:
 
-	//Money picked variable
+	// Money picked variable
 	bool isPicked = false;
 
-	//Money sound variable
+	// Money sound variable
 	int pickCoinFxId;
 
-	//Money animation
+	// Money animation
 	Animation* currentAnimation = nullptr;
 	Animation money;
 
-	//Money Collision function
+	// Money Collision function
 	void Item::OnCollision(PhysBody* physA, PhysBody* physB);
 
 private:
 
-	//Define money parameters
+	// Define money parameters
 	SDL_Texture* texture;
 	const char* texturePath;
 
