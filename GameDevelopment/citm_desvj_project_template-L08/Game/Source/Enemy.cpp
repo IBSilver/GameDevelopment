@@ -107,9 +107,6 @@ bool Enemy::Update()
 	currentAnimation->Update();
 
 	// Render the texture
-	/*if (!destroyed) {
-		app->render->DrawTexture(texture, position.x, position.y - 16, &rect);
-	}*/
 	app->render->DrawTexture(texture, position.x, position.y - 16, &rect);
 	
 	// Add physics to the enemy - updated enemy position using physics
@@ -151,14 +148,12 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 			if (!destroyed) {
 				app->scene->player->dead = true;
 			}
-			//app->audio->PlayFx(deathFx);
 		}
 		else {
 			currentAnimation = &death;
 			if (!destroyed) {
 				app->audio->PlayFx(deathFx);
 			}
-			//physA->body->DestroyFixture(physA->body->GetFixtureList());
 			destroyed = true;
 		}
 		break;
