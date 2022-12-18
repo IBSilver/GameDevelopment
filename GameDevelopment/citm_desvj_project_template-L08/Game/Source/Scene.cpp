@@ -104,7 +104,6 @@ bool Scene::Update(float dt)
 		app->LoadLevel1Request();
 		app->scene->player->dead = false;
 		app->scene->player->winner = false;
-		app->scene->player->dir = true;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
@@ -112,7 +111,6 @@ bool Scene::Update(float dt)
 		app->LoadCurrentLevelRequest();
 		app->scene->player->dead = false;
 		app->scene->player->winner = false;
-		app->scene->player->dir = true;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
