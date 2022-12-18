@@ -7,6 +7,8 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "Pathfinding.h"
+#include "Map.h"
 
 Enemy::Enemy() : Entity(EntityType::ENEMY)
 {
@@ -83,7 +85,7 @@ bool Enemy::Start() {
 	currentAnimation = &idleL;
 
 	// Add physics to the enemy - initialize physics body
-	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 12, bodyType::KINEMATIC);
+	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 12, bodyType::DYNAMIC);
 
 	// Assign enemy class (using "this") to the listener of the pbody. This makes the Physics module to call the OnCollision method
 	pbody->listener = this;
@@ -117,14 +119,6 @@ bool Enemy::Update()
 	// idleAnim condition
 	//currentAnimation = &idleL;
 
-	//if (!destroyed) {
-	//	
-	//	if(app->pathfinding.)
-	//	vel = b2Vec2(-speed * 0.8, -GRAVITY_Y);
-	//	currentAnimation = &left;
-	//	dir = false;
-	//}
-
 	// Set the velocity of the pbody of the player
 	//pbody->body->SetLinearVelocity(vel);
 
@@ -146,11 +140,12 @@ bool Enemy::CleanUp()
 void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	// Detect the type of collision
+	int enemyhead = app->scene->player->position.y + 10; //Variable que hace que el jugador deba estar encima un numero de pixeles minimo para matar al enemigo
 	switch (physB->ctype)
 	{
 	case ColliderType::PLAYER:
 		LOG("ENEMY Collision PLAYER");
-		int enemyhead = app->scene->player->position.y + 10; //Variable que hace que el jugador deba estar encima un numero de pixeles minimo para matar al enemigo
+
 		LOG("ENEMY Y: %d", position.y);
 		LOG("PLAYER Y: %d", enemyhead);
 		if (!app->scene->player->GodMode && enemyhead >= position.y) {
@@ -165,5 +160,22 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 			destroyed = true;
 		}
 		break;
+	case ColliderType::PLATFORM:
+		LOG("ENEMY Collision PLATFORM");
+		break;
 	}
+}
+
+void Enemy::moveLeft() {
+	LOG("LEFT");
+	currentAnimation = &left;
+	dir = false;
+	pbody->body->SetLinearVelocity(b2Vec2(-1, -GRAVITY_Y));
+}
+
+void Enemy::moveRight() {
+	LOG("RIGHT");
+	currentAnimation = &right;
+	dir = true;
+	pbody->body->SetLinearVelocity(b2Vec2(1, -GRAVITY_Y));
 }

@@ -52,6 +52,8 @@ private:
 	// L12: Debug pathfing
 	iPoint origin;
 	bool originSelected = false;
+
+	iPoint pos;
 };
 
 #endif // __SCENE_H__

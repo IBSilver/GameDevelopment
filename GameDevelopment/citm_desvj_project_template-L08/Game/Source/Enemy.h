@@ -32,6 +32,11 @@ public:
 	//Enemy destroyed variable
 	bool destroyed = false;
 
+	void moveLeft();
+
+	void moveRight();
+
+
 	//Enemy animations
 	Animation* currentAnimation = nullptr;
 	Animation idleR;

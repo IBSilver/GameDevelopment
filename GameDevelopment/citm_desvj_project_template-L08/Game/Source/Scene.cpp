@@ -233,8 +233,8 @@ bool Scene::Update(float dt)
 	//	mouseY - app->render->camera.y);
 	
 	int pathDestinyX, pathDestinyY;
-	pathDestinyX = player->position.x;
-	pathDestinyY = player->position.y;
+	pathDestinyX = player->position.x+8;
+	pathDestinyY = player->position.y+8;
 
 	iPoint destinyTile = iPoint(0, 0);
 
@@ -263,31 +263,44 @@ bool Scene::Update(float dt)
 	//}
 
 	int originX, originY;
-	originX = enemy->position.x;
-	originY = enemy->position.y;
+	originX = enemy->position.x+8;
+	originY = enemy->position.y+8;
 
-	origin = app->map->WorldToMap(originX/* - app->render->camera.x*/,
-		originY/* - app->render->camera.y*/);
+	origin = app->map->WorldToMap(originX, originY);
 	//if (app->scene->player->position.y < app->scene->enemy->position.y+30)
 	//{
 	app->pathfinding->ClearLastPath();
-
-	app->pathfinding->CreatePath(origin, destinyTile);
-	LOG("path: %d", origin);
+	if(!enemy->destroyed )
+		app->pathfinding->CreatePath(origin, destinyTile);
 	//}
 
 	// L12: Get the latest calculated path and draw
 	const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
 	for (uint i = 0; i < path->Count(); ++i)
 	{
-		iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+		pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
 		app->render->DrawTexture(mouseTileTex, pos.x, pos.y);
-		LOG("pos.x = %d, pos.y = %d", pos.x, pos.y);
+		//LOG("primer path: %d, %d", app->map->MapToWorld(path->At(0)->x, path->At(0)->y).x, app->map->MapToWorld(path->At(0)->x, path->At(0)->y).y);
+		//LOG("pos.x = %d, pos.y = %d", pos.x, pos.y);
+	}
+
+	if (enemy->destroyed == false && app->pathfinding->CreatePath(origin, destinyTile)>1) {
+		LOG("%d, %d", enemy->position.x, app->map->MapToWorld(path->At(1)->x, path->At(1)->y).x);
+		if (enemy->position.x+8 >= app->map->MapToWorld(path->At(0)->x, path->At(0)->y).x)
+			enemy->moveLeft();
+		if (enemy->position.x+8 < app->map->MapToWorld(path->At(1)->x, path->At(1)->y).x)
+			enemy->moveRight();
 	}
 
 	// L12: Debug pathfinding
 	iPoint originScreen = app->map->MapToWorld(origin.x, origin.y);
 	app->render->DrawTexture(originTex, originScreen.x, originScreen.y);
+
+	//Enemy moves following pathfind
+
+
+
+
 	return true;
 }
 
