@@ -117,6 +117,14 @@ bool Enemy::Update()
 	// idleAnim condition
 	//currentAnimation = &idleL;
 
+	//if (!destroyed) {
+	//	
+	//	if(app->pathfinding.)
+	//	vel = b2Vec2(-speed * 0.8, -GRAVITY_Y);
+	//	currentAnimation = &left;
+	//	dir = false;
+	//}
+
 	// Set the velocity of the pbody of the player
 	//pbody->body->SetLinearVelocity(vel);
 

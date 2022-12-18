@@ -224,34 +224,57 @@ bool Scene::Update(float dt)
 	// Draw map
 	app->map->Draw();
 
-	int mouseX, mouseY;
-	app->input->GetMousePosition(mouseX, mouseY);
+	//int mouseX, mouseY;
+	//app->input->GetMousePosition(mouseX, mouseY);
 
-	iPoint mouseTile = iPoint(0, 0);
+	//iPoint mouseTile = iPoint(0, 0);
 
-	mouseTile = app->map->WorldToMap(mouseX - app->render->camera.x,
-		mouseY - app->render->camera.y);
+	//mouseTile = app->map->WorldToMap(mouseX - app->render->camera.x,
+	//	mouseY - app->render->camera.y);
 	
+	int pathDestinyX, pathDestinyY;
+	pathDestinyX = player->position.x;
+	pathDestinyY = player->position.y;
+
+	iPoint destinyTile = iPoint(0, 0);
+
+	destinyTile = app->map->WorldToMap(pathDestinyX/* - app->render->camera.x*/,
+		pathDestinyY/* - app->render->camera.y*/);
 
 	//Convert again the tile coordinates to world coordinates to render the texture of the tile	******************
-	iPoint highlightedTileWorld = app->map->MapToWorld(mouseTile.x, mouseTile.y);
+	iPoint highlightedTileWorld = app->map->MapToWorld(destinyTile.x, destinyTile.y);
+	//LOG("highlightedTileWorld: %d, %d", highlightedTileWorld.x/32, highlightedTileWorld.y/32);
 	app->render->DrawTexture(mouseTileTex, highlightedTileWorld.x, highlightedTileWorld.y);
 
 	//Test compute path function
-	if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
-	{
-		if (originSelected == true)
-		{
-			app->pathfinding->CreatePath(origin, mouseTile);
-			originSelected = false;
-		}
-		else
-		{
-			origin = mouseTile;
-			originSelected = true;
-			app->pathfinding->ClearLastPath();
-		}
-	}
+	//if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
+	//{
+	//	if (originSelected == true)
+	//	{
+	//		app->pathfinding->CreatePath(origin, mouseTile);
+	//		originSelected = false;
+	//	}
+	//	else
+	//	{
+	//		origin = mouseTile;
+	//		originSelected = true;
+	//		app->pathfinding->ClearLastPath();
+	//	}
+	//}
+
+	int originX, originY;
+	originX = enemy->position.x;
+	originY = enemy->position.y;
+
+	origin = app->map->WorldToMap(originX/* - app->render->camera.x*/,
+		originY/* - app->render->camera.y*/);
+	//if (app->scene->player->position.y < app->scene->enemy->position.y+30)
+	//{
+	app->pathfinding->ClearLastPath();
+
+	app->pathfinding->CreatePath(origin, destinyTile);
+	LOG("path: %d", origin);
+	//}
 
 	// L12: Get the latest calculated path and draw
 	const DynArray<iPoint>* path = app->pathfinding->GetLastPath();

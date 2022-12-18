@@ -42,9 +42,8 @@ public:
 
 	// Save last enemy direction (left or right)
 	//bool dir;
-
-	// Enemy variables
-	//bool dead = false;
+	// Save last player direction (left or right)
+	bool dir;
 
 	// Desclare sounds parameters
 	//int deathFx;

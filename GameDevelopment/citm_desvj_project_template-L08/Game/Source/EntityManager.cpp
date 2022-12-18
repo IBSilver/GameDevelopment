@@ -169,6 +169,7 @@ bool EntityManager::SaveState(pugi::xml_node& data)
 	pl.append_attribute("y") = app->scene->player->position.y;
 
 	if (!app->scene->enemy->destroyed) {
+		app->scene->enemy->destroyed = false;
 		pugi::xml_node we = data.append_child("walkingEnemy");
 
 		we.append_attribute("x") = app->scene->enemy->position.x;
