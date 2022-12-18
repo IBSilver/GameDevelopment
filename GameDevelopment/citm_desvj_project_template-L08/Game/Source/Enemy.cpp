@@ -150,7 +150,7 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::PLAYER:
 		LOG("ENEMY Collision PLAYER");
-		int enemyhead = app->scene->player->position.y + 6;
+		int enemyhead = app->scene->player->position.y + 10; //Variable que hace que el jugador deba estar encima un numero de pixeles minimo para matar al enemigo
 		LOG("ENEMY Y: %d", position.y);
 		LOG("PLAYER Y: %d", enemyhead);
 		if (!app->scene->player->GodMode && enemyhead >= position.y) {
