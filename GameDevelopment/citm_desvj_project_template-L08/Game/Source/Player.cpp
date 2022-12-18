@@ -304,6 +304,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::ENEMY:
 		LOG("PLAYER Collision ENEMY");
 		break;
+	case ColliderType::ENEMYFLYING:
+		LOG("PLAYER Collision FLYING ENEMY");
+		break;
 	case ColliderType::DEATH:
 		LOG("PLAYER Collision DEATH");
 		if (!GodMode) {

@@ -34,6 +34,7 @@ enum class ColliderType {
 	PLAYER,
 	ITEM,
 	ENEMY,
+	ENEMYFLYING,
 	PLATFORM,
 	DEATH,
 	WIN,

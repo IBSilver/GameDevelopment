@@ -44,6 +44,9 @@ bool Scene::Awake(pugi::xml_node& config)
 	enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
 	enemy->parameters = config.child("enemy");
 
+	enemyFlying = (EnemyFlying*)app->entityManager->CreateEntity(EntityType::ENEMYFLYING);
+	enemyFlying->parameters = config.child("enemyFlying");
+
 	// Instantiate the player using the entity manager
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	player->parameters = config.child("player");
@@ -266,12 +269,20 @@ bool Scene::Update(float dt)
 	originX = enemy->position.x+8;
 	originY = enemy->position.y+8;
 
+	int originFX, originFY;
+	originFX = enemyFlying->position.x;
+	originFY = enemyFlying->position.y;
+
 	origin = app->map->WorldToMap(originX, originY);
+
+	originF = app->map->WorldToMap(originFX, originFY);
 	//if (app->scene->player->position.y < app->scene->enemy->position.y+30)
 	//{
 	app->pathfinding->ClearLastPath();
 	if(!enemy->destroyed )
 		app->pathfinding->CreatePath(origin, destinyTile);
+	if (!enemy->destroyed)
+		app->pathfinding->CreatePath(originF, destinyTile);
 	//}
 
 	// L12: Get the latest calculated path and draw
@@ -292,9 +303,24 @@ bool Scene::Update(float dt)
 			enemy->moveRight();
 	}
 
+	if (enemyFlying->destroyed == false && app->pathfinding->CreatePath(originF, destinyTile) > 1) {
+		LOG("%d, %d", enemyFlying->position.x, app->map->MapToWorld(path->At(1)->x, path->At(1)->y).x);
+		if (enemyFlying->position.x + 6 >= app->map->MapToWorld(path->At(1)->x, path->At(1)->y).x)
+			enemyFlying->moveLeft();
+		if (enemyFlying->position.x + 6 < app->map->MapToWorld(path->At(1)->x, path->At(1)->y).x)
+			enemyFlying->moveRight();
+		if (enemyFlying->position.y + 6 < app->map->MapToWorld(path->At(1)->x, path->At(1)->y).y)
+			enemyFlying->moveUp();
+		if (enemyFlying->position.y + 6 < app->map->MapToWorld(path->At(1)->x, path->At(1)->y).y)
+			enemyFlying->moveDown();
+	}
+
 	// L12: Debug pathfinding
 	iPoint originScreen = app->map->MapToWorld(origin.x, origin.y);
 	app->render->DrawTexture(originTex, originScreen.x, originScreen.y);
+
+	iPoint originScreenF = app->map->MapToWorld(originF.x, originF.y);
+	app->render->DrawTexture(originTex, originScreenF.x, originScreenF.y);
 
 	//Enemy moves following pathfind
 

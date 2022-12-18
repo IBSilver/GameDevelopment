@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Item.h"
 #include "Enemy.h"
+#include "EnemyFlying.h"
 
 struct SDL_Texture;
 
@@ -43,6 +44,7 @@ public:
 	// Declare the entities attribute
 	Player* player;
 	Enemy* enemy;
+	EnemyFlying* enemyFlying;
 
 private:
 	SDL_Texture* img;
@@ -51,6 +53,7 @@ private:
 
 	// L12: Debug pathfing
 	iPoint origin;
+	iPoint originF;
 	bool originSelected = false;
 
 	iPoint pos;
