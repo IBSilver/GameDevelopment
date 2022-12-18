@@ -136,8 +136,10 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("ENEMY Collision PLAYER");
 		if (!app->scene->player->GodMode && enemyhead >= position.y) {
 			if (!destroyed) {
+				if (!app->scene->player->dead) {
+					app->audio->PlayFx(app->scene->player->deathFx);
+				}
 				app->scene->player->dead = true;
-				app->audio->PlayFx(app->scene->player->deathFx);
 			}
 		}
 		else {
