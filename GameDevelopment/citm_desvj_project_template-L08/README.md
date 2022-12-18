@@ -12,6 +12,7 @@ Platform game for the videogame development subject.
  - Music for scenes and level & Fx for jump, death and win.
  - The player can move left or right, jump, die and win.
  - The player can obtain coins.
+ - This version have only the second level map.
  - Walking & flying enemies added!!
  
  ## Navigation
