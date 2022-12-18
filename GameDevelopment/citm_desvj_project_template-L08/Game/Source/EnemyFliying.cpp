@@ -32,6 +32,14 @@ bool EnemyFlying::Awake() {
 
 bool EnemyFlying::Start() {
 
+	// Initialize animations
+	idle.totalFrames = 0;
+	move.totalFrames = 0;
+	death.totalFrames = 0;
+
+	// Initilize textures
+	texture = app->tex->Load(texturePath);
+	
 	//idle Anim
 	for (int i = 0; i < 4; i++) {
 		idle.PushBack({ 0 + (i * 48), 144, 48, 48 });
@@ -65,10 +73,10 @@ bool EnemyFlying::Start() {
 	pbody->listener = this;
 
 	// Assign collider type
-	pbody->ctype = ColliderType::ENEMY;
+	pbody->ctype = ColliderType::ENEMYFLYING;
 
 	// Initialize audio effect - !! Path is hardcoded, should be loaded from config.xml
-	//deathFx = app->audio->LoadFx("Assets/Audio/Fx/biker_hurt.wav");
+	deathFx = app->audio->LoadFx("Assets/Audio/Fx/robot_death.wav");
 
 	return true;
 }
@@ -118,24 +126,23 @@ void EnemyFlying::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 	case ColliderType::PLAYER:
-		LOG("ENEMY Collision PLAYER");
-
-		LOG("ENEMY Y: %d", position.y);
-		LOG("PLAYER Y: %d", enemyhead);
+		LOG("ENEMYFLYING Collision PLAYER");
 		if (!app->scene->player->GodMode && enemyhead >= position.y) {
 			if (!destroyed) {
 				app->scene->player->dead = true;
 			}
-			//app->audio->PlayFx(deathFx);
 		}
 		else {
 			currentAnimation = &death;
+			if (!destroyed) {
+				app->audio->PlayFx(deathFx);
+			}
 			destroyed = true;
 			b2Vec2(0, -GRAVITY_Y);
 		}
 		break;
 	case ColliderType::PLATFORM:
-		LOG("ENEMY Collision PLATFORM");
+		LOG("ENEMYFLYING Collision PLATFORM");
 		break;
 	}
 }
@@ -143,23 +150,23 @@ void EnemyFlying::OnCollision(PhysBody* physA, PhysBody* physB) {
 void EnemyFlying::moveLeft() {
 	LOG("LEFT");
 	currentAnimation = &move;
-	pbody->body->SetLinearVelocity(b2Vec2(-1, 0));
+	pbody->body->SetLinearVelocity(b2Vec2(-2, 0));
 }
 
 void EnemyFlying::moveRight() {
 	LOG("RIGHT");
 	currentAnimation = &move;
-	pbody->body->SetLinearVelocity(b2Vec2(1, 0));
+	pbody->body->SetLinearVelocity(b2Vec2(2, 0));
 }
 
 void EnemyFlying::moveUp() {
 	LOG("UP");
 	currentAnimation = &move;
-	pbody->body->SetLinearVelocity(b2Vec2(0, -1));
+	pbody->body->SetLinearVelocity(b2Vec2(0, -2));
 }
 
 void EnemyFlying::moveDown() {
 	LOG("DOWN");
 	currentAnimation = &move;
-	pbody->body->SetLinearVelocity(b2Vec2(0, 1));
+	pbody->body->SetLinearVelocity(b2Vec2(0, 2));
 }

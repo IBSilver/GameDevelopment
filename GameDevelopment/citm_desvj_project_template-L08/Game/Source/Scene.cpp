@@ -65,7 +65,7 @@ bool Scene::Start()
 	mouseTileTex = app->tex->Load("Assets/Maps/path_square.png");
 
 	// Texture to show path origin 
-	originTex = app->tex->Load("Assets/Maps/x_square.png");
+	//originTex = app->tex->Load("Assets/Maps/x_square.png");
 
 	// Load map
 	bool retLoad = app->map->Load();

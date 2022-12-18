@@ -47,8 +47,8 @@ public:
 	Animation move;
 	Animation death;
 
-	// Desclare sounds parameters
-	//int deathFx;
+	// Declare sounds parameters
+	int deathFx;
 
 	// Define OnCollision function for the enemy. Check the virtual function on Entity class
 	void OnCollision(PhysBody* physA, PhysBody* physB);

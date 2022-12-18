@@ -142,8 +142,6 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::PLAYER:
 		LOG("ENEMY Collision PLAYER");
-		LOG("ENEMY Y: %d", position.y);
-		LOG("PLAYER Y: %d", enemyhead);
 		if (!app->scene->player->GodMode && enemyhead >= position.y) {
 			if (!destroyed) {
 				app->scene->player->dead = true;
