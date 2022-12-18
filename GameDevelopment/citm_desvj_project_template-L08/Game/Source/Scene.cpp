@@ -36,11 +36,14 @@ bool Scene::Awake(pugi::xml_node& config)
 		item->parameters = itemNode;
 	}
 
-	for (pugi::xml_node enemyNode = config.child("enemy"); enemyNode; enemyNode = enemyNode.next_sibling("enemy"))
-	{
-		Enemy* enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
-		enemy->parameters = enemyNode;
-	}
+	//for (pugi::xml_node enemyNode = config.child("enemy"); enemyNode; enemyNode = enemyNode.next_sibling("enemy"))
+	//{
+	//	Enemy* enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
+	//	enemy->parameters = enemyNode;
+	//}
+	enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
+	enemy->parameters = config.child("enemy");
+
 	// Instantiate the player using the entity manager
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	player->parameters = config.child("player");

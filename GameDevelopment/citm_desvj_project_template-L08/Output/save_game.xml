@@ -8,7 +8,8 @@
 	<pathfinding />
 	<scene />
 	<entitymanager>
-		<camera x="250" y="2563" />
+		<player x="355" y="383" />
+		<walkingEnemy x="265" y="387" />
 	</entitymanager>
 	<map />
 	<renderer />

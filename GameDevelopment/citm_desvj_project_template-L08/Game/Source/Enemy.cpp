@@ -37,7 +37,7 @@ bool Enemy::Start() {
 	idleL.totalFrames = 0;
 	//left.totalFrames = 0;
 	//right.totalFrames = 0;
-	//death.totalFrames = 0;
+	death.totalFrames = 0;
 
 	// Initilize textures
 	texture = app->tex->Load(texturePath);
@@ -59,7 +59,7 @@ bool Enemy::Start() {
 	currentAnimation = &idleL;
 
 	// Add physics to the enemy - initialize physics body
-	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 16, bodyType::DYNAMIC);
+	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 12, bodyType::DYNAMIC);
 
 	// Assign enemy class (using "this") to the listener of the pbody. This makes the Physics module to call the OnCollision method
 	pbody->listener = this;
@@ -108,7 +108,6 @@ bool Enemy::CleanUp()
 {
 	return true;
 }
-
 
 // Define OnCollision function for the enemy. Check the virtual function on Entity class
 void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
