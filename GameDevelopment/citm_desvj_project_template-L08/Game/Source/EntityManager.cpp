@@ -150,16 +150,27 @@ bool EntityManager::Update(float dt)
 bool EntityManager::LoadState(pugi::xml_node& data)
 {
 	int x = 16+data.child("player").attribute("x").as_int();
-	int y = 16+data.child("player").attribute("y").as_int();
+	int y = 288+16+data.child("player").attribute("y").as_int();
 
 	app->scene->player->pbody->body->SetTransform({ PIXEL_TO_METERS(x), PIXEL_TO_METERS(y) }, 0);
 
-	if (!app->scene->enemy->destroyed) {
-		int xE = 16 + data.child("enemy").attribute("x").as_int();
-		int yE = 16 + data.child("enemy").attribute("y").as_int();
-
-		app->scene->player->pbody->body->SetTransform({ PIXEL_TO_METERS(xE), PIXEL_TO_METERS(yE) }, 0);
+	if (app->scene->enemy->destroyed && respawnW == true) {
+		app->scene->enemy->destroyed = false;
+		app->scene->enemy->currentAnimation = &app->scene->enemy->idleL;
 	}
+	int xE = 16 + data.child("enemy").attribute("x").as_int();
+	int yE = 288+16 + data.child("enemy").attribute("y").as_int();
+
+	app->scene->player->pbody->body->SetTransform({ PIXEL_TO_METERS(xE), PIXEL_TO_METERS(yE) }, 0);
+
+	if (app->scene->enemyFlying->destroyed && respawnF == true) {
+		app->scene->enemyFlying->destroyed = false;
+		app->scene->enemyFlying->currentAnimation = &app->scene->enemyFlying->idle;
+	}
+	int xEF = 16 + data.child("enemyFlying").attribute("x").as_int();
+	int yEF = 288+16 + data.child("enemyFlying").attribute("y").as_int();
+
+	app->scene->player->pbody->body->SetTransform({ PIXEL_TO_METERS(xEF), PIXEL_TO_METERS(yEF) }, 0);
 
 	return true;
 }
@@ -174,11 +185,12 @@ bool EntityManager::SaveState(pugi::xml_node& data)
 	pl.append_attribute("y") = app->scene->player->position.y;
 
 	if (!app->scene->enemy->destroyed) {
-		app->scene->enemy->destroyed = false;
 		pugi::xml_node we = data.append_child("walkingEnemy");
 
 		we.append_attribute("x") = app->scene->enemy->position.x;
 		we.append_attribute("y") = app->scene->enemy->position.y;
+
+		respawnW = true;
 	}
 
 	if (!app->scene->enemyFlying->destroyed) {
@@ -187,6 +199,8 @@ bool EntityManager::SaveState(pugi::xml_node& data)
 
 		fe.append_attribute("x") = app->scene->enemyFlying->position.x;
 		fe.append_attribute("y") = app->scene->enemyFlying->position.y;
+
+		respawnF = true;
 	}
 
 	return true;

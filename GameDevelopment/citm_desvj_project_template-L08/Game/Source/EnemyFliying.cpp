@@ -67,7 +67,7 @@ bool EnemyFlying::Start() {
 	currentAnimation = &idle;
 
 	// Add physics to the enemy - initialize physics body
-	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 12, bodyType::DYNAMIC);
+	pbody = app->physics->CreateCircle(position.x + 12, position.y + 12, 12, bodyType::DYNAMIC);
 
 	// Assign enemy class (using "this") to the listener of the pbody. This makes the Physics module to call the OnCollision method
 	pbody->listener = this;
@@ -88,11 +88,11 @@ bool EnemyFlying::Update()
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	currentAnimation->Update();
 
-	app->render->DrawTexture(texture, position.x, position.y - 16, &rect);
+	app->render->DrawTexture(texture, position.x, position.y - 12, &rect);
 
 	// Add physics to the enemy - updated enemy position using physics
 	//int speed = 10;
-	//b2Vec2 vel = b2Vec2(0, 0);
+	b2Vec2 vel = b2Vec2(0, 0);
 
 	// idleAnim condition
 	//currentAnimation = &idleL;

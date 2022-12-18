@@ -64,9 +64,6 @@ bool Scene::Start()
 	// Texture to highligh mouse position 
 	mouseTileTex = app->tex->Load("Assets/Maps/path_square.png");
 
-	// Texture to show path origin 
-	//originTex = app->tex->Load("Assets/Maps/x_square.png");
-
 	// Load map
 	bool retLoad = app->map->Load();
 
@@ -140,6 +137,16 @@ bool Scene::Update(float dt)
 		app->scene->player->winner = true;
 		app->scene->player->dead = false;
 		app->audio->PlayFx(app->scene->player->winFx);
+	}
+
+	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN) {
+		if (showPath == false) {
+			showPath = true;
+		}
+		else {
+			showPath = false;
+		}
+
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
@@ -246,7 +253,8 @@ bool Scene::Update(float dt)
 
 	//Convert again the tile coordinates to world coordinates to render the texture of the tile	******************
 	iPoint highlightedTileWorld = app->map->MapToWorld(destinyTile.x, destinyTile.y);
-	app->render->DrawTexture(mouseTileTex, highlightedTileWorld.x, highlightedTileWorld.y);
+	if(showPath)
+		app->render->DrawTexture(mouseTileTex, highlightedTileWorld.x, highlightedTileWorld.y);
 
 	//Test compute path function
 	//if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
@@ -280,16 +288,27 @@ bool Scene::Update(float dt)
 	app->pathfinding->ClearLastPath();
 	if(!enemy->destroyed )
 		app->pathfinding->CreatePath(origin, destinyTile);
-	if (!enemy->destroyed)
-		app->pathfinding->CreatePath(originF, destinyTile);
-	//}
 
 	// Get the latest calculated path and draw
 	const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
 	for (uint i = 0; i < path->Count(); ++i)
 	{
 		pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-		app->render->DrawTexture(mouseTileTex, pos.x, pos.y);
+		if(showPath==true)
+			app->render->DrawTexture(mouseTileTex, pos.x, pos.y);
+	}
+
+	if (!enemy->destroyed)
+		app->pathfinding->CreatePath(originF, destinyTile);
+	//}
+
+	// Get the latest calculated path and draw
+	const DynArray<iPoint>* pathF = app->pathfinding->GetLastPath();
+	for (uint i = 0; i < pathF->Count(); ++i)
+	{
+		pos = app->map->MapToWorld(pathF->At(i)->x, pathF->At(i)->y);
+		if (showPath == true)
+			app->render->DrawTexture(mouseTileTex, pos.x, pos.y);
 	}
 
 	if (enemy->destroyed == false && app->pathfinding->CreatePath(origin, destinyTile)>1) {

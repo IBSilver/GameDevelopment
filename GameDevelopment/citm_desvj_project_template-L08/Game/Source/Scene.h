@@ -55,6 +55,7 @@ private:
 	iPoint origin;
 	iPoint originF;
 	bool originSelected = false;
+	bool showPath = false;
 
 	iPoint pos;
 };

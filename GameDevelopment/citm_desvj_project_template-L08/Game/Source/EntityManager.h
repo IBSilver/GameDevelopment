@@ -40,6 +40,8 @@ public:
 
 	List<Entity*> entities;
 
+	bool respawnW = false;	//respawnear enemigo terrestre
+	bool respawnF = false;	//respawnear enemigo volador
 };
 
 #endif // __ENTITYMANAGER_H__

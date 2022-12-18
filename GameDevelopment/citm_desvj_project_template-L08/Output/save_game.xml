@@ -9,8 +9,8 @@
 	<scene />
 	<entitymanager>
 		<player x="30" y="287" />
-		<walkingEnemy x="310" y="291" />
-		<flyingEnemy x="190" y="133" />
+		<walkingEnemy x="301" y="291" />
+		<flyingEnemy x="169" y="130" />
 	</entitymanager>
 	<map />
 	<renderer />
