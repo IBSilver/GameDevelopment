@@ -40,16 +40,16 @@ public:
 	Animation left;
 	Animation death;
 
-	// Save last player direction (left or right)
+	// Save last enemy direction (left or right)
 	//bool dir;
 
-	// Character variables
+	// Enemy variables
 	//bool dead = false;
 
 	// Desclare sounds parameters
 	//int deathFx;
 
-	// Define OnCollision function for the player. Check the virtual function on Entity class
+	// Define OnCollision function for the enemy. Check the virtual function on Entity class
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
 public:
@@ -62,4 +62,4 @@ private:
 
 };
 
-#endif // __PLAYER_H__
+#endif // __ENEMY_H__

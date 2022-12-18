@@ -40,7 +40,7 @@ public:
 	int timer = 0;
 public:
 
-	// Declare a Player attribute 
+	// Declare the entities attribute
 	Player* player;
 	Enemy* enemy;
 
