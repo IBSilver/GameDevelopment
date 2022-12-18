@@ -40,7 +40,7 @@
 	<item x="1936" y="176" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
 	<item x="2064" y="176" texturepath="Assets/Maps/industrial_zone_tileset/4_Animated_objects/Money.png"/>
 	<enemy x="365" y="288" texturepath="Assets/Textures/enemigos/Robot_walking.png"/>
-	<enemyFlying x="300" y="124" texturepath="Assets/Textures/enemigos/Robot_flying.png"/>
+	<enemyFlying x="1360" y="32" texturepath="Assets/Textures/enemigos/Robot_flying.png"/>
 
 
 	  <logo x="0"   y="288" texturepath="Assets/Scenes/logo.png"/>
