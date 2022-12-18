@@ -1,4 +1,4 @@
-# Cyberpunk v0.1
+# Cyberpunk v0.5
 
 ## Description
 
@@ -10,10 +10,9 @@ Platform game for the videogame development subject.
 
  - Logo Scene & Title Scene.
  - Music for scenes and level & Fx for jump, death and win.
- - The player can move left or right and can jump.
- - The player can die.
- - The player can win.
+ - The player can move left or right, jump, die and win.
  - The player can obtain coins.
+ - Walking & flying enemies added!!
  
  ## Navigation
 
@@ -26,6 +25,7 @@ Platform game for the videogame development subject.
  - D: Move right
  - A: Move left
  - Space: Jump
+ - Defeat enemies by stepping on them.
  
  ## Debug
 
@@ -35,7 +35,7 @@ Platform game for the videogame development subject.
  - F6: Load the previous state
  - F7: Instant death
  - F8: Instant win
- - F9: View colliders / logic
+ - F9: View colliders / logic / enemies pathfinding
  - F10: God Mode (fly around, cannot be killed, cannot win)
 
 ## Developers
