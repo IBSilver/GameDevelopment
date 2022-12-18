@@ -59,7 +59,7 @@ bool EnemyFlying::Start() {
 		death.PushBack({ 0 + (i * 48), 96, 48, 48 });
 	}
 	for (int i = 0; i < 4; i++) {
-		death.PushBack({ 0 + (i * 48), 48, 48, 48 });
+		death.PushBack({ 0 + (i * 48), 54, 48, 48 });
 	}
 	death.loop = false;
 	death.speed = 0.075f;
@@ -91,14 +91,7 @@ bool EnemyFlying::Update()
 	app->render->DrawTexture(texture, position.x, position.y - 12, &rect);
 
 	// Add physics to the enemy - updated enemy position using physics
-	//int speed = 10;
 	b2Vec2 vel = b2Vec2(0, 0);
-
-	// idleAnim condition
-	//currentAnimation = &idleL;
-
-	// Set the velocity of the pbody of the player
-	//pbody->body->SetLinearVelocity(vel);
 
 	// Update enemy position in pixels
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
@@ -137,7 +130,7 @@ void EnemyFlying::OnCollision(PhysBody* physA, PhysBody* physB) {
 				app->audio->PlayFx(deathFx);
 			}
 			destroyed = true;
-			b2Vec2(0, -GRAVITY_Y);
+			//b2Vec2(0, -GRAVITY_Y);
 		}
 		break;
 	case ColliderType::PLATFORM:

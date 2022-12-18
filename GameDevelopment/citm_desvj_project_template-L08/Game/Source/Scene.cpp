@@ -321,9 +321,9 @@ bool Scene::Update(float dt)
 
 	if (enemyFlying->destroyed == false && app->pathfinding->CreatePath(originF, destinyTile) > 1) {
 		LOG("%d, %d", enemyFlying->position.x, app->map->MapToWorld(path->At(1)->x, path->At(1)->y).x);
-		if (enemyFlying->position.x + 6 >= app->map->MapToWorld(path->At(1)->x, path->At(1)->y).x)
+		if (enemyFlying->position.x + 6 >= app->scene->player->position.x)
 			enemyFlying->moveLeft();
-		if (enemyFlying->position.x + 6 < app->map->MapToWorld(path->At(1)->x, path->At(1)->y).x)
+		if (enemyFlying->position.x + 6 < app->scene->player->position.x)
 			enemyFlying->moveRight();
 		if (enemyFlying->position.y + 6 < app->map->MapToWorld(path->At(1)->x, path->At(1)->y).y)
 			enemyFlying->moveUp();

@@ -154,18 +154,19 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("ENEMY Collision PLATFORM");
 		break;
 	}
+
 }
 
 void Enemy::moveLeft() {
 	LOG("LEFT");
 	currentAnimation = &left;
 	dir = false;
-	pbody->body->SetLinearVelocity(b2Vec2(-1, -GRAVITY_Y));
+	pbody->body->SetLinearVelocity(b2Vec2(-2, -GRAVITY_Y));
 }
 
 void Enemy::moveRight() {
 	LOG("RIGHT");
 	currentAnimation = &right;
 	dir = true;
-	pbody->body->SetLinearVelocity(b2Vec2(1, -GRAVITY_Y));
+	pbody->body->SetLinearVelocity(b2Vec2(2, -GRAVITY_Y));
 }
