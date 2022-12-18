@@ -94,7 +94,7 @@ bool Enemy::Start() {
 	pbody->ctype = ColliderType::ENEMY;
 
 	// Initialize audio effect - !! Path is hardcoded, should be loaded from config.xml
-	//deathFx = app->audio->LoadFx("Assets/Audio/Fx/biker_hurt.wav");
+	deathFx = app->audio->LoadFx("Assets/Audio/Fx/robot_death.wav");
 
 	return true;
 }
@@ -145,7 +145,6 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::PLAYER:
 		LOG("ENEMY Collision PLAYER");
-
 		LOG("ENEMY Y: %d", position.y);
 		LOG("PLAYER Y: %d", enemyhead);
 		if (!app->scene->player->GodMode && enemyhead >= position.y) {
@@ -156,6 +155,9 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 		}
 		else {
 			currentAnimation = &death;
+			if (!destroyed) {
+				app->audio->PlayFx(deathFx);
+			}
 			//physA->body->DestroyFixture(physA->body->GetFixtureList());
 			destroyed = true;
 		}
