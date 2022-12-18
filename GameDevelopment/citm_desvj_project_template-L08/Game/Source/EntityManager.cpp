@@ -180,5 +180,14 @@ bool EntityManager::SaveState(pugi::xml_node& data)
 		we.append_attribute("x") = app->scene->enemy->position.x;
 		we.append_attribute("y") = app->scene->enemy->position.y;
 	}
+
+	if (!app->scene->enemyFlying->destroyed) {
+		app->scene->enemyFlying->destroyed = false;
+		pugi::xml_node fe = data.append_child("flyingEnemy");
+
+		fe.append_attribute("x") = app->scene->enemyFlying->position.x;
+		fe.append_attribute("y") = app->scene->enemyFlying->position.y;
+	}
+
 	return true;
 }

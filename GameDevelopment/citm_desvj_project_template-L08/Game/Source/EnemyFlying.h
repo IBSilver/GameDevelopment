@@ -63,4 +63,4 @@ private:
 
 };
 
-#endif // __ENEMY_H__
+#endif // __ENEMYFLYING_H__
