@@ -35,8 +35,8 @@ bool Enemy::Start() {
 	// Initialize animations
 	idleR.totalFrames = 0;
 	idleL.totalFrames = 0;
-	//left.totalFrames = 0;
-	//right.totalFrames = 0;
+	left.totalFrames = 0;
+	right.totalFrames = 0;
 	death.totalFrames = 0;
 
 	// Initilize textures
@@ -50,16 +50,40 @@ bool Enemy::Start() {
 	idleR.speed = 0.1f;
 
 	// idleL Anim
-	for (int i = 3; i >= 0; i--) {
-		idleL.PushBack({ 193 + (i * 48), 0, 48, 48 });
+	for (int i = 0; i < 4; i++) {
+		idleL.PushBack({ 192 + (i * 48), 144, 48, 48 });
 	}
 	idleL.loop = true;
 	idleL.speed = 0.1f;
 
+	// right Anim
+	for (int i = 0; i < 4; i++) {
+		right.PushBack({ 0 + (i * 48), 192, 48, 48 });
+	}
+	right.loop = true;
+	right.speed = 0.1f;
+
+	// left Anim
+	for (int i = 0; i < 4; i++) {
+		left.PushBack({ 192 + (i * 48), 192, 48, 48 });
+	}
+	left.loop = true;
+	left.speed = 0.1f;
+
+	// death Anim
+	for (int i = 0; i < 2; i++) {
+		death.PushBack({ 0 + (i * 48), 96, 48, 48 });
+	}
+	for (int i = 0; i < 4; i++) {
+		death.PushBack({ 0 + (i * 48), 48, 48, 48 });
+	}
+	death.loop = false;
+	death.speed = 0.075f;
+
 	currentAnimation = &idleL;
 
 	// Add physics to the enemy - initialize physics body
-	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 12, bodyType::DYNAMIC);
+	pbody = app->physics->CreateCircle(position.x + 16, position.y + 16, 12, bodyType::KINEMATIC);
 
 	// Assign enemy class (using "this") to the listener of the pbody. This makes the Physics module to call the OnCollision method
 	pbody->listener = this;
@@ -81,16 +105,17 @@ bool Enemy::Update()
 	currentAnimation->Update();
 
 	// Render the texture
-	if (!destroyed) {
+	/*if (!destroyed) {
 		app->render->DrawTexture(texture, position.x, position.y - 16, &rect);
-	}
+	}*/
+	app->render->DrawTexture(texture, position.x, position.y - 16, &rect);
 	
 	// Add physics to the enemy - updated enemy position using physics
 	//int speed = 10;
 	b2Vec2 vel = b2Vec2(0, -GRAVITY_Y);
 
 	// idleAnim condition
-	currentAnimation = &idleL;
+	//currentAnimation = &idleL;
 
 	// Set the velocity of the pbody of the player
 	//pbody->body->SetLinearVelocity(vel);
@@ -117,14 +142,18 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::PLAYER:
 		LOG("ENEMY Collision PLAYER");
+		int enemyhead = app->scene->player->position.y + 6;
 		LOG("ENEMY Y: %d", position.y);
-		LOG("PLAYER Y: %d", app->scene->player->position.y);
-		if (!app->scene->player->GodMode && app->scene->player->position.y >= position.y) {
-			app->scene->player->dead = true;
+		LOG("PLAYER Y: %d", enemyhead);
+		if (!app->scene->player->GodMode && enemyhead >= position.y) {
+			if (!destroyed) {
+				app->scene->player->dead = true;
+			}
 			//app->audio->PlayFx(deathFx);
 		}
 		else {
-			physA->body->DestroyFixture(physA->body->GetFixtureList());
+			currentAnimation = &death;
+			//physA->body->DestroyFixture(physA->body->GetFixtureList());
 			destroyed = true;
 		}
 		break;
