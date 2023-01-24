@@ -60,7 +60,6 @@ bool Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
                 if (tileset != NULL)
                 {
                     //According to the mapType use the ID of the tile to set the walkability value
-                    
                     if (tileId == 125) map[i] = 1;
                 }
                 else {
@@ -86,21 +85,7 @@ void Map::Draw()
     if(mapLoaded == false)
         return;
 
-    /*
-    // L04: DONE 6: Iterate all tilesets and draw all their 
-    // images in 0,0 (you should have only one tileset for now)
-
-    ListItem<TileSet*>* tileset;
-    tileset = mapData.tilesets.start;
-
-    while (tileset != NULL) {
-        app->render->DrawTexture(tileset->data->texture,0,0);
-        tileset = tileset->next;
-    }
-    */
-
     // Prepare the loop to draw all tiles in a layer + DrawTexture()
-
     ListItem<MapLayer*>* mapLayerItem;
     mapLayerItem = mapData.maplayers.start;
 
@@ -113,10 +98,10 @@ void Map::Draw()
             {
                 for (int y = 0; y < mapLayerItem->data->height; y++)
                 {
-                    // L05: DONE 9: Complete the draw function
+                    // Complete the draw function
                     int gid = mapLayerItem->data->Get(x, y);
 
-                    //L06: DONE 3: Obtain the tile set using GetTilesetFromTileId
+                    // Obtain the tile set using GetTilesetFromTileId
                     TileSet* tileset = GetTilesetFromTileId(gid);
 
                     SDL_Rect r = tileset->GetTileRect(gid);
@@ -130,7 +115,6 @@ void Map::Draw()
             }
         }
         mapLayerItem = mapLayerItem->next;
-
     }
 }
 
@@ -145,7 +129,7 @@ iPoint Map::MapToWorld(int x, int y) const
     return ret;
 }
 
-// L08: DONE 3: Add method WorldToMap to obtain  map coordinates from screen coordinates
+// Add method WorldToMap to obtain  map coordinates from screen coordinates
 iPoint Map::WorldToMap(int x, int y)
 {
     iPoint ret(0, 0);
@@ -187,7 +171,6 @@ TileSet* Map::GetTilesetFromTileId(int gid) const
         }
         item = item->next;
     }
-
     return set;
 }
 
@@ -217,7 +200,6 @@ bool Map::CleanUp()
         RELEASE(layerItem->data);
         layerItem = layerItem->next;
     }
-
     return true;
 }
 
@@ -273,7 +255,6 @@ bool Map::Load()
     if(ret == true)
     {
         // LOG all the data loaded iterate all tilesets and LOG everything
-       
         LOG("Successfully parsed map XML file :%s", mapFileName.GetString());
         LOG("width : %d height : %d",mapData.width,mapData.height);
         LOG("tile_width : %d tile_height : %d",mapData.tileWidth, mapData.tileHeight);
@@ -327,7 +308,6 @@ bool Map::LoadMap(pugi::xml_node mapFile)
         mapData.tileHeight = map.attribute("tileheight").as_int();
         mapData.tileWidth = map.attribute("tilewidth").as_int();
     }
-
     return ret;
 }
 
@@ -357,7 +337,6 @@ bool Map::LoadTileSet(pugi::xml_node mapFile){
 
         mapData.tilesets.Add(set);
     }
-
     return ret;
 }
 
@@ -387,7 +366,6 @@ bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
         layer->data[i] = tile.attribute("gid").as_int();
         i++;
     }
-
     return ret;
 }
 
@@ -404,7 +382,6 @@ bool Map::LoadAllLayers(pugi::xml_node mapNode) {
         // Add the layer to the map
         mapData.maplayers.Add(mapLayer);
     }
-
     return ret;
 }
 
@@ -424,11 +401,9 @@ bool Map::LoadObject(pugi::xml_node node)
         object.width = colNode.next_sibling("object").attribute("width").as_int();
         object.height = colNode.next_sibling("object").attribute("height").as_int();
 
-
         PhysBody* c1 = app->physics->CreateRectangle(object.x+ object.width/2, object.y+object.height/2, object.width, object.height, STATIC);
         c1->ctype = ColliderType::PLATFORM;
     }
-
     return ret;
 }
 
@@ -446,7 +421,6 @@ bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 
         properties.list.Add(p);
     }
-
     return ret;
 }
 
@@ -465,7 +439,6 @@ Properties::Property* Properties::GetProperty(const char* name)
         }
         item = item->next;
     }
-
     return p;
 }
 

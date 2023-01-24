@@ -22,14 +22,13 @@ Physics::Physics() : Module()
 {
 	// Initialise all the internal class variables, at least to NULL pointer
 	world = NULL;
-	//	mouse_joint = NULL;
 	debug = false;
 }
 
 // Destructor
 Physics::~Physics()
 {
-	// You should do some memory cleaning here, if required
+	// Do some memory cleaning here, if required
 }
 
 bool Physics::Start()
@@ -396,61 +395,3 @@ int PhysBody::RayCast(int x1, int y1, int x2, int y2, float& normal_x, float& no
 
 	return ret;
 }
-
-/*
-void Physics::BeginContact(b2Contact* contact)
-{
-	PhysBody* physA = (PhysBody*)contact->GetFixtureA()->GetBody()->GetUserData();
-	PhysBody* physB = (PhysBody*)contact->GetFixtureB()->GetBody()->GetUserData();
-
-	if (physA && physA->listener != NULL)
-		physA->listener->OnCollision(physA, physB);
-
-	if (physB && physB->listener != NULL)
-		physB->listener->OnCollision(physB, physA);
-}
-
-b2RevoluteJoint* Physics::CreateRevoluteJoint(PhysBody* A, b2Vec2 anchorA, PhysBody* B, b2Vec2 anchorB, float angle, bool collideConnected, bool enableLimit)
-{
-	b2RevoluteJointDef revoluteJointDef;
-	revoluteJointDef.bodyA = A->body;
-	revoluteJointDef.bodyB = B->body;
-	revoluteJointDef.collideConnected = collideConnected;
-	revoluteJointDef.localAnchorA.Set(anchorA.x, anchorA.y);
-	revoluteJointDef.localAnchorB.Set(anchorB.x, anchorB.y);
-	revoluteJointDef.referenceAngle = 0;
-	revoluteJointDef.enableLimit = enableLimit;
-	revoluteJointDef.lowerAngle = -DEG_TO_RAD(angle);
-	revoluteJointDef.upperAngle = DEG_TO_RAD(angle);
-
-	return (b2RevoluteJoint*)world->CreateJoint(&revoluteJointDef);
-}
-b2PrismaticJoint* Physics::CreatePrismaticJoint(PhysBody* A, b2Vec2 anchorA, PhysBody* B, b2Vec2 anchorB, b2Vec2 axys, float maxHeight, bool collideConnected, bool enableLimit)
-{
-	b2PrismaticJointDef prismaticJointDef;
-	prismaticJointDef.bodyA = A->body;
-	prismaticJointDef.bodyB = B->body;
-	prismaticJointDef.collideConnected = collideConnected;
-	prismaticJointDef.localAxisA.Set(axys.x, axys.y);
-	prismaticJointDef.localAnchorA.Set(anchorA.x, anchorA.y);
-	prismaticJointDef.localAnchorB.Set(anchorB.x, anchorB.y);
-	prismaticJointDef.referenceAngle = 0;
-	prismaticJointDef.enableLimit = enableLimit;
-	prismaticJointDef.lowerTranslation = -0.01;
-	prismaticJointDef.upperTranslation = maxHeight;
-
-	return (b2PrismaticJoint*)world->CreateJoint(&prismaticJointDef);
-}
-
-b2WeldJoint* Physics::CreateWeldJoint(PhysBody* A, b2Vec2 anchorA, PhysBody* B, b2Vec2 anchorB, float angle, bool collideConnected, bool enableLimit)
-{
-	b2WeldJointDef weldJointDef;
-	weldJointDef.bodyA = A->body;
-	weldJointDef.bodyB = B->body;
-	weldJointDef.collideConnected = collideConnected;
-	weldJointDef.localAnchorA.Set(anchorA.x, anchorA.y);
-	weldJointDef.localAnchorB.Set(anchorB.x, anchorB.y);
-	weldJointDef.referenceAngle = 0;
-
-	return (b2WeldJoint*)world->CreateJoint(&weldJointDef);
-	*/

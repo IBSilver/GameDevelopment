@@ -45,18 +45,18 @@ public:
 
 private:
 
-	// size of the map
+	// Size of the map
 	uint width;
 	uint height;
 
-	// all map walkability values [0..255]
+	// All map walkability values [0..255]
 	uchar* map;
 
-	// we store the created path here
+	// We store the created path here
 	DynArray<iPoint> lastPath;
 };
 
-// forward declaration
+// Forward declaration
 struct PathList;
 
 // ---------------------------------------------------------------------

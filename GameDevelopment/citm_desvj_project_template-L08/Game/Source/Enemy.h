@@ -45,7 +45,7 @@ public:
 	Animation left;
 	Animation death;
 
-	// Save last player direction (left or right)
+	// Save last enemy direction (left or right)
 	bool dir;
 
 	// Declare sounds parameters

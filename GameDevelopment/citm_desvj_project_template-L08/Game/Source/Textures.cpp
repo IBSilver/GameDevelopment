@@ -75,7 +75,6 @@ SDL_Texture* const Textures::Load(const char* path)
 		texture = LoadSurface(surface);
 		SDL_FreeSurface(surface);
 	}
-
 	return texture;
 }
 
@@ -93,7 +92,6 @@ bool Textures::UnLoad(SDL_Texture* texture)
 			return true;
 		}
 	}
-
 	return false;
 }
 
@@ -110,7 +108,6 @@ SDL_Texture* const Textures::LoadSurface(SDL_Surface* surface)
 	{
 		textures.Add(texture);
 	}
-
 	return texture;
 }
 

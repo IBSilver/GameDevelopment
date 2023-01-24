@@ -83,8 +83,6 @@ bool EnemyFlying::Start() {
 
 bool EnemyFlying::Update()
 {
-	//posInicialY = position.y;
-
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	currentAnimation->Update();
 
@@ -96,8 +94,6 @@ bool EnemyFlying::Update()
 	// Update enemy position in pixels
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 16;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 16;
-
-	//SDL_Rect textSection = { 0,0,48,48 };
 
 	return true;
 }
@@ -130,7 +126,6 @@ void EnemyFlying::OnCollision(PhysBody* physA, PhysBody* physB) {
 				app->audio->PlayFx(deathFx);
 			}
 			destroyed = true;
-			//b2Vec2(0, -GRAVITY_Y);
 		}
 		break;
 	case ColliderType::PLATFORM:

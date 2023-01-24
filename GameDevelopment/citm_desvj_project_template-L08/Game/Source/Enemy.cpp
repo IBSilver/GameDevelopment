@@ -99,8 +99,6 @@ bool Enemy::Start() {
 
 bool Enemy::Update()
 {
-	//posInicialY = position.y;
-
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
 	currentAnimation->Update();
 
@@ -108,7 +106,6 @@ bool Enemy::Update()
 	app->render->DrawTexture(texture, position.x, position.y - 16, &rect);
 	
 	// Add physics to the enemy - updated enemy position using physics
-	//int speed = 10;
 	b2Vec2 vel = b2Vec2(0, -GRAVITY_Y);
 
 	// Update enemy position in pixels

@@ -36,11 +36,6 @@ bool Scene::Awake(pugi::xml_node& config)
 		item->parameters = itemNode;
 	}
 
-	//for (pugi::xml_node enemyNode = config.child("enemy"); enemyNode; enemyNode = enemyNode.next_sibling("enemy"))
-	//{
-	//	Enemy* enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
-	//	enemy->parameters = enemyNode;
-	//}
 	enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
 	enemy->parameters = config.child("enemy");
 
@@ -58,7 +53,6 @@ bool Scene::Awake(pugi::xml_node& config)
 // Called before the first frame
 bool Scene::Start()
 {
-	//img = app->tex->Load("Assets/Textures/test.png");
 	app->audio->PlayMusic("Assets/Audio/Music/Level1.ogg");
 
 	// Texture to highligh mouse position 
@@ -233,14 +227,6 @@ bool Scene::Update(float dt)
 
 	// Draw map
 	app->map->Draw();
-
-	//int mouseX, mouseY;
-	//app->input->GetMousePosition(mouseX, mouseY);
-
-	//iPoint mouseTile = iPoint(0, 0);
-
-	//mouseTile = app->map->WorldToMap(mouseX - app->render->camera.x,
-	//	mouseY - app->render->camera.y);
 	
 	int pathDestinyX, pathDestinyY;
 	pathDestinyX = player->position.x+8;
@@ -251,26 +237,10 @@ bool Scene::Update(float dt)
 	destinyTile = app->map->WorldToMap(pathDestinyX/* - app->render->camera.x*/,
 		pathDestinyY/* - app->render->camera.y*/);
 
-	//Convert again the tile coordinates to world coordinates to render the texture of the tile	******************
+	//Convert again the tile coordinates to world coordinates to render the texture of the tile
 	iPoint highlightedTileWorld = app->map->MapToWorld(destinyTile.x, destinyTile.y);
 	if(showPath)
 		app->render->DrawTexture(mouseTileTex, highlightedTileWorld.x, highlightedTileWorld.y);
-
-	//Test compute path function
-	//if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
-	//{
-	//	if (originSelected == true)
-	//	{
-	//		app->pathfinding->CreatePath(origin, mouseTile);
-	//		originSelected = false;
-	//	}
-	//	else
-	//	{
-	//		origin = mouseTile;
-	//		originSelected = true;
-	//		app->pathfinding->ClearLastPath();
-	//	}
-	//}
 
 	int originX, originY;
 	originX = enemy->position.x+8;
@@ -283,8 +253,7 @@ bool Scene::Update(float dt)
 	origin = app->map->WorldToMap(originX, originY);
 
 	originF = app->map->WorldToMap(originFX, originFY);
-	//if (app->scene->player->position.y < app->scene->enemy->position.y+30)
-	//{
+	
 	app->pathfinding->ClearLastPath();
 	if(!enemy->destroyed )
 		app->pathfinding->CreatePath(origin, destinyTile);
@@ -300,7 +269,6 @@ bool Scene::Update(float dt)
 
 	if (!enemy->destroyed)
 		app->pathfinding->CreatePath(originF, destinyTile);
-	//}
 
 	// Get the latest calculated path and draw
 	const DynArray<iPoint>* pathF = app->pathfinding->GetLastPath();

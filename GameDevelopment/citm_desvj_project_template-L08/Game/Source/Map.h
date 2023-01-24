@@ -26,7 +26,7 @@ struct TileSet
 	SDL_Rect GetTileRect(int gid) const;
 };
 
-//  We create an enum for map type, just for convenience,
+// We create an enum for map type, just for convenience,
 // NOTE: Platformer game will be of type ORTHOGONAL
 enum MapTypes
 {
@@ -47,7 +47,6 @@ struct Properties
 
 	~Properties()
 	{
-		//...
 		ListItem<Property*>* item;
 		item = list.start;
 
@@ -56,7 +55,6 @@ struct Properties
 			RELEASE(item->data);
 			item = item->next;
 		}
-
 		list.Clear();
 	}
 
@@ -101,8 +99,6 @@ struct ColLayer
 	int y;
 	int width;
 	int height;
-	//uint* data;
-
 };
 
 // Create a struct needed to hold the information to Map node

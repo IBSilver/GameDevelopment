@@ -280,7 +280,7 @@ const char* App::GetOrganization() const
 }
 
 // Implement methods to request load / save and methods 
-// for the real execution of load / save (to be implemented in TODO 5 and 7)
+// for the real execution of load / save 
 void App::LoadGameRequest()
 {
 	// NOTE: We should check if SAVE_STATE_FILENAME actually exist
