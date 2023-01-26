@@ -167,8 +167,11 @@ bool Scene::Update(float dt)
 		app->render->camera.x -= 5;*/
 
 	// Logo scene
+	if (transition == true) {
+		app->render->camera.y -= 10;
+	}
 	if (Logo == true) {
-		app->render->camera.y = 1000;
+		app->render->camera.y = 2000;
 		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
 			timer = 250;
 		if (timer < 250)
@@ -179,14 +182,19 @@ bool Scene::Update(float dt)
 			timer = 0;
 			Title = true;
 			Logo = false;
+			transition = true;
 		}
 	}
 
 	// Title scene
 	else if (Title == true) {
-		app->render->camera.y = 2000;
-		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) {
-			Title = false;
+		if (app->render->camera.y == 1000)
+		{
+			transition = false;
+			if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) {
+				transition = true;
+				Title = false;
+			}
 		}
 	}
 
@@ -213,15 +221,18 @@ bool Scene::Update(float dt)
 	}
 
 	else {
-		app->render->camera.y = -000;
-		if (player->position.x >= 250) {
-			app->render->camera.x = -player->position.x + 250;
-			if (player->position.x >= 2810) {
-				app->render->camera.x = -2560;
+		if (app->render->camera.y == 0)
+		{
+			transition = false;
+			if (player->position.x >= 250) {
+				app->render->camera.x = -player->position.x + 250;
+				if (player->position.x >= 2810) {
+					app->render->camera.x = -2560;
+				}
 			}
-		}
-		else {
-			app->render->camera.x = -10;
+			else {
+				app->render->camera.x = -10;
+			}
 		}
 	}
 

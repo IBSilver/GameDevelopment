@@ -39,6 +39,7 @@ public:
 	bool Logo = true;
 	bool Title = false;
 	int timer = 0;
+	bool transition = false;
 public:
 
 	// Declare the entities attribute
