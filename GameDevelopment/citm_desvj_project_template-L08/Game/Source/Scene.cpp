@@ -195,7 +195,6 @@ bool Scene::Update(float dt)
 			transition = false;
 			if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) {
 				transition = true;
-				app->scene->player->lives == 2;
 				Title = false;
 			}
 		}
@@ -222,6 +221,7 @@ bool Scene::Update(float dt)
 					Title = true;
 					app->LoadCurrentLevelRequest();
 					app->scene->player->dead = false;
+					app->scene->player->lives == 2;
 				}
 			}
 			else {
