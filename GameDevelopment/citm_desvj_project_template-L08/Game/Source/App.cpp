@@ -82,6 +82,8 @@ bool App::Awake()
 	{
 		title = configNode.child("app").child("title").child_value(); // Read the title from the config file
 
+		maxFrameDuration = configNode.child("app").child("frcap").attribute("value").as_int();
+
 		ListItem<Module*>* item;
 		item = modules.start;
 
@@ -169,6 +171,14 @@ void App::FinishUpdate()
 	if (saveGameRequested == true) SaveToFile();
 	if (loadLevel1Requested == true) LoadLevel1();
 	if (loadCurrentLevelRequested == true) LoadCurrentLevel();
+
+	float delay = float(maxFrameDuration) - dt;
+
+	if (maxFrameDuration > 0 && delay > 0) {
+		SDL_Delay(delay);
+		//LOG("We waited for %f milliseconds and the real delay is % f", delay, delayTimer.ReadMs());
+		dt = maxFrameDuration;
+	}
 }
 
 // Call modules before each loop iteration

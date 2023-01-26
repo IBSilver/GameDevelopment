@@ -122,6 +122,7 @@ private:
 	bool loadLevel1Requested;
 	bool loadCurrentLevelRequested;
 
+	uint32 maxFrameDuration = 0;
 };
 
 extern App* app;

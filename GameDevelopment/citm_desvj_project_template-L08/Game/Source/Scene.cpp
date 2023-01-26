@@ -216,6 +216,7 @@ bool Scene::Update(float dt)
 				timer = 0;
 				app->LoadCurrentLevelRequest();
 				app->scene->player->dead = false;
+				app->render->camera.y = 0;
 			}
 		}
 	}
