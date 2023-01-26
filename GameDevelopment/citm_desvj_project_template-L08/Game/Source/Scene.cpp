@@ -122,15 +122,15 @@ bool Scene::Update(float dt)
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN) {
-		app->scene->player->dead = true;
+		/*app->scene->player->dead = true;
 		app->scene->player->winner = false;
-		app->audio->PlayFx(app->scene->player->deathFx);
+		app->audio->PlayFx(app->scene->player->deathFx);*/
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN) {
-		app->scene->player->winner = true;
+		/*app->scene->player->winner = true;
 		app->scene->player->dead = false;
-		app->audio->PlayFx(app->scene->player->winFx);
+		app->audio->PlayFx(app->scene->player->winFx);*/
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN) {
