@@ -311,6 +311,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("PLAYER Collision DEATH");
 		if (!GodMode) {
 			dead = true;
+			lives = lives - 1;
 			app->audio->PlayFx(deathFx);
 		}
 		break;

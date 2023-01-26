@@ -166,10 +166,12 @@ bool Scene::Update(float dt)
 	else if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		app->render->camera.x -= 5;*/
 
-	// Logo scene
+	//Transition animation
 	if (transition == true) {
 		app->render->camera.y -= 10;
 	}
+
+	// Logo scene
 	if (Logo == true) {
 		app->render->camera.y = 2000;
 		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
@@ -193,6 +195,7 @@ bool Scene::Update(float dt)
 			transition = false;
 			if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) {
 				transition = true;
+				app->scene->player->lives == 2;
 				Title = false;
 			}
 		}
@@ -206,17 +209,31 @@ bool Scene::Update(float dt)
 			timer++;
 		}
 		else {
-			app->render->camera.x = 0;
-			app->render->camera.y = 3000;
-			if (timer < 250)
-			{
-				timer++;
+			if (app->scene->player->lives == 0) {
+				app->render->camera.x = 0;
+				app->render->camera.y = 3000;
+				if (timer < 250)
+				{
+					timer++;
+				}
+				else {
+					timer = 0;
+					transition = true;
+					Title = true;
+					app->LoadCurrentLevelRequest();
+					app->scene->player->dead = false;
+				}
 			}
 			else {
-				timer = 0;
-				app->LoadCurrentLevelRequest();
-				app->scene->player->dead = false;
-				app->render->camera.y = 0;
+				if (timer < 50)
+				{
+					timer++;
+				}
+				else {
+					timer = 0;
+					app->LoadCurrentLevelRequest();
+					app->scene->player->dead = false;
+				}
 			}
 		}
 	}

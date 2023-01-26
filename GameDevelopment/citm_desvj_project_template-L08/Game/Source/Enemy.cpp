@@ -136,6 +136,7 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 				if (!app->scene->player->dead) {
 					app->audio->PlayFx(app->scene->player->deathFx);
 				}
+				app->scene->player->lives = app->scene->player->lives - 1;
 				app->scene->player->dead = true;
 			}
 		}
