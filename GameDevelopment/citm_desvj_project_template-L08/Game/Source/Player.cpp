@@ -239,6 +239,10 @@ bool Player::Update()
 		jumpTimer = 0;
 
 	// Gameplay conditions
+	if (app->scene->Title == true) {
+		lives = 2;
+	}
+
 	if (dead && !GodMode) {
 		currentAnimation = &death;
 		dir = true;

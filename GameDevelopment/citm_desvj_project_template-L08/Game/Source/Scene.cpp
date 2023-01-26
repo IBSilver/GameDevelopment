@@ -217,11 +217,11 @@ bool Scene::Update(float dt)
 				}
 				else {
 					timer = 0;
-					transition = true;
+					Logo = false;
 					Title = true;
+					transition = true;
 					app->LoadCurrentLevelRequest();
 					app->scene->player->dead = false;
-					app->scene->player->lives == 2;
 				}
 			}
 			else {
