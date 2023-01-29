@@ -219,7 +219,7 @@ bool Scene::Update(float dt)
 					timer = 0;
 					Logo = false;
 					Title = true;
-					transition = true;
+					app->render->camera.y = 1000;
 					app->LoadCurrentLevelRequest();
 					app->scene->player->dead = false;
 				}
