@@ -1,4 +1,4 @@
-# Cyberpunk v0.5
+# Cyberpunk v1.0
 
 ## Description
 
@@ -11,15 +11,17 @@ Platform game for the videogame development subject.
  - Logo Scene & Title Scene.
  - Music for scenes and level & Fx for jump, death and win.
  - The player can move left or right, jump, die and win.
- - The player can obtain coins.
- - This version have only the second level map.
- - Walking & flying enemies added!!
+ - There are walking & flying enemies.
+ - The player can obtain coins!!
+ - If player lose three lifes, go back to the title screen.
+ - The player lifes are displayed on the screen.
  
  ## Navigation
 
  - Logo Scene: 5 seconds screen. Also can press Enter to go to the Title Screen.
  - Title Scene: Press Enter to start the level.
- - Dead Scene: Appears when you die. Wait a few seconds and try again!
+ - Dead Scene: Appears when you lose three lifes. Wait a few seconds and go to the Title Screen.
+ - Smooth animations between scenes.
  
 ## Controls
 
@@ -28,16 +30,19 @@ Platform game for the videogame development subject.
  - Space: Jump
  - Defeat enemies by stepping on them.
  
- ## Debug
+## Debug
 
  - F1: Start from the first/second level
  - F3: Start from the beginning of the current level
  - F5: Save the current game state
  - F6: Load the previous state
- - F7: Instant death
- - F8: Instant win
  - F9: View colliders / logic / enemies pathfinding
  - F10: God Mode (fly around, cannot be killed, cannot win)
+ 
+## Extra debug functions
+ 
+ - F7: Instant death
+ - F8: Instant win
 
 ## Developers
 
