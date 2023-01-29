@@ -54,7 +54,7 @@ public:
 	bool onair = false;
 	bool winner = false;
 	bool GodMode = false;
-	int lives;
+	int lifes;
 
 	// Calculate if player moves in y
 	int posInicialY;

@@ -240,7 +240,7 @@ bool Player::Update()
 
 	// Gameplay conditions
 	if (app->scene->Title == true) {
-		lives = 3;
+		lifes = 3;
 	}
 
 	if (dead && !GodMode) {
@@ -315,7 +315,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("PLAYER Collision DEATH");
 		if (!GodMode) {
 			dead = true;
-			lives = lives - 1;
+			lifes = lifes - 1;
 			app->audio->PlayFx(deathFx);
 		}
 		break;
