@@ -40,6 +40,8 @@ public:
 	bool Title = false;
 	int timer = 0;
 	bool transition = false;
+
+	bool limitFPS = true;
 public:
 
 	// Declare the entities attribute

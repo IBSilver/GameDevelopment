@@ -153,6 +153,11 @@ bool Scene::Update(float dt)
 			app->scene->player->jumpTimer = 30;
 		}
 
+	if (app->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN)
+	{
+		limitFPS = !limitFPS;
+	}
+
 	// Move camera
 	/*if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
 		app->render->camera.y += 50;

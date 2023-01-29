@@ -168,7 +168,8 @@ bool App::LoadConfig()
 
 void App::PrepareUpdate()
 {
-	frameTime.Start();
+	if(app->scene->limitFPS==true)
+		frameTime.Start();
 }
 
 void App::FinishUpdate()
