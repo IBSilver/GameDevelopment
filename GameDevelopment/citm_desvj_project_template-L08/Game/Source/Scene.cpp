@@ -208,7 +208,7 @@ bool Scene::Update(float dt)
 			timer++;
 		}
 		else {
-			if (app->scene->player->lives == 0) {
+			if (app->scene->player->lifes == 0) {
 				app->render->camera.x = 0;
 				app->render->camera.y = 3000;
 				if (timer < 250)
