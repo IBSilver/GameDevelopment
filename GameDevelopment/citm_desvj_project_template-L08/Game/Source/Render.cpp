@@ -48,6 +48,7 @@ bool Render::Awake(pugi::xml_node& config)
 		camera.x = 0;
 		camera.y = 0;
 	}
+
 	return ret;
 }
 

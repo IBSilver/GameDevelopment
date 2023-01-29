@@ -240,7 +240,7 @@ bool Player::Update()
 
 	// Gameplay conditions
 	if (app->scene->Title == true) {
-		lives = 2;
+		lives = 3;
 	}
 
 	if (dead && !GodMode) {

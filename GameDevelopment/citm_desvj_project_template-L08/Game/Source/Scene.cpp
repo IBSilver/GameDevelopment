@@ -330,10 +330,10 @@ bool Scene::Update(float dt)
 
 	// Debug pathfinding
 	iPoint originScreen = app->map->MapToWorld(origin.x, origin.y);
-	app->render->DrawTexture(originTex, originScreen.x, originScreen.y);
+	//app->render->DrawTexture(originTex, originScreen.x, originScreen.y);
 
 	iPoint originScreenF = app->map->MapToWorld(originF.x, originF.y);
-	app->render->DrawTexture(originTex, originScreenF.x, originScreenF.y);
+	//app->render->DrawTexture(originTex, originScreenF.x, originScreenF.y);
 
 	return true;
 }

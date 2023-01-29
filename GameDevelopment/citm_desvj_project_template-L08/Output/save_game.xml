@@ -8,9 +8,9 @@
 	<pathfinding />
 	<scene />
 	<entitymanager>
-		<player x="30" y="287" />
-		<walkingEnemy x="301" y="291" />
-		<flyingEnemy x="169" y="130" />
+		<player x="29" y="287" />
+		<walkingEnemy x="188" y="387" />
+		<flyingEnemy x="561" y="276" />
 	</entitymanager>
 	<map />
 	<renderer />

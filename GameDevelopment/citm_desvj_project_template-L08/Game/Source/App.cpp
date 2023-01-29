@@ -73,6 +73,8 @@ void App::AddModule(Module* module)
 // Called before render is available
 bool App::Awake()
 {
+	timer = Timer(); 
+	
 	bool ret = false;
 
 	// Load config from XML
@@ -105,6 +107,10 @@ bool App::Awake()
 // Called before the first frame
 bool App::Start()
 {
+	timer.Start();
+	startupTime.Start();
+	lastSecFrameTime.Start(); 
+	
 	bool ret = true;
 	ListItem<Module*>* item;
 	item = modules.start;
@@ -162,6 +168,7 @@ bool App::LoadConfig()
 
 void App::PrepareUpdate()
 {
+	frameTime.Start();
 }
 
 void App::FinishUpdate()
@@ -172,13 +179,41 @@ void App::FinishUpdate()
 	if (loadLevel1Requested == true) LoadLevel1();
 	if (loadCurrentLevelRequested == true) LoadCurrentLevel();
 
+	// Amount of frames since startup
+	frameCount++;
+	// Amount of time since game start (use a low resolution timer)
+	secondsSinceStartup = startupTime.ReadSec();
+	// Amount of ms took the last update
+	dt = frameTime.ReadMSec();
+	// Amount of frames during the last second
+	lastSecFrameCount++;
+
+	if (lastSecFrameTime.ReadMSec() > 1000) {
+		lastSecFrameTime.Start();
+		framesPerSecond = lastSecFrameCount;
+		lastSecFrameCount = 0;
+		// Average FPS for the whole game life
+		averageFps = (averageFps + framesPerSecond) / 2;
+	}
+
 	float delay = float(maxFrameDuration) - dt;
 
+	PerfTimer delayTimer = PerfTimer();
+	delayTimer.Start();
 	if (maxFrameDuration > 0 && delay > 0) {
 		SDL_Delay(delay);
-		//LOG("We waited for %f milliseconds and the real delay is % f", delay, delayTimer.ReadMs());
+		LOG("We waited for %f milliseconds and the real delay is % f", delay, delayTimer.ReadMs());
 		dt = maxFrameDuration;
 	}
+	else {
+		//LOG("No wait");
+	}
+
+	static char title[256];
+	sprintf_s(title, 256, "Av.FPS: %.2f Last sec frames: %i Last dt: %.3f Time since startup: %.3f Frame Count: %I64u ",
+		averageFps, framesPerSecond, dt, secondsSinceStartup, frameCount);
+
+	app->win->SetTitle(title);
 }
 
 // Call modules before each loop iteration

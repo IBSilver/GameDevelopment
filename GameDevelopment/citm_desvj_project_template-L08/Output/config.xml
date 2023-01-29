@@ -2,11 +2,11 @@
   <app>
     <title>Game Development Testbed</title>
     <organization>UPC</organization>
-	<frcap value = "60"/>
+	<frcap value = "16"/>
   </app>
 
   <renderer>
-    <vsync value="true"/>
+    <vsync value="false"/>
   </renderer>
 
   <window>
