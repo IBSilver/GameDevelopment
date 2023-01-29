@@ -31,6 +31,8 @@ bool Player::Awake() {
 }
 
 bool Player::Start() {
+	
+	vidas = app->tex->Load("Assets/Textures/extras/corazon.png");
 
 	// Initialize scenes
 	logo = app->tex->Load("Assets/Scenes/logo.png");
@@ -156,6 +158,19 @@ bool Player::Update()
 	app->render->DrawTexture(title, 0, -1000, NULL);
 	app->render->DrawTexture(gameover, 0, -3000, NULL);
 	app->render->DrawTexture(texture, position.x, position.y - 16, &rect);
+
+	if (lifes > 0)
+	{
+		app->render->DrawTexture(vidas, position.x-220, 0, NULL);
+		if (lifes > 1)
+		{
+			app->render->DrawTexture(vidas, position.x - 180, 0, NULL);
+			if (lifes > 2)
+			{
+				app->render->DrawTexture(vidas, position.x - 140, 0, NULL);
+			}
+		}
+	}
 
 	// Add physics to the player - updated player position using physics
 	int speed = 10; 

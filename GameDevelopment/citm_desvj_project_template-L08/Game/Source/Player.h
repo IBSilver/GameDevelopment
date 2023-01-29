@@ -79,6 +79,7 @@ private:
 	SDL_Texture* logo;
 	SDL_Texture* title;
 	SDL_Texture* gameover;
+	SDL_Texture* vidas;
 
 };
 

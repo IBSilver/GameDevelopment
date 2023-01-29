@@ -46,7 +46,7 @@ bool Scene::Awake(pugi::xml_node& config)
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	player->parameters = config.child("player");
 
-
+	
 	return ret;
 }
 
